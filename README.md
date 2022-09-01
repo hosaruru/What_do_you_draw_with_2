@@ -1,24 +1,31 @@
-# README
+# What do you draw with?
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+## サイト概要
+### サイトテーマ
+自分が何を使ってイラストを描いたかを共有できるサイト
 
-Things you may want to cover:
 
-* Ruby version
+### テーマを選んだ理由
+私はデジタルイラストを描くのが好きなのですが、デジタルイラストではさまざまな種類のペンを使って描くことができます。
+普段他人のイラストを見ていて、なんのペンを使って描いているのかが非常に気になる、またSNSで交遊している友達も同じように思っていることから
+このアプリケーションを作りたいと思いました。
 
-* System dependencies
+### ターゲットユーザ
+SNSにイラストを投稿しているユーザー
 
-* Configuration
+### 主な利用シーン
+自分が絵を描くときに参考にする時
 
-* Database creation
+## 設計書
+<...>
 
-* Database initialization
+## 開発環境
+- OS：Linux(CentOS)
+- 言語：HTML,CSS,JavaScript,Ruby,SQL
+- フレームワーク：Ruby on Rails
+- JSライブラリ：jQuery
+- IDE：Cloud9
 
-* How to run the test suite
-
-* Services (job queues, cache servers, search engines, etc.)
-
-* Deployment instructions
-
-* ...
+## 使用素材
+- 
+- 
