@@ -1,0 +1,52 @@
+<%= flash[:notice] %>
+<main>
+	<% if user_signed_in? %>
+	<%=  %>
+	<% else %>
+	<%= link_to 'ゲストログイン（閲覧用）', homes_guest_sign_in_path, method: :post , class: "btn btn-primary btn-sm px-4" %>
+	<% end %>
+	<div class='container px-5 px-sm-0'>
+		<div class='row'>
+			<div class='col-md-8 offset-md-1'>
+				<table class='table table-hover table-inverse'>
+					<tbody>
+						<% @posts.each do |post| %>
+						<tr>
+						<td>
+							<%= link_to post_path(post.id) do %>
+							<% if post.image.attached? %>
+							<%= image_tag post.image, size: "200x200" %>
+							<% else %>
+							<%= image_tag 'no_image', size: "200x200" %>
+							<% end %>
+						</td>
+						<td>
+							<%= post.introduction %><br>
+							<%= post.comments %><br>
+							<%= link_to "詳細", post_path(post.id),class: "btn btn-success"  %>
+						</td>
+						
+						
+						  <% if @post.favorited_by?(current_user) %>
+    <p>
+      <%= link_to post_favorites_path(@post), method: :delete do %>
+        ♥<%= @post.favorites.count %> いいね
+      <% end %>
+    </p>
+    <% else %>
+    <p>
+      <%= link_to post_favorites_path(@post), method: :post do %>
+        ♡<%= @post.favorites.count %> いいね
+      <% end %>
+    </p>
+  <% end %>
+							<% end %>
+							<% end %>
+						</tr>	
+					</tbody>
+				</table>
+			</div>
+		</div><span class='pagination'style="margin-bottom: 100px;"><%= paginate @posts %></span>
+	</div>
+
+</main>

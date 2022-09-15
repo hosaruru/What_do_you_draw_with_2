@@ -1,0 +1,6 @@
+<h1>ジャンル編集</h1>
+<%= form_with model: @software, url: admin_update_software_path(@software.id), method: :patch do |f| %>
+  <h4>ジャンル名</h4>
+  <%= f.text_field :software %>
+  <%= f.submit '変更を保存' ,class: "btn btn-success" %>
+<% end %>

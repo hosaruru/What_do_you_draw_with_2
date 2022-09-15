@@ -1,0 +1,24 @@
+<%= form_with model: @user, url: update_user_path, method: :patch do |f| %>
+  <h4>タイトル</h4>
+　　
+　<table class='table'>
+  <tr>
+	  <th>氏名</th>
+	  <td><%= f.text_field :user_name %></td>
+  </tr>
+   <tr>
+	  <th>フリガナ</th>
+	  <td><%= f.text_field :email %></td>
+  </tr>
+  <tr>
+  <div class="field">
+    <%= f.label :誕生日 %><br />
+    <%== sprintf(f.date_select(:birth, :use_month_numbers=>true, :date_separator => '%s', :start_year=>1930, :end_year => Time.now.year, :default =>'1990-1-1'.to_date), '年','月') + '日生まれ' %>
+  </div>
+  <div class="actions"></td>
+  </tr>
+
+</table>
+
+  <%= f.submit '編集内容を保存', class: "btn btn-success btn-sm px-5"  %>
+<% end %>

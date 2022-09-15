@@ -1,0 +1,23 @@
+<div class="col-md-5 col-sm-10 mx-2 mx-sm-auto shadow-lg rounded px-0 my-5">
+  <h5 class="text-dark bg-light p-4 mb-0">投稿画面</h5>
+  <p><%= form_with model: @post,url:posts_path, method: :post do |f| %>
+    <div class="container">
+      <div class="row">
+        <div class="col-4">
+          <p>商品画像 <%= f.file_field :image, accept: "image/*", class: "w-100", size: "200x200" %></p>
+          </div>
+          <div class="col-4">
+          <p> <%= f.label :software_id, '使用ソフト' %>
+          <%= f.collection_select :software_id, Software.all, :id, :software, { prompt: '選択してください' }, class: 'form-control' %></p>
+          <p> 紹介文<%= f.text_area :introduction %></p>
+          <p>線画<%= f.text_field :brush %></p>
+          <p>塗り（メイン）<%= f.text_field :brush %></p>
+          <p>塗り（サブ）<%= f.text_field :brush %></p>
+          <p>装飾ペン<%= f.text_field :brush %></p>
+          <p> コメント（あれば）<%= f.text_area :comments %></p>
+          <p><%= f.submit "新規登録" ,class: "btn btn-success" %></p>
+          <% end %>
+      </div>
+      </div>
+    </div>
+</div>

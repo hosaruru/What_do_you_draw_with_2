@@ -1,0 +1,15 @@
+<h1>編集画面</h1>
+<%= form_with model: @post, url: update_post_path(@post.id), method: :patch do |f| %>
+<h4>タイトル</h4>
+<p><%= f.file_field :image, accept: "image/*", class: "w-100" %></p>
+<p>紹介文<%= f.text_field :introduction %></p>
+<p> <%= f.label :software_id, '使用ソフト' %>
+<%= f.collection_select :software_id, Software.all, :id, :software, { prompt: '選択してください' }, class: 'form-control' %></p>
+<p>塗り<%= f.text_field :brush %></p>
+<p> コメント（あれば）<%= f.text_area :comments %></p>
+
+<p>タグ<%= f.text_field :tag %></p>
+
+<%= f.submit '保存' ,class: "btn btn-success" %>
+<% end %>
+

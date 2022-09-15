@@ -6,11 +6,73 @@
     <%= csrf_meta_tags %>
     <%= csp_meta_tag %>
 
-    <%= stylesheet_link_tag 'application', media: 'all', 'data-turbolinks-track': 'reload' %>
+    <%= stylesheet_pack_tag 'application', media: 'all', 'data-turbolinks-track': 'reload' %>
     <%= javascript_pack_tag 'application', 'data-turbolinks-track': 'reload' %>
+
   </head>
+<nav class="navbar navbar-expand-lg navbar-light" style="background: linear-gradient(to right,#a3bce2,#a59aca,#cfa7cd);">
+  <a class="navbar-brand" href="#">Navbar</a>
+  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+    <span class="navbar-toggler-icon"></span>
+  </button>
+
+  <div class="collapse navbar-collapse" id="navbarSupportedContent">
+  <% if user_signed_in? %>
+    <ul class="navbar-nav mr-auto">
+      <li class="nav-item active">
+      <%= link_to "TOP", root_path, class: "nav-link" %>
+      </li>
+      <li class="nav-item">
+      <%= link_to "マイページ", root_path, class: "nav-link" %>
+      </li>
+      <li class="nav-item">
+      <%= link_to "投稿", admin_posts_path, class: "nav-link" %>
+      </li>
+      <li class="nav-item">
+      <%= link_to "ブックマーク", root_path, class: "nav-link" %>
+      </li>
+      <li>
+      <%= link_to "ログアウト", destroy_user_session_path, method: :delete, class: "nav-link" %>
+      </li>
+    </ul>
+    <% elsif admin_signed_in? %>
+        <ul class="navbar-nav mr-auto">
+      <li class="nav-item active">
+      <%= link_to "マイページ", root_path, class: "nav-link" %>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" href="#">会員一覧</a>
+      </li>
+      <li class="nav-item">
+        <%= link_to "ログアウト", destroy_admin_session_path, method: :delete, class: "nav-link" %>
+      </li>
+    </ul>
+    <% else %>
+            <ul class="navbar-nav mr-auto">
+      <li class="nav-item active">
+        <a class="nav-link" href="#">TOP<span class="sr-only">(current)</span></a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" href="#">新規登録</a>
+      </li>
+      <li>
+        <%= link_to "ログイン", new_user_session_path, class: "nav-link text-dark btn btn-outline-secondary btn-sm px-3 ml-5" %>
+      </li>
+    </ul>
+    <% end %>
+<!--    <form class="form-inline my-2 my-lg-0">
+      <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
+      <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
+    </form>-->
+    
+    
+
+  </div>
+</nav>
 
   <body>
     <%= yield %>
   </body>
+<footer class="navbar navbar-expand-lg navbar-light" style="background: linear-gradient(to right,#a3bce2,#a59aca,#cfa7cd); height: 60px;">
+</footer>
 </html>

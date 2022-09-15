@@ -1,0 +1,13 @@
+<h2>登録情報 <span><%= link_to "編集する", edit_user_path %></span></h2>
+<table class='table'>
+  <tr>
+	  <th>氏名</th>
+	  <td><%= @user.user_name %></td>
+  </tr>
+   <tr>
+	  <th>誕生日</th>
+	  <td><%= @user.birth %></td>
+  </tr>
+
+
+</table>
