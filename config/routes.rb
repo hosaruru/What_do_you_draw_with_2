@@ -40,13 +40,19 @@ devise_for :admin, skip: [:registrations, :passwords] ,controllers: {
     resource :favorites, only: [:create, :destroy]
     patch 'posts/:id' => 'posts#update', as: 'update_post'
     post 'posts' => 'posts#create'
-
-
   end
    scope module: :public do
     patch 'users/:id' => 'users#update', as: 'update_user'
-    get 'users/:id' => 'users#show', as: 'show_user'
-    get 'users/:id/edit' => 'users#edit', as: 'edit_user'
+    get 'users/show'
+    get 'users/edit'
+
+  end
+   scope module: :public do
+  resources :users do
+    member do
+      get :favorites
+    end
+  end
 
   end
    scope module: :public do

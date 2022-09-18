@@ -1,2 +1,3 @@
 class Software < ApplicationRecord
+
 end
