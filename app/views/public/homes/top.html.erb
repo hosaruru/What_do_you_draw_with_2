@@ -24,6 +24,7 @@
 							<%= post.introduction %><br>
 							<%= post.comments %><br>
 							<%= link_to "詳細", post_path(post.id),class: "btn btn-success"  %>
+							<%= "#{post.post_comments.count} コメント" %>
 						</td>						
 							<% end %>
 							<% end %>

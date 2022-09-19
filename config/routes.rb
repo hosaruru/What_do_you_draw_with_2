@@ -36,7 +36,9 @@ devise_for :admin, skip: [:registrations, :passwords] ,controllers: {
 
   end
    scope module: :public do
-    resources :posts, only: [:new, :show, :edit, :index]
+    resources :posts, only: [:new, :show, :edit, :index]do
+    resources :post_comments, only: [:create]
+  end
     resource :favorites, only: [:create, :destroy]
     patch 'posts/:id' => 'posts#update', as: 'update_post'
     post 'posts' => 'posts#create'
@@ -48,7 +50,7 @@ devise_for :admin, skip: [:registrations, :passwords] ,controllers: {
 
   end
    scope module: :public do
-  resources :users do
+    resources :users do
     member do
       get :favorites
     end
