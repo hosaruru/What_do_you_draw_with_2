@@ -1,2 +1,22 @@
-<h1>Admin::Users#show</h1>
-<p>Find me in app/views/admin/users/show.html.erb</p>
+<h1>検索結果</h1>
+<table>
+  <thead>
+    <tr>
+      <th>Name</th>
+      <th>Age</th>
+      <th>Height</th>
+      <th>Weight</th>
+      <th>Gender</th>
+      <th colspan="3"></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @results.each do |user| %>
+      <tr>
+        <td><%= user.user_name %></td>
+
+      </tr>
+    <% end %>
+  </tbody>
+</table>

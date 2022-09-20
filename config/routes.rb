@@ -13,8 +13,16 @@ devise_for :admin, skip: [:registrations, :passwords] ,controllers: {
   sessions: "admin/sessions"
 }
   namespace :admin do
+      resources :users do
+    collection do
+      get 'search'
+        end
+    end
+  end
+  namespace :admin do
     resources :users, only: [:index, :show, :edit, :show, :update]
   end
+
   
   # devise_for :users
   namespace :admin do
@@ -29,7 +37,6 @@ devise_for :admin, skip: [:registrations, :passwords] ,controllers: {
     resources :softwares, only: [:index, :create, :edit]
   patch 'softwares/:id' => 'softwares#update', as: 'update_software'
   delete 'softwares/:id' => 'softwares#destroy', as: 'destroy_software'
- 
   end
    scope module: :public do
     resources :bookmarks, only: [:show, :edit, :update]

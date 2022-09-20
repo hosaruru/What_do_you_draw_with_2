@@ -1,4 +1,5 @@
 class Public::PostsController < ApplicationController
+
   def index
     @posts = Post.page(params[:page])
     @post = Post.new
