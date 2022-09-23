@@ -31,6 +31,8 @@ devise_for :admin, skip: [:registrations, :passwords] ,controllers: {
   end
   namespace :admin do
     resources :posts, only: [:index, :show, :edit, :update]
+    resources :post_comments, only: [:create, :destroy]
+    delete 'posts/:id' => 'posts#destroy', as: 'destroy_post'
 
   end
   namespace :admin do
@@ -44,7 +46,7 @@ devise_for :admin, skip: [:registrations, :passwords] ,controllers: {
   end
    scope module: :public do
     resources :posts, only: [:new, :show, :edit, :index]do
-    resources :post_comments, only: [:create]
+    resources :post_comments, only: [:create, :destroy]
   end
     resource :favorites, only: [:create, :destroy]
     patch 'posts/:id' => 'posts#update', as: 'update_post'

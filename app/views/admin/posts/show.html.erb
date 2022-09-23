@@ -1,2 +1,57 @@
-<h1>Admin::Posts#show</h1>
-<p>Find me in app/views/admin/posts/show.html.erb</p>
+
+<div class="col-md-8 offset-md-1">
+    <h5>商品詳細</h2>
+    <div class="container">
+        <div class="row">
+            <div class="col-md-4  img-hidden">
+                <p>            <% if @post.image.attached? %>
+                <%= image_tag @post.image, size: "200x200" %>
+                <% else %>
+                <%= image_tag 'no_image', size: "200x200" %>
+                <% end %> </p><p><%= @post.introduction %></p>
+            </div>
+            <div class="col-md-8">
+                <h5>使用ソフト</h5>
+                <p><%= @post.software %></p>
+                <h5>線画</h5>
+                <p><%= @post.brush %></p>
+                <h5>塗り（メイン）</h5>
+                <p></p>
+                <h5>装飾ペン</h5>
+                <p></p>
+                <h5>コメント</h5>
+                <p><%= @post.comments %></p>
+            </div>
+        </div>
+    </div>
+    <p><%= link_to "編集する", edit_post_path(@post.id),class: "btn btn-success" %></p>
+
+<% if @post.favorited?(current_user) %>
+    <%= link_to favorites_path(post_id: @post.id), method: :delete do %>
+        <span style="color:red; font-size: 40px;">❤︎</span>
+    <% end %>
+<% else %>
+    <%= link_to favorites_path(post_id: @post.id), method: :post do %>
+        <span style="color:gray;font-size: 40px;">❤︎</span>
+    <% end %>
+<% end %>
+
+<div>
+  <p>コメント件数：<%= @post.post_comments.count %></p>
+  <% @post.post_comments.each do |post_comment| %>
+    <%= post_comment.user.user_name %>
+    <%= post_comment.created_at.strftime('%Y/%m/%d') %><br>
+    <%= post_comment.comment %><br>
+
+    <%= link_to '削除', admin_post_comments_path(@post, post_comment), data: {confirm: '本当に削除しますか？'}, method: :delete %>
+  <% end %>
+</div>
+<div>
+  <%= form_with model: [@post, @post_comment] do |f| %>
+    <%= f.text_area :comment, rows: '5', placeholder: "コメントをここに" , style: "width: 500px; height: 80px;"%>
+    <%= f.submit "送信する",class: "btn btn-success" %>
+  <% end %>
+</div>
+
+<%= link_to 'Twitter', "https://twitter.com/share?url=#{request.url}", title: 'Twitter', target: '_blank' ,class: "bi bi-twitter",style: "font-size: 20px;"%>
+</div>
