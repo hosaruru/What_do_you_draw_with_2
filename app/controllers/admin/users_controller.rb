@@ -11,9 +11,13 @@ class Admin::UsersController < ApplicationController
   end
 
   def edit
+    @user = User.find(params[:id])
   end
 
   def update
+    @user =  User.find(params[:id])
+    @user.update(user_params)
+    redirect_to admin_user_path
   end
   
   def search
@@ -21,7 +25,9 @@ class Admin::UsersController < ApplicationController
   end
 
   private
-
+  def user_params
+    params.require(:user).permit(:user_name, :email, :birth)
+  end
   def set_q
     @q = User.ransack(params[:q])
   end

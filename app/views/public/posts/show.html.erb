@@ -1,4 +1,3 @@
-
 <div class="col-md-8 offset-md-1">
     <h5>商品詳細</h2>
     <div class="container">
@@ -39,9 +38,9 @@
 <div>
   <p>コメント件数：<%= @post.post_comments.count %></p>
   <% @post.post_comments.each do |post_comment| %>
-    <%= post_comment.user.user_name %>
+   投稿者： <%= post_comment.user.user_name %><br>
     <%= post_comment.created_at.strftime('%Y/%m/%d') %><br>
-    <%= post_comment.comment %>
+    コメント：<%= post_comment.comment %>
   <% end %>
 </div>
 <div>

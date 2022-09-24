@@ -1,5 +1,5 @@
 <div class="col-md-8 offset-md-1">
-<h2>登録情報<span><%= link_to "編集する", users_edit_path %></span></h2>
+<h2>登録情報<span><%= link_to "編集する", edit_admin_user_path %></span></h2>
 
 <table class='table'>
   <tr>
@@ -27,7 +27,7 @@
 							<%= post.introduction %><br>
 							<%= post.comments %><br>
 							<%= "#{post.post_comments.count} コメント" %>
-							<%= link_to "詳細", post_path(post.id),class: "btn btn-success"  %>
+							<%= link_to "詳細", admin_post_path(post.id),class: "btn btn-success"  %>
 						</td>						
 							<% end %>
 							<% end %>

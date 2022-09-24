@@ -20,7 +20,8 @@ devise_for :admin, skip: [:registrations, :passwords] ,controllers: {
     end
   end
   namespace :admin do
-    resources :users, only: [:index, :show, :edit, :show, :update]
+    resources :users, only: [:index, :show, :edit, :show]
+    patch 'users/:id' => 'users#update', as: 'update_user'
   end
 
   
@@ -30,9 +31,12 @@ devise_for :admin, skip: [:registrations, :passwords] ,controllers: {
 
   end
   namespace :admin do
-    resources :posts, only: [:index, :show, :edit, :update]
+    resources :posts, only: [:index, :show, :edit] do
     resources :post_comments, only: [:create, :destroy]
+    end
+    get 'posts/:id/edit' => 'posts#edit', as: 'edit_post'
     delete 'posts/:id' => 'posts#destroy', as: 'destroy_post'
+    patch 'posts/:id' => 'posts#update', as: 'update_post'
 
   end
   namespace :admin do

@@ -24,7 +24,7 @@
             </div>
         </div>
     </div>
-    <p><%= link_to "編集する", edit_post_path(@post.id),class: "btn btn-success" %></p>
+    <p><%= link_to "編集する", edit_admin_post_path(@post.id),class: "btn btn-success" %></p>
 
 <% if @post.favorited?(current_user) %>
     <%= link_to favorites_path(post_id: @post.id), method: :delete do %>
@@ -34,24 +34,26 @@
     <%= link_to favorites_path(post_id: @post.id), method: :post do %>
         <span style="color:gray;font-size: 40px;">❤︎</span>
     <% end %>
-<% end %>
+<% end %><br> 
 
 <div>
   <p>コメント件数：<%= @post.post_comments.count %></p>
   <% @post.post_comments.each do |post_comment| %>
-    <%= post_comment.user.user_name %>
+   投稿者： <%= post_comment.user.user_name %><br>
     <%= post_comment.created_at.strftime('%Y/%m/%d') %><br>
-    <%= post_comment.comment %><br>
-
-    <%= link_to '削除', admin_post_comments_path(@post, post_comment), data: {confirm: '本当に削除しますか？'}, method: :delete %>
+    コメント：<%= post_comment.comment %>
+    <%= link_to '削除', admin_post_post_comment_path(@post, post_comment), data: {confirm: '本当に削除しますか？'}, method: :delete ,class: "btn btn-success"%><br>
   <% end %>
 </div>
+
 <div>
   <%= form_with model: [@post, @post_comment] do |f| %>
     <%= f.text_area :comment, rows: '5', placeholder: "コメントをここに" , style: "width: 500px; height: 80px;"%>
     <%= f.submit "送信する",class: "btn btn-success" %>
   <% end %>
 </div>
-
 <%= link_to 'Twitter', "https://twitter.com/share?url=#{request.url}", title: 'Twitter', target: '_blank' ,class: "bi bi-twitter",style: "font-size: 20px;"%>
 </div>
+
+
+
