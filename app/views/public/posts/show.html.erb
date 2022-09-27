@@ -11,7 +11,13 @@
             </div>
             <div class="col-md-8">
                 <h5>使用ソフト</h5>
-                <p><%= @post.software %></p>
+                <% if  @post.software == "1" %>
+                 <p> クリスタ</p>
+                <% elsif @post.software == "2" %>
+                 <p>SAI</p>
+                <% else %>
+                 <p>アズペ</p>
+                <% end %>
                 <h5>線画</h5>
                 <p><%= @post.brush %></p>
                 <h5>塗り（メイン）</h5>
@@ -20,11 +26,13 @@
                 <p></p>
                 <h5>コメント</h5>
                 <p><%= @post.comments %></p>
+                <h5>タグ</h5>
+                <p><%= @post.tag_name %></p>
             </div>
         </div>
     </div>
-    <p><%= link_to "編集する", edit_post_path(@post.id),class: "btn btn-success" %></p>
-
+    <p><%= link_to "編集", edit_post_path(@post.id),class: "btn btn-success" %></p>
+    <p><%= link_to "削除", post_destroy_posts_path(@post.id), class: "btn btn-danger", method: :delete, "data-confirm" => "本当に削除しますか？" %></p>
 <% if @post.favorited?(current_user) %>
     <%= link_to favorites_path(post_id: @post.id), method: :delete do %>
         <span style="color:red; font-size: 40px;">❤︎</span>
@@ -52,3 +60,5 @@
 
 <%= link_to 'Twitter', "https://twitter.com/share?url=#{request.url}", title: 'Twitter', target: '_blank' ,class: "bi bi-twitter",style: "font-size: 20px;"%>
 </div>
+
+

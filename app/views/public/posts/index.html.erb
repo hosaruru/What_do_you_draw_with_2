@@ -1,0 +1,50 @@
+タグで探す
+    <% @tag_lists.each do |list| %>
+      <span> <%= link_to "#"+list.tag_name, posts_path(tag_id: list.id), class: 'btn btn-info btn-sm ' %></span>
+<% end %>
+
+
+   <% @post.tags.each do |tag| %>
+     <%= link_to "##{tag.tag_name}", posts_path(tag), class: 'smaller tag_list' %>
+     <% end %>
+
+<%= flash[:notice] %>
+<main>
+<h2>投稿一覧</h2>
+	<% if user_signed_in? %>
+	<%=  %>
+	<% else %>
+	<%= link_to 'ゲストログイン（閲覧用）', posts_guest_sign_in_path, method: :post , class: "btn btn-primary btn-sm px-4" %>
+	<% end %>
+	<div class='container px-5 px-sm-0'>
+		<div class='row'>
+			<div class='col-md-8 offset-md-1'>
+				<table class='table table-hover table-inverse'>
+					<tbody>
+						<% @posts.each do |post| %>
+						<tr>
+						<td>
+							<%= link_to post_path(post.id) do %>
+							<% if post.image.attached? %>
+							<%= image_tag post.image, size: "200x200" %>
+							<% else %>
+							<%= image_tag 'no_image', size: "200x200" %>
+							<% end %>
+						</td>
+						<td>
+							<%= post.introduction %><br>
+							<%= post.comments %><br>
+							<%= link_to "詳細", post_path(post.id),class: "btn btn-success"  %>
+							<%= "#{post.post_comments.count} コメント" %>
+						</td>						
+							<% end %>
+							<% end %>
+						</tr>	
+					</tbody>
+				</table>
+			</div>
+		</div>
+		<ul class="pagination"><li class="page-item"><%= paginate @posts%></li></ul>
+		</div>
+
+</main>

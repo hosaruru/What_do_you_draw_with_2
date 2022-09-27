@@ -50,6 +50,7 @@ devise_for :admin, skip: [:registrations, :passwords] ,controllers: {
   end
    scope module: :public do
     resources :posts, only: [:new, :show, :edit, :index]do
+  delete 'posts/:id' => 'posts#destroy', as: 'destroy_posts'
     resources :post_comments, only: [:create, :destroy]
   end
     resource :favorites, only: [:create, :destroy]
@@ -75,8 +76,8 @@ devise_for :admin, skip: [:registrations, :passwords] ,controllers: {
   end
 
    scope module: :public do
-    root to: 'homes#top'
-  post '/homes/guest_sign_in', to: 'homes#guest_sign_in'
+    root to: 'posts#index'
+  post '/posts/guest_sign_in', to: 'posts#guest_sign_in'
 
   end
 # ゲストログイン
