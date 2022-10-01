@@ -1,26 +1,25 @@
-タグで探す
+<main>
     <% @tag_lists.each do |list| %>
       <span> <%= link_to "#"+list.tag_name, posts_path(tag_id: list.id), class: 'btn btn-info btn-sm ' %></span>
 <% end %>
-
-
    <% @post.tags.each do |tag| %>
      <%= link_to "##{tag.tag_name}", posts_path(tag), class: 'smaller tag_list' %>
      <% end %>
 
-<%= flash[:notice] %>
-<main>
 <h2>投稿一覧</h2>
+<%= flash[:notice] %>
 	<% if user_signed_in? %>
 	<%=  %>
 	<% else %>
 	<%= link_to 'ゲストログイン（閲覧用）', posts_guest_sign_in_path, method: :post , class: "btn btn-primary btn-sm px-4" %>
+	<p>※ログインすると詳細が見れます</p>
 	<% end %>
 	<div class='container px-5 px-sm-0'>
 		<div class='row'>
 			<div class='col-md-8 offset-md-1'>
 				<table class='table table-hover table-inverse'>
 					<tbody>
+					<% if user_signed_in? %>
 						<% @posts.each do |post| %>
 						<tr>
 						<td>
@@ -34,12 +33,15 @@
 						<td>
 							<%= post.introduction %><br>
 							<%= post.comments %><br>
-							<%= link_to "詳細", post_path(post.id),class: "btn btn-success"  %>
+							
+							<p><%= link_to "詳細", post_path(post.id),class: "btn btn-success"  %></p>
+							
 							<%= "#{post.post_comments.count} コメント" %>
 						</td>						
 							<% end %>
 							<% end %>
-						</tr>	
+						</tr>
+						<% end %>
 					</tbody>
 				</table>
 			</div>

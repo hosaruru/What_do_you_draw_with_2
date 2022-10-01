@@ -21,7 +21,11 @@ class Post < ApplicationRecord
 
    # Destroy
    old_tags.each do |old_name|
-     self.tags.delete Tag.find_by(tag_name:old_name)
+     tag= Tag.find_by(tag_name:old_name)
+     self.tags.delete tag
+     if Tagmap.where(tag_id:tag.id).count == 0
+       tag.destroy
+     end
    end
 
    # Create
@@ -29,8 +33,13 @@ class Post < ApplicationRecord
      post_tag = Tag.find_or_create_by(tag_name:new_name)
      self.tags << post_tag
    end
-   
-
+ end
+ def clean_tag
+    self.tags.each do |tag|
+       if Tagmap.where(tag_id:tag.id).where.not(post_id:self.id).count == 0
+         tag.destroy
+       end  
+    end
  end
 
 end

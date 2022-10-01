@@ -1,4 +1,5 @@
 class Admin::SoftwaresController < ApplicationController
+  before_action :move_to_signed_in  
   def index
     @softwares = Software.all
     @software = Software.new
@@ -24,7 +25,11 @@ class Admin::SoftwaresController < ApplicationController
     redirect_to admin_softwares_path
   end
   private
-
+  def move_to_signed_in
+    unless user_signed_in?
+      redirect_to  admin_session_path
+    end
+  end
   def software_params
     params.require(:software).permit(:software)
   end

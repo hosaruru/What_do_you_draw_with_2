@@ -7,7 +7,7 @@
         <%= f.label :software, '使用ソフト' %>
         <%= f.collection_select :software, Software.all, :id, :software, { prompt: '選択してください' }, class: 'form-control' %>
     </p>
-    <p>塗り<%= f.text_field :brush %></p>
+    <p>ペン<%= f.text_field :brush %></p>
     <p> コメント（あれば）<%= f.text_area :comments %></p>
     <p>タグ
         <%#= form_with(model: [@tag,@post], local: true) do |f| %>

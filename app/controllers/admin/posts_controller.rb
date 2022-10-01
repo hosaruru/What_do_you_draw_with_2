@@ -1,4 +1,5 @@
 class Admin::PostsController < ApplicationController
+  before_action :move_to_signed_in
   def index
   end
 
@@ -23,7 +24,11 @@ class Admin::PostsController < ApplicationController
     redirect_to admin_posts_path
   end
   private
-
+  def move_to_signed_in
+    unless user_signed_in?
+      redirect_to  admin_session_path
+    end
+  end
   def post_params
     params.require(:post).permit(:tag, :software, :brush, :image, :comments, :image, :introduction)
   end

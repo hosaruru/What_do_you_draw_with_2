@@ -14,13 +14,12 @@
             </p>
             <p> 紹介文<%= f.text_area :introduction %></p>
             <p>線画<%= f.text_field :brush %></p>
-            <p>塗り（メイン）<%= f.text_field :brush %></p>
-            <p>塗り（サブ）<%= f.text_field :brush %></p>
+            <p>ペン<%= f.text_field :brush %></p>
             <p>装飾ペン<%= f.text_field :brush %></p>
             <p> コメント（あれば）<%= f.text_area :comments %></p>
             <%#= f.input :twitter, collect: Embed.twitters_i18n.invert, include_blank: false %>
             <%#= f.input :identifier %>
-            <p>タグ※複数登録する際は<span style="font-weight: bold; color: red;">半角スペ</span>で！
+            <p>タグ
               <%= form_with(model: [@tag,@post], local: true) do |f| %>
                 <%= f.text_field :tag_name, placeholder: "タグ入力", class: 'uk-input uk-form-small' %>
               <% end %>

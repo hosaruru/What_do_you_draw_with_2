@@ -1,5 +1,5 @@
-
 class Admin::PostCommentsController < ApplicationController
+  before_action :move_to_signed_in
     def create
         post = Post.find(params[:post_id])
         comment = current_user.post_comments.new(post_comment_params)
@@ -17,8 +17,12 @@ class Admin::PostCommentsController < ApplicationController
   end
 end  
     private
-    
     def post_comment_params
         params.require(:post_comment).permit(:comment)
-        end
+    end
+  def move_to_signed_in
+    unless user_signed_in?
+      redirect_to  admin_session_path
+    end
+  end
 end

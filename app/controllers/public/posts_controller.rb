@@ -16,8 +16,6 @@ class Public::PostsController < ApplicationController
   def guest_sign_in
     user = User.find_or_create_by!(email: 'guest@example.com') do |user|
       user.password = SecureRandom.urlsafe_base64
-      # user.confirmed_at = Time.now  # Confirmable を使用している場合は必要
-      # 例えば name を入力必須としているならば， user.name = "ゲスト" なども必要
     end
     sign_in user
     redirect_to root_path, notice: 'ゲストユーザーとしてログインしました。'
@@ -29,7 +27,7 @@ class Public::PostsController < ApplicationController
 
   def create
     @post = Post.new(post_params)
-    tag_list = params[:post][:tag_name].split(nil)
+    tag_list = params[:post][:tag_name].split(/[[:blank:]]/)
     @post.image.attach(params[:post][:image])
     @post.user_id = current_user.id
     if @post.save
@@ -53,10 +51,10 @@ class Public::PostsController < ApplicationController
 
   def update
     @post = Post.find(params[:id])
-    tag_list = params[:post][:tag_name].split(nil)
+    tag_list = params[:post][:tag_name].split(/[[:blank:]]/)
     @post.image.attach(params[:post][:image])
     @post.user_id = current_user.id
-    if @post.update(post_params)
+    if @post.update(post_params)      
        @post.save_posts(tag_list)
       redirect_to post_path(@post.id)
     else
@@ -66,6 +64,7 @@ class Public::PostsController < ApplicationController
   end
   def destroy
     @post = Post.find(params[:id])
+    @post.clean_tag
     @post.destroy
     redirect_to root_path
   end  
