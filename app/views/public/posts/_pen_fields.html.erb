@@ -1,0 +1,9 @@
+<div class="nested-fields">
+  <div class="row mx-auto">
+    <div class="col-5"><%= f.text_field :ing_name, class: "form-control", placeholder: "材料" %></div>
+    <div class="offset-1 col-2"><%= f.text_field :quantity, class: "form-control", placeholder: "分量" %></div>
+    <div class="offset-1 col-1 px-0 w-auto">
+      <%= link_to_remove_association "削除", f, class: "btn btn-secondary btn-block" %>
+    </div>
+  </div>
+</div>

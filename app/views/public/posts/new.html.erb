@@ -14,7 +14,26 @@
             </p>
             <p> 紹介文<%= f.text_area :introduction %></p>
             <p>線画<%= f.text_field :brush %></p>
-            <p>ペン<%= f.text_field :brush %></p>
+            <p> 
+            <%= form_with(model: @post, local: true) do |f| %>
+              <div class="pens">
+                <div class="mx-auto">
+                  <%= f.fields_for :pens do |t| %>
+                    <%= render "public/posts/pen_fields", f: t %>
+                  <% end %>
+                </div>
+                <div id="detail-association-insertion-point"></div>
+                <div class="col-10 mx-auto mt-2">
+                  <%= link_to_add_association "+フォームを追加", f, :pens,
+                  class: "btn btn-secondary btn-block",
+                  data: {
+                  association_insertion_node: '#detail-association-insertion-point',
+                  association_insertion_method: 'after'
+                  }%>
+                </div>
+              </div>
+            <% end %>
+            </p>
             <p>装飾ペン<%= f.text_field :brush %></p>
             <p> コメント（あれば）<%= f.text_area :comments %></p>
             <%#= f.input :twitter, collect: Embed.twitters_i18n.invert, include_blank: false %>
@@ -28,8 +47,7 @@
       <% end %>
       </div>
       </div>
-      
-      
+
       
     </div>
 </div> 

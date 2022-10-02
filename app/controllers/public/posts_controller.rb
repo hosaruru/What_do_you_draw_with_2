@@ -23,6 +23,7 @@ class Public::PostsController < ApplicationController
   
   def new
      @post = Post.new
+     @pens = @post.pens.build
   end
 
   def create
@@ -71,6 +72,7 @@ class Public::PostsController < ApplicationController
   private
 
   def post_params
-    params.require(:post).permit(:tag_name, :software, :brush, :image, :comments, :image, :introduction)
+    params.require(:post).permit(:tag_name, :software, :brush, :image, :comments, :image, :introduction,
+                                pens_attributes:[:ing_name, :quantity, :_destroy])
   end
 end

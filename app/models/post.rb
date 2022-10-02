@@ -5,6 +5,8 @@ class Post < ApplicationRecord
       has_many :post_comments, dependent: :destroy    
       has_many :tagmaps, dependent: :destroy
       has_many :tags, through: :tagmaps
+      has_many :pens, dependent: :destroy
+      accepts_nested_attributes_for :pens, allow_destroy: true
     def favorited?(user)
    favorites.where(user_id: user.id).exists?
   end
