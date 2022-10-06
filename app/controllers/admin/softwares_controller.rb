@@ -1,5 +1,5 @@
 class Admin::SoftwaresController < ApplicationController
-  before_action :move_to_signed_in  
+  before_action :authenticate_admin!
   def index
     @softwares = Software.all
     @software = Software.new

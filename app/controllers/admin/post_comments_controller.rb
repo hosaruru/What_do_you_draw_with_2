@@ -1,5 +1,5 @@
 class Admin::PostCommentsController < ApplicationController
-  before_action :move_to_signed_in
+  before_action :authenticate_admin!
     def create
         post = Post.find(params[:post_id])
         comment = current_user.post_comments.new(post_comment_params)

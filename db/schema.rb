@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2022_10_01_123951) do
+ActiveRecord::Schema.define(version: 2022_10_02_115430) do
 
   create_table "active_storage_attachments", force: :cascade do |t|
     t.string "name", null: false
@@ -74,6 +74,7 @@ ActiveRecord::Schema.define(version: 2022_10_01_123951) do
     t.integer "post_id", null: false
     t.string "ing_name"
     t.string "quantity"
+    t.string "use_pen"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.index ["post_id"], name: "index_pens_on_post_id"
@@ -99,6 +100,7 @@ ActiveRecord::Schema.define(version: 2022_10_01_123951) do
     t.text "introduction"
     t.integer "twitter"
     t.string "tag_name"
+    t.string "name"
   end
 
   create_table "softwares", force: :cascade do |t|

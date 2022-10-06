@@ -73,6 +73,6 @@ class Public::PostsController < ApplicationController
 
   def post_params
     params.require(:post).permit(:tag_name, :software, :brush, :image, :comments, :image, :introduction,
-                                pens_attributes:[:ing_name, :quantity, :_destroy])
+                                pens_attributes:[:use_pen, :_destroy],)
   end
 end

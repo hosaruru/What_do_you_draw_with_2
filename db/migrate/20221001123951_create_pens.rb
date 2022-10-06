@@ -4,6 +4,7 @@ class CreatePens < ActiveRecord::Migration[6.1]
       t.references :post, null: false, foreign_key: true
       t.string :ing_name
       t.string :quantity
+      t.string :use_pen
 
       t.timestamps
     end

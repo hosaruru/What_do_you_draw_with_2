@@ -1,6 +1,6 @@
 class Admin::UsersController < ApplicationController
   before_action :set_q, only: [:index, :search]
-  before_action :move_to_signed_in
+  before_action :authenticate_admin!
   def index
     @users = User.page(params[:page])
     @user = User.new
