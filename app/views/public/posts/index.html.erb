@@ -1,12 +1,12 @@
-<main>
-    <% @tag_lists.each do |list| %>
+<% @tag_lists.each do |list| %>
       <span> <%= link_to "#"+list.tag_name, posts_path(tag_id: list.id), class: 'btn btn-info btn-sm ' %></span>
 <% end %>
    <% @post.tags.each do |tag| %>
      <%= link_to "##{tag.tag_name}", posts_path(tag), class: 'smaller tag_list' %>
      <% end %>
-
+<div class="col-md-8 offset-md-1">
 <h2>投稿一覧</h2>
+</div>
 <%= flash[:notice] %>
 	<% if user_signed_in? %>
 	<%=  %>
@@ -48,5 +48,3 @@
 		</div>
 		<ul class="pagination"><li class="page-item"><%= paginate @posts%></li></ul>
 		</div>
-
-</main>

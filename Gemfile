@@ -60,3 +60,4 @@ gem 'ransack'
 gem 'acts-as-taggable-on', '~> 4.0'
 gem "enum_help"
 gem 'cocoon'
+gem 'simple_form'

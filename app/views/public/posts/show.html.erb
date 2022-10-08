@@ -1,14 +1,15 @@
-<div class="col-md-8 offset-md-1">
+<div class="col-md-5 col-sm-10 mx-2 mx-sm-auto">
     <h5>商品詳細</h2>
     <div class="container">
         <div class="row">
             <div class="col-md-4  img-hidden">
-                <p>            <% if @post.image.attached? %>
+                <p>            
+                <% if @post.image.attached? %>
                 <%= image_tag @post.image, size: "200x200" %>
                 <% else %>
                 <%= image_tag 'no_image', size: "200x200" %>
                 <% end %> </p><p><%= @post.introduction %></p>
-            </div>
+            </div>           
             <div class="col-md-8">
                 <h5>使用ソフト</h5>
                 <% if  @post.software == "1" %>
@@ -19,21 +20,25 @@
                  <p>アズペ</p>
                 <% end %>
                 <h5>使ってるペン・ブラシ</h5>
-                <p><%= @post.use_pen %></p>
-                <h5>コメント</h5>
-                <p><%= @post.comments %></p>
+                  <% @post.pens.each do |use_pen| %>
+                  <p><%= use_pen.use_pen %></p>
+                 <% end %>
+                <h5>コメント</h5>         
+                <p><%= @post.comments.html_safe %></p>
+                <p><%= "#{@post.comments}" %></p>
                 <h5>タグ</h5>
                 <p><%= @post.tag_name %></p>
             </div>
         </div>
     </div>
+    
     <p><%= link_to "編集", edit_post_path(@post.id),class: "btn btn-success" %></p>
     <p><%= link_to "削除", post_destroy_posts_path(@post.id), class: "btn btn-danger", method: :delete, "data-confirm" => "本当に削除しますか？" %></p>
 <% if @post.favorited?(current_user) %>
     <%= link_to favorites_path(post_id: @post.id), method: :delete do %>
         <span style="color:red; font-size: 40px;">❤︎</span>
     <% end %>
-<% else %>
+    <% else %>
     <%= link_to favorites_path(post_id: @post.id), method: :post do %>
         <span style="color:gray;font-size: 40px;">❤︎</span>
     <% end %>

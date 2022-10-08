@@ -27,11 +27,16 @@ class Public::PostsController < ApplicationController
   end
 
   def create
+
     @post = Post.new(post_params)
     tag_list = params[:post][:tag_name].split(/[[:blank:]]/)
     @post.image.attach(params[:post][:image])
     @post.user_id = current_user.id
+
+    
     if @post.save
+
+
        @post.save_posts(tag_list)
       redirect_to post_path(@post.id)
     else
@@ -42,6 +47,7 @@ class Public::PostsController < ApplicationController
 
   def show
     @post = Post.find(params[:id])
+    @pen = 
     @post_comment = PostComment.new
   end
 

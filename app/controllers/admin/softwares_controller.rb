@@ -21,7 +21,8 @@ class Admin::SoftwaresController < ApplicationController
     redirect_to admin_softwares_path
   end
   def destroy
-
+    @software = Software.find(params[:id])
+    @software.destroy
     redirect_to admin_softwares_path
   end
   private

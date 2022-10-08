@@ -8,9 +8,10 @@ class Admin::PostCommentsController < ApplicationController
         redirect_to admin_users_path
     end
   def destroy
+    post = Post.find(params[:post_id])
   @comment = PostComment.find(params[:id])
   if @comment.destroy
-    redirect_to admin_users_path, notice: 'コメントを削除しました'
+    redirect_to admin_post_path(post), notice: 'コメントを削除しました'
   else
     flash.now[:alert] = 'コメント削除に失敗しました'
     render admin_users_path

@@ -58,9 +58,10 @@ devise_for :admin, skip: [:registrations, :passwords] ,controllers: {
     post 'posts' => 'posts#create'
   end
    scope module: :public do
+    resources :users, only: [:show, :edit]
     patch 'users/:id' => 'users#update', as: 'update_user'
-    get 'users/show'
-    get 'users/edit'
+
+
 
   end
    scope module: :public do
