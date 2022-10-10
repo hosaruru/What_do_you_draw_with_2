@@ -1,65 +1,59 @@
-<div class="col-md-5 col-sm-10 mx-2 mx-sm-auto">
-    <h5>商品詳細</h2>
-    <div class="container">
-        <div class="row">
-            <div class="col-md-4  img-hidden">
-                <p>            
-                <% if @post.image.attached? %>
-                <%= image_tag @post.image, size: "200x200" %>
-                <% else %>
-                <%= image_tag 'no_image', size: "200x200" %>
-                <% end %> </p><p><%= @post.introduction %></p>
-            </div>           
-            <div class="col-md-8">
-                <h5>使用ソフト</h5>
-                <% if  @post.software == "1" %>
-                 <p> クリスタ</p>
-                <% elsif @post.software == "2" %>
-                 <p>SAI</p>
-                <% else %>
-                 <p>アズペ</p>
-                <% end %>
-                <h5>使ってるペン・ブラシ</h5>
-                  <% @post.pens.each do |use_pen| %>
-                  <p><%= use_pen.use_pen %></p>
-                 <% end %>
-                <h5>コメント</h5>         
-                <p><%= @post.comments.html_safe %></p>
-                <p><%= "#{@post.comments}" %></p>
-                <h5>タグ</h5>
-                <p><%= @post.tag_name %></p>
+<div class="container">    
+        <div class="row mt-4">
+            <div class="col-md-7">
+                <p><%= @post.twitter.html_safe %></p>
+                <p><%= @post.introduction %></p>
+            </div>
+            <div class="col-md-3">
+                <h5><i class="bi bi-magic"></i> 使用ソフト</h5>
+                    <% if  @post.software == "1" %>
+                        <p> クリスタ</p>
+                    <% elsif @post.software == "2" %>
+                        <p>SAI</p>
+                    <% else %>
+                        <p>アズペ</p>
+                    <% end %>
+                <h5><i class="bi bi-pen"></i> 線画</h5>
+                    <p>・<%= @post.brush %></p> 
+                <h5><i class="bi bi-pencil-fill"></i> 塗り・その他</h5>                   
+                    <% @post.pens.each do |use_pen| %>
+                            <p>・<%= use_pen.use_pen %></p>
+                    <% end %>
+                <h5><i class="bi bi-card-text"></i> 補足説明</h5>
+                    <p><%= @post.comments %></p>
+                    <p style="color: #17a2b8;"><i class="bi bi-tag"></i><%= @post.tag_name %></p> 
+                     <% if @post.image.attached? %>
+                        <p> <%= link_to @post.image, "data-lightbox": @post.image do %>
+                        <%= image_tag @post.image ,style: "max-width: 400px;", class:"img" %><% end %></p>
+                    <% end %> 
+                    
             </div>
         </div>
+    <% if @post.favorited?(current_user) %>
+        <%= link_to favorites_path(post_id: @post.id), method: :delete do %>
+            <span style="color:red; font-size: 40px;">❤︎</span>
+        <% end %>
+        <% else %>
+        <%= link_to favorites_path(post_id: @post.id), method: :post do %>
+            <span style="color:gray;font-size: 40px;">❤︎</span>
+        <% end %>
+    <% end %>    
+    <p><%= link_to "編集", edit_post_path(@post.id),class: "btn btn-success" %>
+    <%= link_to "削除", post_destroy_posts_path(@post.id), class: "btn btn-danger", method: :delete, "data-confirm" => "本当に削除しますか？" %></p>
+    <div>
+        <p>コメント件数：<%= @post.post_comments.count %></p>
+        <% @post.post_comments.each do |post_comment| %>
+            投稿者： <%= post_comment.user.user_name %><br>
+            <%= post_comment.created_at.strftime('%Y/%m/%d') %><br>
+            コメント：<%= post_comment.comment %>
+        <% end %>
     </div>
-    
-    <p><%= link_to "編集", edit_post_path(@post.id),class: "btn btn-success" %></p>
-    <p><%= link_to "削除", post_destroy_posts_path(@post.id), class: "btn btn-danger", method: :delete, "data-confirm" => "本当に削除しますか？" %></p>
-<% if @post.favorited?(current_user) %>
-    <%= link_to favorites_path(post_id: @post.id), method: :delete do %>
-        <span style="color:red; font-size: 40px;">❤︎</span>
-    <% end %>
-    <% else %>
-    <%= link_to favorites_path(post_id: @post.id), method: :post do %>
-        <span style="color:gray;font-size: 40px;">❤︎</span>
-    <% end %>
-<% end %>
-
-<div>
-  <p>コメント件数：<%= @post.post_comments.count %></p>
-  <% @post.post_comments.each do |post_comment| %>
-   投稿者： <%= post_comment.user.user_name %><br>
-    <%= post_comment.created_at.strftime('%Y/%m/%d') %><br>
-    コメント：<%= post_comment.comment %>
-  <% end %>
+    <div>
+        <%= form_with model: [@post, @post_comment] do |f| %>
+            <%= f.text_area :comment, rows: '5', placeholder: "コメントをここに" , style: "width: 500px; height: 80px;"%>
+            <%= f.submit "送信する",class: "btn btn-success" %>
+        <% end %>
+    </div>
+    <%= link_to 'Twitter', "https://twitter.com/share?url=#{request.url}", title: 'Twitter', target: '_blank' ,class: "bi bi-twitter",style: "font-size: 20px;"%>
 </div>
-<div>
-  <%= form_with model: [@post, @post_comment] do |f| %>
-    <%= f.text_area :comment, rows: '5', placeholder: "コメントをここに" , style: "width: 500px; height: 80px;"%>
-    <%= f.submit "送信する",class: "btn btn-success" %>
-  <% end %>
-</div>
-
-<%= link_to 'Twitter', "https://twitter.com/share?url=#{request.url}", title: 'Twitter', target: '_blank' ,class: "bi bi-twitter",style: "font-size: 20px;"%>
-</div>
-
-
+>

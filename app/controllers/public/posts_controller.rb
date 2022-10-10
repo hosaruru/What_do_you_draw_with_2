@@ -27,17 +27,12 @@ class Public::PostsController < ApplicationController
   end
 
   def create
-
     @post = Post.new(post_params)
     tag_list = params[:post][:tag_name].split(/[[:blank:]]/)
     @post.image.attach(params[:post][:image])
     @post.user_id = current_user.id
-
-    
     if @post.save
-
-
-       @post.save_posts(tag_list)
+      @post.save_posts(tag_list)
       redirect_to post_path(@post.id)
     else
       flash.now[:alert] = '投稿に失敗しました'
@@ -59,7 +54,7 @@ class Public::PostsController < ApplicationController
   def update
     @post = Post.find(params[:id])
     tag_list = params[:post][:tag_name].split(/[[:blank:]]/)
-    @post.image.attach(params[:post][:image])
+    @post.clean_pen
     @post.user_id = current_user.id
     if @post.update(post_params)      
        @post.save_posts(tag_list)
@@ -78,7 +73,7 @@ class Public::PostsController < ApplicationController
   private
 
   def post_params
-    params.require(:post).permit(:tag_name, :software, :brush, :image, :comments, :image, :introduction,
+    params.require(:post).permit(:tag_name, :software, :brush, :image, :comments, :image, :introduction, :twitter,
                                 pens_attributes:[:use_pen, :_destroy],)
   end
 end

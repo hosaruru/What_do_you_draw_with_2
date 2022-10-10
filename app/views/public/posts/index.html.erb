@@ -1,18 +1,18 @@
 <% @tag_lists.each do |list| %>
-      <span> <%= link_to "#"+list.tag_name, posts_path(tag_id: list.id), class: 'btn btn-info btn-sm ' %></span>
+	<span> <%= link_to "#"+list.tag_name, posts_path(tag_id: list.id), class: 'btn btn-info btn-sm' %></span>
 <% end %>
-   <% @post.tags.each do |tag| %>
-     <%= link_to "##{tag.tag_name}", posts_path(tag), class: 'smaller tag_list' %>
-     <% end %>
+<% @post.tags.each do |tag| %>
+	<%= link_to "##{tag.tag_name}", posts_path(tag), class: 'smaller tag_list' %>
+<% end %>
 <div class="col-md-8 offset-md-1">
-<h2>投稿一覧</h2>
+	<h2>投稿一覧</h2>
 </div>
-<%= flash[:notice] %>
+	<%= flash[:notice] %>
 	<% if user_signed_in? %>
-	<%=  %>
+		<%=  %>
 	<% else %>
-	<%= link_to 'ゲストログイン（閲覧用）', posts_guest_sign_in_path, method: :post , class: "btn btn-primary btn-sm px-4" %>
-	<p>※ログインすると詳細が見れます</p>
+		<%= link_to 'ゲストログイン（閲覧用）', posts_guest_sign_in_path, method: :post , class: "btn btn-primary btn-sm px-4" %>
+		<p>※ログインすると詳細が見れます</p>
 	<% end %>
 	<div class='container px-5 px-sm-0'>
 		<div class='row'>
@@ -21,30 +21,39 @@
 					<tbody>
 					<% if user_signed_in? %>
 						<% @posts.each do |post| %>
-						<tr>
-						<td>
-							<%= link_to post_path(post.id) do %>
-							<% if post.image.attached? %>
-							<%= image_tag post.image, size: "200x200" %>
-							<% else %>
-							<%= image_tag 'no_image', size: "200x200" %>
-							<% end %>
-						</td>
-						<td>
-							<%= post.introduction %><br>
-							<%= post.comments %><br>
-							
-							<p><%= link_to "詳細", post_path(post.id),class: "btn btn-success"  %></p>
-							
-							<%= "#{post.post_comments.count} コメント" %>
-						</td>						
-							<% end %>
-							<% end %>
-						</tr>
-						<% end %>
+							<div class="container">
+							<div class="row">
+								<div class="col-7">
+								<%= link_to post_path(post.id) do %>
+									<%= post.twitter.to_s.html_safe %>
+								</div>
+								<div class="col-3">
+									<h5><i class="bi bi-magic"></i> 使用ソフト</h5>
+					                    <% if  @post.software == "1" %>
+					                        <p> クリスタ</p>
+					                    <% elsif @post.software == "2" %>
+					                        <p>SAI</p>
+					                    <% else %>
+					                        <p>アズペ</p>
+					                    <% end %>
+					                <h5><i class="bi bi-pen"></i> 線画</h5>
+					                    <p>・<%= @post.brush %></p> 
+					                <h5><i class="bi bi-pencil-fill"></i> 塗り・その</h5>                   
+					                    <% @post.pens.each do |use_pen| %>
+					                            <p>・<%= use_pen.use_pen %></p>
+					                    <% end %>
+									<br>							
+									<p><%= link_to "詳細", post_path(post.id),class: "btn btn-success"  %></p>							
+									<%= "#{post.post_comments.count} コメント" %>
+								</div>							
+								<% end %>
+							</div>
+							</div>
+						<% end %>					
+					<% end %>
 					</tbody>
 				</table>
 			</div>
 		</div>
 		<ul class="pagination"><li class="page-item"><%= paginate @posts%></li></ul>
-		</div>
+	</div>

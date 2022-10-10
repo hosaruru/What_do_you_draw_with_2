@@ -10,8 +10,6 @@ class Post < ApplicationRecord
     def favorited?(user)
    favorites.where(user_id: user.id).exists?
   end
-    enum twitter: { youtube: 0, twitter: 1 }
-
  def self.posts_serach(search)
    Post.where(['title LIKE ? OR content LIKE ?', "%#{search}%", "%#{search}%"])
  end
@@ -41,6 +39,11 @@ class Post < ApplicationRecord
        if Tagmap.where(tag_id:tag.id).where.not(post_id:self.id).count == 0
          tag.destroy
        end  
+    end
+ end
+ def clean_pen
+    self.pens.each do |use_pen|
+        use_pen.destroy
     end
  end
 

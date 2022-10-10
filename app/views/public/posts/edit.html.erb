@@ -1,22 +1,55 @@
-<div class="col-md-5 col-sm-10 mx-2 mx-sm-auto">
-<h1>編集画面</h1>
-<%= form_with model: @post, url: update_post_path(@post.id), method: :patch do |f| %>
-    <h4>タイトル</h4>
-    <p><%= f.file_field :image, accept: "image/*", class: "w-100" %></p>
-    <p>紹介文<%= f.text_field :introduction %></p>
-    <p>
-        <%= f.label :software, '使用ソフト' %>
-        <%= f.collection_select :software, Software.all, :id, :software, { prompt: '選択してください' }, class: 'form-control' %>
-    </p>
+<div class="col-md-5 col-sm-10 mx-2 mx-sm-auto shadow-lg rounded px-0 my-5">
+  <h5 class="text-dark bg-light p-4 mb-0">編集画面</h5>
+  <p>
+    <%= form_with model: @post, url: update_post_path(@post.id), method: :patch do |f| %>
+      <div class="container">
+        <div class="row">
+          <div class="col-md-4">
+            <p> ツイッターURL<br><%= f.text_area :twitter %></p>
+            
+          </div>
+          <div class="col-md-4">
+            <p>
+              <%= f.label :software_id, '使用ソフト' %>
+              <%= f.collection_select :software_id, Software.all, :id, :software, { prompt: '選択してください' }, class: 'form-control' %>
+            </p>
+            <p> 紹介文<br><%= f.text_area :introduction %></p>
+            <p>線画<br><%= f.text_field :brush %></p> 
+            <p>ペン</p>
+            <div class="pens">
+            <%= f.fields_for :pens do |t| %>              
+                <div class="mx-auto" style="width: 400px;">
+                  <div class="nested-fields" style="width: 400px; margin-top: 10px;">
+                    <div class="row mx-auto">
+                      <div class="col-5"><%= t.text_field :use_pen, class: "form-control", placeholder: "水彩筆" %></div>
+                      <div><%= link_to_remove_association "", t, class: "btn btn-secondary btn-block bi-trash" %></div>
+                    </div>
+                  </div>
+                </div>
+            <% end %>
+                <div id="detail-association-insertion-point"></div>
+                  <div class="col-10 mx-auto my-2">
+                    <%= link_to_add_association "", f, :pens,
+                    class: "btn btn-secondary btn-block bi bi-plus-circle",
+                    data: {
+                    association_insertion_node: '#detail-association-insertion-point',
+                    association_insertion_method: 'before'
+                    }%>
+                  </div>
+              </div>
+            <p> コメント（あれば）<br><%= f.text_area :comments %></p>
+            <p><%= f.file_field :image, accept: "image/*", class: "w-100" %></p>
+            <p>タグ<br>
+              <%= form_with(model: [@tag,@post], local: true) do |f| %>
+                <%= f.text_field :tag_name, placeholder: "タグ入力", class: 'uk-input uk-form-small' %>
+              <% end %>
+            </p> 
+            <p><%= f.submit '保存' ,class: "btn btn-success" %></p>
+    <% end %>
+      </div>
+      </div>
 
-    <p> コメント（あれば）<%= f.text_area :comments %></p>
-    <p>タグ
-        <%#= form_with(model: [@tag,@post], local: true) do |f| %>
-            <%= f.text_field :tag_name, placeholder: "タグ入力", class: 'uk-input uk-form-small' %>
-        <%# end %>
-    </p>
-    <%= f.submit '保存' ,class: "btn btn-success" %>
-<% end %>
-
-
+      
+    </div>
 </div> 
+
