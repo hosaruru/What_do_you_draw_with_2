@@ -17,12 +17,8 @@
 						<% @posts.each do |post| %>
 						<tr>
 						<td>
-							<%= link_to post_path(post.id) do %>
-							<% if post.image.attached? %>
-							<%= image_tag post.image, size: "200x200" %>
-							<% else %>
-							<%= image_tag 'no_image', size: "200x200" %>
-							<% end %>
+								<%= link_to post_path(post.id) do %>
+									<%= post.twitter.to_s.html_safe %>
 						</td>
 						<td>
 							<%= post.introduction %><br>

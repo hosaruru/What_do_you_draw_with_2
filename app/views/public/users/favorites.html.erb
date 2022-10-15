@@ -1,16 +1,15 @@
-<h2>いいね一覧</h2>
+<h2>ブックマーク一覧</h2>
 <div class='col-md-8 offset-md-1'>
+     <% if @favorite_posts.blank? %>
+         ブックマークがありません。
+     <% else %>
 	<table class='table table-hover table-inverse'>
 		<tbody>
 			<% @favorite_posts.each do |post| %>
 			<tr>
 				<td>
 					<%= link_to post_path(post.id) do %>
-					<% if post.image.attached? %>
-					<%= image_tag post.image, size: "200x200" %>
-					<% else %>
-					<%= image_tag 'no_image', size: "200x200" %>
-					<% end %>
+					<%= post.twitter.to_s.html_safe %>
 				</td>
 				<td>
 					<%= post.introduction %><br>
@@ -22,4 +21,5 @@
 			</tr>
 		</tbody>
 	</table>
+	<% end %>
 </div>

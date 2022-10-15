@@ -1,0 +1,49 @@
+<h1>検索結果</h1>
+<table>
+  <thead>
+    <tr>
+      <th>Name</th>
+      <th>Age</th>
+      <th>Height</th>
+      <th>Weight</th>
+      <th>Gender</th>
+      <th colspan="3"></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @results.each do |post| %>
+							<div class="container">
+							<div class="row">
+								<div class="col-8">
+								<%= link_to post_path(post.id) do %>
+									<%= post.twitter.to_s.html_safe %>
+								</div>
+								<div class="col-3 ml-5">
+								<h5><i class="bi bi-magic"></i> 使用ソフト</h5>
+									<% if  post.software == "1" %>
+										<p> クリスタ</p>
+										<% elsif post.software == "2" %>
+										<p>SAI</p>
+										<% else %>
+										<p>アズペ</p>
+									<% end %>
+								<h5><i class="bi bi-pen"></i> 線画</h5>
+									<p>・<%= post.brush %></p>
+								<h5><i class="bi bi-pencil-fill"></i>塗り・その他</h5>
+								<% post.pens.each do |use_pen| %>
+									<% if use_pen.present? %>
+										<p>・<%= use_pen.use_pen %></p>
+									<% end %>
+								<% end %>
+								<br>
+									<p><%= link_to "詳細", post_path(post.id),class: "btn btn-success"  %></p>
+									<%= "#{post.post_comments.count} コメント" %>
+								</div>							
+								<% end %>
+							</div>
+							</div>
+    <% end %>
+  </tbody>
+</table>
+

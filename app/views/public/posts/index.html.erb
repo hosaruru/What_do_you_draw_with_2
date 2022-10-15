@@ -1,3 +1,17 @@
+
+<%= search_form_for @q, url: search_posts_path do |f| %>
+  <%= f.label :brush_cont, 'ペン検索' %>
+  <%= f.search_field :brush_cont %>
+  <br>
+  <%= f.submit '検索' %><% end %>
+<%= search_form_for @pens_q, url: search_posts_path do |f| %>
+  <%= f.label :use_pen_cont, 'ペン検索' %>
+  <%= f.search_field :use_pen_cont %>
+  <br>
+  <%= f.submit '検索' %>
+<% end %>
+
+
 <% @tag_lists.each do |list| %>
 	<span> <%= link_to "#"+list.tag_name, posts_path(tag_id: list.id), class: 'btn btn-info btn-sm' %></span>
 <% end %>
@@ -23,27 +37,29 @@
 						<% @posts.each do |post| %>
 							<div class="container">
 							<div class="row">
-								<div class="col-7">
+								<div class="col-8">
 								<%= link_to post_path(post.id) do %>
 									<%= post.twitter.to_s.html_safe %>
 								</div>
-								<div class="col-3">
-									<h5><i class="bi bi-magic"></i> 使用ソフト</h5>
-					                    <% if  @post.software == "1" %>
-					                        <p> クリスタ</p>
-					                    <% elsif @post.software == "2" %>
-					                        <p>SAI</p>
-					                    <% else %>
-					                        <p>アズペ</p>
-					                    <% end %>
-					                <h5><i class="bi bi-pen"></i> 線画</h5>
-					                    <p>・<%= @post.brush %></p> 
-					                <h5><i class="bi bi-pencil-fill"></i> 塗り・その</h5>                   
-					                    <% @post.pens.each do |use_pen| %>
-					                            <p>・<%= use_pen.use_pen %></p>
-					                    <% end %>
-									<br>							
-									<p><%= link_to "詳細", post_path(post.id),class: "btn btn-success"  %></p>							
+								<div class="col-3 ml-5">
+								<h5><i class="bi bi-magic"></i> 使用ソフト</h5>
+									<% if  post.software == "1" %>
+										<p> クリスタ</p>
+										<% elsif post.software == "2" %>
+										<p>SAI</p>
+										<% else %>
+										<p>アズペ</p>
+									<% end %>
+								<h5><i class="bi bi-pen"></i> 線画</h5>
+									<p>・<%= post.brush %></p>
+								<h5><i class="bi bi-pencil-fill"></i>塗り・その他</h5>
+								<% post.pens.each do |use_pen| %>
+									<% if use_pen.present? %>
+										<p>・<%= use_pen.use_pen %></p>
+									<% end %>
+								<% end %>
+								<br>
+									<p><%= link_to "詳細", post_path(post.id),class: "btn btn-success"  %></p>
 									<%= "#{post.post_comments.count} コメント" %>
 								</div>							
 								<% end %>
@@ -57,3 +73,10 @@
 		</div>
 		<ul class="pagination"><li class="page-item"><%= paginate @posts%></li></ul>
 	</div>
+<!--<h1>ユーザー検索</h1>-->
+<%#= search_form_for @q, url: search_posts_path do |f| %>
+  <%#= f.label :brush_cont, 'ユーザー名' %>
+  <%#=# f.search_field :brush_cont %>
+  <br>
+  <%#= f.submit '検索' %>
+<%# end %>

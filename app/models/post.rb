@@ -6,6 +6,7 @@ class Post < ApplicationRecord
       has_many :tagmaps, dependent: :destroy
       has_many :tags, through: :tagmaps
       has_many :pens, dependent: :destroy
+      validates :twitter,:brush, presence: true
       accepts_nested_attributes_for :pens, allow_destroy: true
     def favorited?(user)
    favorites.where(user_id: user.id).exists?
@@ -46,5 +47,11 @@ class Post < ApplicationRecord
         use_pen.destroy
     end
  end
+ def blank_pen
+    self.pens.each do |use_pen|
+        if use_pen.nil?
+        use_pen.destroy
+    end
+ end end
 
 end

@@ -1,4 +1,5 @@
 class Public::PostsController < ApplicationController
+  before_action :set_q, only: [:index, :search]
   def index
     @posts = Post.page(params[:page])
     @post = Post.new
@@ -35,8 +36,8 @@ class Public::PostsController < ApplicationController
       @post.save_posts(tag_list)
       redirect_to post_path(@post.id)
     else
-      flash.now[:alert] = '投稿に失敗しました'
-      render 'new'
+      flash[:alret] = "*は必須です。"
+      render :new
     end
   end
 
@@ -56,12 +57,14 @@ class Public::PostsController < ApplicationController
     tag_list = params[:post][:tag_name].split(/[[:blank:]]/)
     @post.clean_pen
     @post.user_id = current_user.id
+    
     if @post.update(post_params)      
        @post.save_posts(tag_list)
+       @post.blank_pen
       redirect_to post_path(@post.id)
     else
-      flash.now[:alert] = '投稿に失敗しました'
-      render 'new'
+      flash.now[:alert] = "*は必須です。"
+      render :edit
     end
   end
   def destroy
@@ -69,9 +72,15 @@ class Public::PostsController < ApplicationController
     @post.clean_tag
     @post.destroy
     redirect_to root_path
-  end  
+  end   
+  def search
+    @results = @q.result
+  end
   private
-
+  def set_q
+    @q = Post.ransack(params[:q])
+    @pens_q = Pen.ransack(params[:use_pen_q], search_key: :use_pen_q)
+  end
   def post_params
     params.require(:post).permit(:tag_name, :software, :brush, :image, :comments, :image, :introduction, :twitter,
                                 pens_attributes:[:use_pen, :_destroy],)

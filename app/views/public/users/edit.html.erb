@@ -1,5 +1,7 @@
+<div class="col-md-6 col-sm-10 mx-2 mx-sm-auto shadow-lg rounded px-0 my-5" style="text-align: center;">
+<div style="padding: 20px;">
 <%= form_with model: @user, url: update_user_path, method: :patch do |f| %>
-  <h4>タイトル</h4>
+  <h4>マイページ編集</h4>
 　　
 　<table class='table'>
   <tr>
@@ -12,8 +14,8 @@
   </tr>
   <tr>
   <div class="field">
-    <%= f.label :誕生日 %><br />
-    <%== sprintf(f.date_select(:birth, :use_month_numbers=>true, :date_separator => '%s', :start_year=>1930, :end_year => Time.now.year, :default =>'1990-1-1'.to_date), '年','月') + '日生まれ' %>
+    <th><%= f.label :誕生日 %></th>
+    <td><%== sprintf(f.date_select(:birth, :use_month_numbers=>true, :date_separator => '%s', :start_year=>1930, :end_year => Time.now.year, :default =>'1990-1-1'.to_date), '年','月') + '日生まれ' %></td>
   </div>
   <div class="actions"></td>
   </tr>
@@ -21,4 +23,4 @@
 </table>
 
   <%= f.submit '編集内容を保存', class: "btn btn-success btn-sm px-5"  %>
-<% end %>
+<% end %></div></div>

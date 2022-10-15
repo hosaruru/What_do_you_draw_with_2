@@ -19,6 +19,13 @@ devise_for :admin, skip: [:registrations, :passwords] ,controllers: {
         end
     end
   end
+  scope module: :public do
+      resources :posts do
+    collection do
+      get 'search'
+        end
+    end
+  end
   namespace :admin do
     resources :users, only: [:index, :show, :edit, :show]
     patch 'users/:id' => 'users#update', as: 'update_user'
@@ -60,9 +67,6 @@ devise_for :admin, skip: [:registrations, :passwords] ,controllers: {
    scope module: :public do
     resources :users, only: [:show, :edit]
     patch 'users/:id' => 'users#update', as: 'update_user'
-
-
-
   end
    scope module: :public do
     resources :users do
@@ -70,7 +74,6 @@ devise_for :admin, skip: [:registrations, :passwords] ,controllers: {
       get :favorites
     end
   end
-
   end
    scope module: :public do
     resources :lists, only: [:index, :show]

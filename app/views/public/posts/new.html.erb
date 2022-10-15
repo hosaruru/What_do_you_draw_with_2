@@ -1,25 +1,28 @@
-<div class="col-md-5 col-sm-10 mx-2 mx-sm-auto shadow-lg rounded px-0 my-5">
+<div style="background-color: #dc3545; text-align: center; color: white;">
+  <%= flash[:alret] %>
+</div>
+<div class="col-md-6 col-sm-10 mx-2 mx-sm-auto shadow-lg rounded px-0 my-5">
   <h5 class="text-dark bg-light p-4 mb-0">投稿画面</h5>
   <p>
     <%= form_with model: @post,url:posts_path, method: :post do |f| %>
       <div class="container">
         <div class="row">
-          <div class="col-4">
-            <p> ツイッターURL<%= f.text_area :twitter %></p>
+          <div class="col-md-6">
+            <p><b style="color: #dc3545;">*</b> ツイッターURL<br><%= f.text_area :twitter %></p>
           </div>
-          <div class="col-4">
+          <div class="col-md-5">
             <p>
-              <%= f.label :software_id, '使用ソフト' %>
+              <b style="color: #dc3545;">*</b> <%= f.label :software_id, '使用ソフト' %>
               <%= f.collection_select :software_id, Software.all, :id, :software, { prompt: '選択してください' }, class: 'form-control' %>
             </p>
-            <p> 紹介文<br><%= f.text_area :introduction %></p>
-            <p>線画<br><%= f.text_field :brush %></p> 
-            <p>ペン</p>
+            <!--<p> 紹介文<br><%#= f.text_area :introduction %></p>-->
+            <p><b style="color: #dc3545;">*</b> 線画<br><%= f.text_field :brush %></p> 
+            <p>ペン<br>
             <div class="pens">
             <%= f.fields_for :pens do |t| %>              
-                <div class="mx-auto" style="width: 400px;">
-                  <div class="nested-fields" style="width: 400px; margin-top: 10px;">
-                    <div class="row mx-auto">
+                <div class="" style="width: 400px;">
+                  <div class="nested-fields" style="width: 400px; margin-top: 5px;">
+                    <div class="row">
                       <div class="col-5"><%= t.text_field :use_pen, class: "form-control", placeholder: "水彩筆" %></div>
                       <div><%= link_to_remove_association "", t, class: "btn btn-secondary btn-block bi-trash" %></div>
                     </div>
@@ -27,7 +30,7 @@
                 </div>
             <% end %>
                 <div id="detail-association-insertion-point"></div>
-                  <div class="col-10 mx-auto mt-2">
+                  <div class="col-10 mt-2 mb-3">
                     <%= link_to_add_association "", f, :pens,
                     class: "btn btn-secondary btn-block bi bi-plus-circle",
                     data: {
@@ -36,9 +39,10 @@
                     }%>
                   </div>
               </div>
+              </p>
             <p>補足<br><%= f.text_area :comments %></p>
-            <p>説明画像 <%= f.file_field :image, accept: "image/*", class: "w-100", size: "200x200" %></p>
-            <p>タグ
+            <p>説明画像 <%= f.file_field :image, accept: "image/*", class: "w-100" %></p>
+            <p>タグ<br>
               <%= form_with(model: [@tag,@post], local: true) do |f| %>
                 <%= f.text_field :tag_name, placeholder: "タグ入力", class: 'uk-input uk-form-small' %>
               <% end %>
@@ -47,8 +51,6 @@
     <% end %>
       </div>
       </div>
-
-      
     </div>
 </div> 
 
