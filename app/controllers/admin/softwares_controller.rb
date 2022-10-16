@@ -32,6 +32,6 @@ class Admin::SoftwaresController < ApplicationController
     end
   end
   def software_params
-    params.require(:software).permit(:software)
+    params.require(:software).permit(:name)
   end
 end

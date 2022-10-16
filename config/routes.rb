@@ -22,8 +22,9 @@ devise_for :admin, skip: [:registrations, :passwords] ,controllers: {
   scope module: :public do
       resources :posts do
     collection do
-      get 'search'
-        end
+        get 'search'
+        #get 'search_pens'
+      end
     end
   end
   namespace :admin do

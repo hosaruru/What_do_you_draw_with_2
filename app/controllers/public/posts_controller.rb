@@ -43,7 +43,7 @@ class Public::PostsController < ApplicationController
 
   def show
     @post = Post.find(params[:id])
-    @pen = 
+    @software = Software.all
     @post_comment = PostComment.new
   end
 
@@ -55,12 +55,11 @@ class Public::PostsController < ApplicationController
   def update
     @post = Post.find(params[:id])
     tag_list = params[:post][:tag_name].split(/[[:blank:]]/)
-    @post.clean_pen
     @post.user_id = current_user.id
+    @post.clean_pen
     
-    if @post.update(post_params)      
+    if @post.update(hoge) 
        @post.save_posts(tag_list)
-       @post.blank_pen
       redirect_to post_path(@post.id)
     else
       flash.now[:alert] = "*は必須です。"
@@ -79,10 +78,15 @@ class Public::PostsController < ApplicationController
   private
   def set_q
     @q = Post.ransack(params[:q])
-    @pens_q = Pen.ransack(params[:use_pen_q], search_key: :use_pen_q)
   end
   def post_params
-    params.require(:post).permit(:tag_name, :software, :brush, :image, :comments, :image, :introduction, :twitter,
-                                pens_attributes:[:use_pen, :_destroy],)
+    params.require(:post).permit(:tag_name, :brush, :image, :comments, :image, :introduction, :twitter, :software_id, pens_attributes:[:use_pen, :_destroy])
+
   end
+  
+  def hoge
+    post_params.merge!("pens_attributes" => post_params[:pens_attributes].select {|_, attributes| attributes[:use_pen].present? })
+  end
+  
+  
 end

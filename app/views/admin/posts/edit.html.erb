@@ -3,8 +3,8 @@
 <h4>タイトル</h4>
 <p><%= f.file_field :image, accept: "image/*", class: "w-100" %></p>
 <p>紹介文<%= f.text_field :introduction %></p>
-<p> <%= f.label :software, '使用ソフト' %>
-<%= f.collection_select :software, Software.all, :id, :software, { prompt: '選択してください' }, class: 'form-control' %></p>
+<p> <%= f.label :software_id, '使用ソフト' %>
+<%= f.collection_select :software_id, Software.all, :id, :name, { prompt: '選択してください' }, class: 'form-control' %></p>
 <p>塗り<%= f.text_field :brush %></p>
 <p> コメント（あれば）<%= f.text_area :comments %></p>
 

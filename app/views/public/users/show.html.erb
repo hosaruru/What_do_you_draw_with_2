@@ -11,16 +11,16 @@
 	  <th>誕生日</th>
 	  <td><%= @user.birth %></td>
   		</tr>
-			<div class='col-md-8 offset-md-1'>
+			<div class='col-md-7 offset-md-1'>
 				<table class='table table-hover table-inverse'>
 					<tbody>
 						<% @posts.each do |post| %>
 						<tr>
-						<td>
+						<td class='col-md-7 offset-md-1'>
 								<%= link_to post_path(post.id) do %>
 									<%= post.twitter.to_s.html_safe %>
 						</td>
-						<td>
+						<td class='col-md-7 offset-md-1'>
 							<%= post.introduction %><br>
 							<%= post.comments %><br>
 							<%= "#{post.post_comments.count} コメント" %>

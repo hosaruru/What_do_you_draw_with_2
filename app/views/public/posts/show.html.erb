@@ -6,16 +6,10 @@
             </div>
             <div class="col-md-3">
                 <h5><i class="bi bi-magic"></i> 使用ソフト</h5>
-                    <% if  @post.software == "1" %>
-                        <p> クリスタ</p>
-                    <% elsif @post.software == "2" %>
-                        <p>SAI</p>
-                    <% else %>
-                        <p>アズペ</p>
-                    <% end %>
-                <h5><i class="bi bi-pen"></i> 線画</h5>
+                    <p>・<%= @post.software.name %></p> 
+                <h5><i class="bi bi-pen"></i> 線画ペン</h5>
                     <p>・<%= @post.brush %></p> 
-                <h5><i class="bi bi-pencil-fill"></i> 塗り・その他</h5>
+                <h5><i class="bi bi-pencil-fill"></i> 塗りペン</h5>
                     <% @post.pens.each do |use_pen| %>
                     <% if use_pen.present? %>
                             <p>・<%= use_pen.use_pen %></p>
@@ -27,8 +21,7 @@
                      <% if @post.image.attached? %>
                         <p> <%= link_to @post.image, "data-lightbox": @post.image do %>
                         <%= image_tag @post.image ,style: "max-width: 400px;", class:"img" %><% end %></p>
-                    <% end %> 
-                    
+                    <% end %>                    
             </div>
         </div>
     <% if @post.favorited?(current_user) %>

@@ -12,11 +12,11 @@
           <div class="col-md-5">
             <p>
               <%= f.label :software_id, '使用ソフト' %>
-              <%= f.collection_select :software_id, Software.all, :id, :software, { prompt: '選択してください' }, class: 'form-control' %>
+              <%= f.collection_select :software_id, Software.all, :id, :name, { prompt: '選択してください' }, class: 'form-control' %>
             </p>
             <!--<p> 紹介文<br><%#= f.text_area :introduction %></p>-->
-            <p>線画<br><%= f.text_field :brush %></p> 
-            <p>ペン<br>
+            <p>線画ペン<br><%= f.text_field :brush %></p> 
+            <p>塗りペン<br>
             <div class="pens">
             <%= f.fields_for :pens do |t| %>              
                 <div style="width: 400px;">
@@ -28,17 +28,17 @@
                   </div>
                 </div>
             <% end %>
-                <div id="detail-association-insertion-point"></div>
-                  <div class="col-10 mt-2 mb-3">
-                    <%= link_to_add_association "", f, :pens,
-                    class: "btn btn-secondary btn-block bi bi-plus-circle",
-                    data: {
-                    association_insertion_node: '#detail-association-insertion-point',
-                    association_insertion_method: 'before'
-                    }%>
-                  </div>
+            <div id="detail-association-insertion-point"></div>
+              <div class="col-10 mt-2 mb-3">
+                <%= link_to_add_association "", f, :pens,
+                class: "btn btn-secondary btn-block bi bi-plus-circle",
+                data: {
+                association_insertion_node: '#detail-association-insertion-point',
+                association_insertion_method: 'before'
+                }%>
               </div>
-              </p>
+            </div>
+          </p>
             <p>補足<br><%= f.text_area :comments %></p>
             <p>説明画像 <%= f.file_field :image, accept: "image/*", class: "w-100" %></p>
             <p>タグ<br>

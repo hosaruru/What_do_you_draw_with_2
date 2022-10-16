@@ -1,6 +1,7 @@
 class Post < ApplicationRecord
     has_one_attached :image
       belongs_to :user
+      belongs_to :software
       has_many :favorites, dependent: :destroy
       has_many :post_comments, dependent: :destroy    
       has_many :tagmaps, dependent: :destroy
@@ -47,11 +48,6 @@ class Post < ApplicationRecord
         use_pen.destroy
     end
  end
- def blank_pen
-    self.pens.each do |use_pen|
-        if use_pen.nil?
-        use_pen.destroy
-    end
- end end
+
 
 end

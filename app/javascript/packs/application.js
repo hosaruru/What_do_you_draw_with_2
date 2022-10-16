@@ -15,6 +15,7 @@ import "popper.js";
 require("@nathanvda/cocoon")
 import "bootstrap";
 import "../stylesheets/application" 
+import "../stylesheets/posts" 
 
 Rails.start()
 Turbolinks.start()
