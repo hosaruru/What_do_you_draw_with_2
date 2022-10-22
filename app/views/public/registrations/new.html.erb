@@ -1,12 +1,22 @@
+
 <div class="col-md-6 col-sm-10 mx-2 mx-sm-auto shadow-lg rounded px-0 my-5" style="text-align: center;">
-<h2>新規登録</h2>
+	<div class='pt-5', id="title">
+		<p>
+			<span>S</span>
+			<span>I</span>
+			<span>G</span>
+			<span style ="margin-right:20px;">N</span>
+			<span>U</span>
+			<span>P</span>
+		</p>
+	</div>
 
 <%= form_for(resource, as: resource_name, url: registration_path(resource_name)) do |f| %>
   <%= render "public/shared/error_messages", resource: resource %>
 
   <div class="field">
     <%= f.label :メールアドレス %><br />
-    <%= f.email_field :email, autofocus: true, autocomplete: "email" %>
+    <%= f.email_field :email, autofocus: true, autocomplete: "email", class: 'search_container' %>
   </div>
 
   <div class="field">
@@ -14,7 +24,7 @@
     <% if @minimum_password_length %>
     <em>（<%= @minimum_password_length %>文字以上）</em>
     <% end %><br />
-    <%= f.password_field :password, autocomplete: "new-password" %>
+    <%= f.password_field :password, autocomplete: "new-password", class: 'search_container' %>
   </div>
 
   <!--<div class="field">-->
@@ -23,7 +33,7 @@
   <!--</div>-->
   <div class="field">
     <%= f.label :ユーザーネーム %><br />
-    <%= f.text_field :user_name, autofocus: true, autocomplete: "user_name" %>
+    <%= f.text_field :user_name, autofocus: true, autocomplete: "user_name", class: 'search_container' %>
   </div>
   <div class="field">
     <%= f.label :誕生日 %><br />

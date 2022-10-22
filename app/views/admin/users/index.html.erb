@@ -1,8 +1,8 @@
-<h1>ユーザー検索</h1>
+<div class="wrap">
+	<div class="top">
 <%= search_form_for @q, url: search_admin_users_path do |f| %>
-  <%= f.label :user_name_cont, 'ユーザー名' %>
-  <%= f.search_field :user_name_cont %>
-  <br>
+  <%= f.label :user_name_cont, 'ユーザー検索' %>
+  <%= f.search_field :user_name_cont, class: 'search_container'  %>
   <%= f.submit '検索' %>
 <% end %>
 
@@ -35,3 +35,5 @@
     </div>
 </div>
 <footer> <%#= paginate @users %></footer>
+        </div>
+    </div>

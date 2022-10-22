@@ -1,1 +1,234 @@
 @import '~bootstrap/scss/bootstrap';
+
+
+body {
+    background-color: ghostwhite;
+    animation: fadeIn 2s ease 0s 1 normal;
+    -webkit-animation: fadeIn 2s ease 0s 1 normal;
+}
+.navbar-collapse{
+    font-weight: bold;
+}
+@keyframes fadeIn {
+    0% {opacity: 0}
+    100% {opacity: 1}
+}
+
+@-webkit-keyframes fadeIn {
+    0% {opacity: 0}
+    100% {opacity: 1}
+}
+
+h2{
+    text-align: center;
+}
+.container{
+    border-bottom: solid 1px #cccccc;
+    padding: 20px 0 20px 0;
+}
+.top{
+    margin: 30px 0 0 30px;
+    }
+    
+.search_container{
+  box-sizing: border-box;
+  position: relative;
+  border: 1px solid #999;
+  padding: 3px 10px;
+  border-radius: 20px;
+  height: 2.3em;
+  width: 265px;
+  overflow: hidden;
+}
+.search_container input[type="text"]{
+  border: none;
+  height: 2.0em;
+}
+.search_container input[type="text"]:focus {
+  outline: 0;
+}
+.search_container input[type="submit"]{
+  cursor: pointer;
+  font-family: FontAwesome;
+  border: none;
+  background: #3879D9;
+  color: #fff;
+  position: absolute;
+  width: 3.5em;
+  height: 3.0em;
+  right:0px;
+  top: -3px;
+  outline : none;
+}
+
+.fadeIn {
+animation-name: fadeInAnime;
+animation-duration:3s;
+animation-fill-mode:forwards;
+opacity: 0;
+}
+
+@keyframes fadeInAnime{
+  0% {
+    opacity: 0;
+  }
+
+  100% {
+    opacity: 1;
+  }
+}
+
+/* animation */
+@-webkit-keyframes passing-bar{
+	0% {
+		left: 0;
+		right: auto;
+		width: 0;
+	}
+	50% {
+		left: 0;
+		right: auto;
+		width: 100%;
+	}
+	51% {
+		left: auto;
+		right: 0;
+		width: 100%;
+	}
+	100% {
+		left: auto;
+		right: 0;
+		width: 0;
+	}
+}
+@keyframes passing-bar{
+	0% {
+		left: 0;
+		width: 0;
+	}
+	50% {
+		left: 0;
+		width: 100%;
+	}
+	51% {
+		left: 0;
+		width: 100%;
+	}
+	100% {
+		left: 100%;
+		width: 0;
+	}
+}
+@-webkit-keyframes passing-txt{
+	0% { opacity: 0; }
+	50% { opacity: 0; }
+	100% { opacity: 1; }
+}
+@keyframes passing-txt{
+	0% { opacity:0; }
+	50% { opacity:0; }
+	100% { opacity:1; }
+}
+
+
+/* 画像ホバー時拡大 */
+.hover-img {
+  cursor: pointer;
+  max-width: 500px;
+  overflow: hidden;
+  width: 100%;
+}
+.hover-img img {
+  height: auto;
+  transition: transform .6s ease; 
+}
+.hover-img:hover img {
+  transform: scale(1.1); 
+}
+
+figure {
+  position: relative;
+  overflow: hidden;
+  width: 300px;
+}
+figcaption {
+  position: absolute;
+  bottom: -60px;
+  left: 0;
+  z-index: 2;
+  width: 100%;
+  height: 60px;
+  background: rgba(0,0,0,.6);
+  -webkit-transition: .6s;
+  transition: .6s;
+  text-align: center;
+  color: white;
+}
+figure:hover figcaption {
+  bottom: 0;
+}
+figcaption p{ margin-top: 20px;
+}
+
+/* 見出し一文字ずつ表示 */
+#title{
+  font-family: 'Josefin Sans', sans-serif;
+  margin: 0 auto;
+  display: flex;
+  overflow: hidden;
+  color: #212529;
+  font-size: 32px;
+  font-weight: bold;
+  span{
+    display: inline-block;
+    transform: translateY(105%);
+    @for $i from 1 to 10{
+      &:nth-child(#{$i}){
+        animation: fadeInText 1s ease
+        .1*$i+s forwards;
+      }
+    }
+  }
+}
+#title p{
+  margin: 0 auto;}
+@keyframes fadeInText {
+  100%{
+    transform: translateY(0);
+  }
+}
+
+
+#page_top{
+  width: 50px;
+  height: 50px;
+  position: fixed;
+  right: 0;
+  bottom: 0;
+  background: #707CA8;
+  opacity: 0.6;
+  border-radius: 50%;
+  }
+#page_top a{
+  position: relative;
+  display: block;
+  width: 50px;
+  height: 50px;
+  text-decoration: none;
+}
+#page_top a::before{
+  font-family: 'Font Awesome 5 Free';
+  font-weight: 900;
+  content: '\f062';
+  font-size: 25px;
+  color: #fff;
+  position: absolute;
+  width: 25px;
+  height: 25px;
+  top: 0;
+  bottom: 7px;
+  right: 0;
+  left: 0;
+  margin: auto;
+  text-align: center;
+}

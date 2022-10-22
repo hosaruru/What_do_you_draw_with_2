@@ -2,15 +2,22 @@
   <%= flash[:alret] %>
 </div>
 <div class="col-md-6 col-sm-10 mx-2 mx-sm-auto shadow-lg rounded px-0 my-5">
-  <h5 class="text-dark bg-light p-4 mb-0">投稿画面</h5>
+<div class='pt-5', id="title">
+		<p>
+		<span>P</span>
+		<span>O</span>
+		<span>S</span>
+		<span>T</span>
+	</p>
+</div>
   <p>
     <%= form_with model: @post,url:posts_path, method: :post do |f| %>
-      <div class="container">
+      <div class="container ml-5">
         <div class="row">
-          <div class="col-md-6">
+          <div class="col-md-5">
             <p><b style="color: #dc3545;">*</b> ツイッターURL<br><%= f.text_area :twitter %></p>
           </div>
-          <div class="col-md-5">
+          <div class="col-md-6">
             <p>
               <b style="color: #dc3545;">*</b> <%= f.label :software_id, '使用ソフト' %>
               <%= f.collection_select :software_id, Software.all, :id, :name, { prompt: '選択してください' }, class: 'form-control' %>
@@ -41,7 +48,10 @@
               </div>
               </p>
             <p>補足<br><%= f.text_area :comments %></p>
-            <p>説明画像 <%= f.file_field :image, accept: "image/*", class: "w-100" %></p>
+            <p>説明画像 <%= f.file_field :image, accept: "image/*", class: "w-100", id: "upload" , type: "file", name: "upload"  %></p>
+            <div>
+
+</div>
             <p>タグ<br>
               <%= form_with(model: [@tag,@post], local: true) do |f| %>
                 <%= f.text_field :tag_name, placeholder: "タグ入力", class: 'uk-input uk-form-small' %>

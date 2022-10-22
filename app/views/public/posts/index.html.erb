@@ -1,25 +1,19 @@
-
-<%= search_form_for @q, url: search_posts_path do |f| %>
-  <%= f.label :brush_cont, '線画ペン検索' %>
-  <%= f.search_field :brush_cont %>
-  <%= f.submit '検索' %><% end %>
-<%= search_form_for @q, url: search_posts_path do |f| %>
-  <%= f.label :pens_use_pen_cont, '塗りペン検索' %>
-  <%= f.search_field :pens_use_pen_cont %>
-
-  <%= f.submit '検索' %>
-<% end %>
-
-
-<% @tag_lists.each do |list| %>
-	<span> <%= link_to "#"+list.tag_name, posts_path(tag_id: list.id), class: 'btn btn-info btn-sm' %></span>
-<% end %>
-<% @post.tags.each do |tag| %>
-	<%= link_to "##{tag.tag_name}", posts_path(tag), class: 'smaller tag_list' %>
-<% end %>
-<div class="col-md-8 offset-md-1">
-	<h2>投稿一覧</h2>
+<div class='mt-5', id="title">
+		<p>
+		<span>P</span>
+		<span>O</span>
+		<span>S</span>
+		<span>T</span>
+		<span style ="margin-right:20px;">S</span>
+		<span>L</span>
+		<span>I</span>
+		<span>S</span>
+		<span>T</span>
+		<span>S</span>
+	</p>
 </div>
+<div class="wrap">
+	<div class="top">
 	<%= flash[:notice] %>
 	<% if user_signed_in? %>
 		<%=  %>
@@ -27,22 +21,41 @@
 		<%= link_to 'ゲストログイン（閲覧用）', posts_guest_sign_in_path, method: :post , class: "btn btn-primary btn-sm px-4" %>
 		<p>※ログインすると詳細が見れます</p>
 	<% end %>
+		<%= search_form_for @q, url: search_posts_path do |f| %>
+		  <%= f.label :brush_cont, '線画ペン検索' %>
+		  <%= f.search_field :brush_cont , class: 'search_container'%>
+		  <%= f.submit '検索' ,class: "btn btn-dark btn-sm"%>
+		<% end %>
+		<%= search_form_for @q, url: search_posts_path do |f| %>
+		  <%= f.label :pens_use_pen_cont, '塗りペン検索' %>
+		  <%= f.search_field :pens_use_pen_cont, class: 'search_container' %>
+		
+		  <%= f.submit '検索' ,class: "btn btn-dark btn-sm"%>
+		<% end %>	
+	<% @tag_lists.each do |list| %>
+		<span> <%= link_to "#"+list.tag_name, posts_path(tag_id: list.id), class: 'btn btn-info btn-sm' %></span>
+	<% end %>
+	<% @post.tags.each do |tag| %>
+		<%= link_to "##{tag.tag_name}", posts_path(tag), class: 'smaller tag_list' %>
+	<% end %>
+
+	</div>
 	<div class='container px-5 px-sm-0'>
 		<div class='row'>
-			<div class='col-md-8 offset-md-1'>
+			<div class='col-md-8 offset-md-1' style='margin: 0 auto;'>
 				<table class='table table-hover table-inverse'>
 					<tbody>
 					<% if user_signed_in? %>
 						<% @posts.each do |post| %>
 							<div class="container">
 							<div class="row o-2column">
-								<div class="col-md-8">
+								<div class="col-md-8 ml-4">
 								<%= link_to post_path(post.id) do %>
 									<%= post.twitter.to_s.html_safe %>
 								</div>
-								<div class="ml-5 col-md-3">
+								<div class="ml-3 col-md-3">
 								<h5><i class="bi bi-magic"></i> 使用ソフト</h5>
-									<p>・<%= post.software %></p>
+									<p>・<%= post.software.name %></p>
 								<h5><i class="bi bi-pen"></i> 線画ペン</h5>
 									<p>・<%= post.brush %></p>
 								<h5><i class="bi bi-pencil-fill"></i>塗りペン</h5>
@@ -58,7 +71,31 @@
 								<% end %>
 							</div>
 							</div>
-						<% end %>					
+						<% end %>
+						<% else %>
+						<% @posts.each do |post| %>
+							<div class="container">
+								<div class="row o-2column">
+									<div class="col-md-8 ml-4">
+									<%= link_to post_path(post.id) do %>
+										<%= post.twitter.to_s.html_safe %>
+									</div>
+									<div class="ml-3 col-md-3">
+									<h5><i class="bi bi-magic"></i> 使用ソフト</h5>
+										<p>・<%= post.software.name %></p>
+									<h5><i class="bi bi-pen"></i> 線画ペン</h5>
+										<p>・<%= post.brush %></p>
+									<h5><i class="bi bi-pencil-fill"></i>塗りペン</h5>
+										<% post.pens.each do |use_pen| %>
+											<% if use_pen.present? %>
+												<p>・<%= use_pen.use_pen %></p>
+											<% end %>
+										<% end %><br>								
+									</div>							
+									<% end %>
+								</div>
+							</div>
+						<% end %>
 					<% end %>
 					</tbody>
 				</table>
@@ -66,10 +103,4 @@
 		</div>
 		<ul class="pagination"><li class="page-item"><%= paginate @posts%></li></ul>
 	</div>
-<!--<h1>ユーザー検索</h1>-->
-<%#= search_form_for @q, url: search_posts_path do |f| %>
-  <%#= f.label :brush_cont, 'ユーザー名' %>
-  <%#=# f.search_field :brush_cont %>
-  <br>
-  <%#= f.submit '検索' %>
-<%# end %>
+</div>

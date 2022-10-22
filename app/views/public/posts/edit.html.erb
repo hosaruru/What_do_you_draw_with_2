@@ -1,9 +1,16 @@
 <div class="col-md-6 col-sm-10 mx-2 mx-sm-auto shadow-lg rounded px-0 my-5">
   <%= flash[:alret] %>
-  <h5 class="text-dark bg-light p-4 mb-0">編集画面</h5>
+  <div class='pt-5', id="title">
+		<p>
+		<span>E</span>
+		<span>D</span>
+		<span>I</span>
+		<span>T</span>
+	</p>
+</div>
   <p>
     <%= form_with model: @post, url: update_post_path(@post.id), method: :patch do |f| %>
-      <div class="container">
+      <div class="container  ml-5">
         <div class="row">
           <div class="col-md-6">
             <p> ツイッターURL<br><%= f.text_area :twitter %></p>

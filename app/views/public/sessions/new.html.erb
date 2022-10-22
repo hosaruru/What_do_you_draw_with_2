@@ -1,15 +1,23 @@
 <div class="col-md-6 col-sm-10 mx-2 mx-sm-auto shadow-lg rounded px-0 my-5" style="text-align: center;">
-<h2>ログイン</h2>
+<div class='pt-5', id="title">
+		<p>
+		<span>L</span>
+		<span>O</span>
+		<span>G</span>
+		<span>I</span>
+		<span>N</span>
+	</p>
+</div>
 
 <%= form_for(resource, as: resource_name, url: session_path(resource_name)) do |f| %>
   <div class="field">
     <%= f.label :email %><br />
-    <%= f.email_field :email, autofocus: true, autocomplete: "email" %>
+    <%= f.email_field :email, autofocus: true, autocomplete: "email", class: 'search_container' %>
   </div>
 
   <div class="field">
     <%= f.label :password %><br />
-    <%= f.password_field :password, autocomplete: "current-password" %>
+    <%= f.password_field :password, autocomplete: "current-password", class: 'search_container' %>
   </div>
 
   <% if devise_mapping.rememberable? %>
