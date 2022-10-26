@@ -1,4 +1,5 @@
 class Admin::UsersController < ApplicationController
+  before_action :authenticate_admin!
   before_action :set_q, only: [:index, :search]
   def index
     @users = User.page(params[:page])
@@ -7,7 +8,8 @@ class Admin::UsersController < ApplicationController
 
   def show
     @user = User.find(params[:id])
-    @posts = @user.posts  
+    @post = @user.posts 
+    @posts = Post.page(params[:page])
   end
 
   def edit

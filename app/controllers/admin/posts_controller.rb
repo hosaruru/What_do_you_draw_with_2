@@ -6,6 +6,7 @@ class Admin::PostsController < ApplicationController
   def show
     @post = Post.find(params[:id])
     @post_comment = PostComment.new
+    @posts = Post.page(params[:page])
   end
 
   def edit

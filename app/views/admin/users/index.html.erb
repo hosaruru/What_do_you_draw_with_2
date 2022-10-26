@@ -1,39 +1,52 @@
 <div class="wrap">
-	<div class="top">
-<%= search_form_for @q, url: search_admin_users_path do |f| %>
-  <%= f.label :user_name_cont, 'ユーザー検索' %>
-  <%= f.search_field :user_name_cont, class: 'search_container'  %>
-  <%= f.submit '検索' %>
-<% end %>
-
-
-
-<div class='container px-5 px-sm-0'>
-    <div class='row'>
-        <div class='col-md-8 offset-md-1'>
-        <h2>会員一覧</h2>
-        <table class='table table-hover table-inverse'>
-            <thead>
-                <tr>
-                <th>会員ID</th>
-                <th>氏名</th>
-                <th>メールアドレス</th>
-                <th colspan="4"></th>
-                </tr>
-            </thead>
-            <tbody>
-                <% @users.each do |user| %>
-                <tr>
-                <td><%= link_to user.id, admin_user_path(user.id) %></td>
-                <td><%= link_to user.user_name, admin_user_path(user.id) %></td>
-                <td><%= user.email %></td>
-                </tr>
-                <% end %>
-            </tbody>
-        </table>
+    <div class="top">
+        <%= search_form_for @q, url: search_admin_users_path do |f| %>
+            <%= f.label :user_name_cont, 'ユーザー検索' %>
+            <%= f.search_field :user_name_cont, class: 'search_container'  %>
+            <%= f.submit '検索' %>
+        <% end %>
+        <div class='mt-5', id="title">
+            <p>
+                <span>U</span>
+                <span>S</span>
+                <span>E</span>
+                <span style ="margin-right:20px;">R</span>
+                <span>L</span>
+                <span>I</span>
+                <span>S</span>
+                <span>T</span>
+            </p>
         </div>
+        <div class='container px-5 px-sm-0'>
+            <div class='row' style="text-align: center;">
+                <div class='col-md-8 offset-md-1' style="margin: 0 auto;">
+                    <table class="table table-hover">
+                        <thead class="thead-light">
+                            <tr>
+                            <th scope="col">会員ID</th>
+                            <th scope="col">氏名</th>
+                            <th scope="col">メールアドレス</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                        <% @users.each do |user| %>
+                            <tr>
+                            <td scope="row"><%= link_to user.id, admin_user_path(user.id) %></td>
+                            <td><%= link_to user.user_name, admin_user_path(user.id) %></td>
+                            <td><%= user.email %></td>                   
+                            </tr>
+                            <% end %>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+        <footer> <%#= paginate @users %></footer>
     </div>
 </div>
-<footer> <%#= paginate @users %></footer>
-        </div>
-    </div>
+
+
+
+
+
+

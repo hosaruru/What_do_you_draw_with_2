@@ -74,6 +74,7 @@ class Public::PostsController < ApplicationController
   end   
   def search
     @results = @q.result
+    @posts = Post.page(params[:page])
   end
   private
   def set_q
