@@ -13,21 +13,21 @@
 	</div>
 	<table class='table'>
 	  <tr>
-		  <th>氏名</th>
+		  <th>ユーザー名</th>
 		  <td><%= @user.user_name %></td>
 	  </tr>
 	   <tr>
-		  <th>誕生日</th>
-		  <td><%= @user.birth %></td>
+		  <th>メールアドレス</th>
+		  <td><%= @user.email %></td>
 	   </tr>
 	</table>
 </div>
 	<div class='container px-5 px-sm-0'>
 		<div class='row'>
 			<div class='col-md-8 offset-md-1' style='margin: 0 auto;'>
+			    <span><%= link_to "編集", edit_admin_user_path ,class: "btn btn-success"%></span>
 				<table class='table table-hover table-inverse'>
 					<tbody>
-					<% if user_signed_in? %>
 						<% @post.each do |post| %>
 							<div class="container">
 							<div class="row o-2column">
@@ -36,11 +36,11 @@
 									<%= post.twitter.to_s.html_safe %>
 								</div>
 								<div class="ml-3 col-md-3">
-								<h5><i class="bi bi-magic"></i> 使用ソフト</h5>
+									<h5><i class="bi bi-magic"></i> 使用ソフト</h5>
 									<p>・<%= post.software.name %></p>
-								<h5><i class="bi bi-pen"></i> 線画ペン</h5>
+									<h5><i class="bi bi-pen"></i> 線画ペン</h5>
 									<p>・<%= post.brush %></p>
-								<h5><i class="bi bi-pencil-fill"></i>塗りペン</h5>
+									<h5><i class="bi bi-pencil-fill"></i>塗りペン</h5>
 								<% post.pens.each do |use_pen| %>
 									<% if use_pen.present? %>
 										<p>・<%= use_pen.use_pen %></p>
@@ -54,7 +54,6 @@
 							</div>
 							</div>
 						<% end %>					
-					<% end %>
 					</tbody>
 				</table>
 			</div>

@@ -9,7 +9,7 @@ class Admin::UsersController < ApplicationController
   def show
     @user = User.find(params[:id])
     @post = @user.posts 
-    @posts = Post.page(params[:page])
+    @posts = @post.page(params[:page])
   end
 
   def edit
@@ -28,7 +28,7 @@ class Admin::UsersController < ApplicationController
 
   private
   def user_params
-    params.require(:user).permit(:user_name, :email, :birth)
+    params.require(:user).permit(:user_name, :email)
   end
   def set_q
     @q = User.ransack(params[:q])

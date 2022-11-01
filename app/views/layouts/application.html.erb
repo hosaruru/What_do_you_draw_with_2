@@ -29,77 +29,74 @@ setInterval(() => {
 }, TIMEOUT * 2);
 </script>
   </head>
-<nav class="navbar navbar-expand-lg navbar-light" style="background: linear-gradient(to right,#5b7bb4,#d0d7ff,#a6f0ff);">
-  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-    <span class="navbar-toggler-icon"></span>
-  </button>
-
-  <div class="collapse navbar-collapse" id="navbarSupportedContent">
-  <% if !user_signed_in? %>
-      <ul class="navbar-nav mr-auto">
-      <li class="nav-item active">
-        <%= link_to "TOP", root_path, class: "nav-link" %>
-      </li>
-      <li class="nav-item">
-      <%= link_to "新規登録", new_user_registration_path, class: "nav-link" %>
-      </li>
-      <li>
-        <%= link_to "ログイン", new_user_session_path, class: "nav-link " %>
-      </li>
-    </ul>
-  <% elsif current_user.email == 'guest@example.com' %>
-      <ul class="navbar-nav mr-auto">
-      <li class="nav-item active">
-      <%= link_to "TOP", root_path, class: "nav-link" %>
-      </li>
-      <li>
-      <%= link_to "ログアウト", destroy_user_session_path, method: :delete, class: "nav-link" %>
-      </li>
-    </ul>
-  <% elsif user_signed_in? %>
-    <ul class="navbar-nav mr-auto">
-      <li class="nav-item active">
-      <%= link_to "TOP", root_path, class: "nav-link" %>
-      </li>
-      <li class="nav-item">
-      <%= link_to "マイページ", "/users/1", class: "nav-link" %>
-      </li>
-      <li class="nav-item">
-      <%= link_to "投稿", new_post_path, class: "nav-link" %>
-      </li>
-      <li class="nav-item">
-      <%= link_to "ブックマーク", favorites_user_path(current_user), class: "nav-link" %>
-      </li>
-      <li>
-      <%= link_to "ログアウト", destroy_user_session_path, method: :delete, class: "nav-link" %>
-      </li>
-    </ul>
-    <% elsif admin_signed_in? %>
-        <ul class="navbar-nav mr-auto">
-      <li class="nav-item active">
-      <%#= link_to "マイページ", users_show_path, class: "nav-link" %>
-      </li>
-      <li class="nav-item">
-        <a class="nav-link" href="#">会員一覧</a>
-      </li>
-      <li class="nav-item">
-        <%= link_to "ログアウト", destroy_admin_session_path, method: :delete, class: "nav-link" %>
-      </li>
-    </ul>
-    <% end %>
-<!--    <form class="form-inline my-2 my-lg-0">
-      <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
-      <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
-    </form>-->
-  </div>
-</nav>
 
   <body>
-
+    <nav class="navbar navbar-expand-lg navbar-light" style="background: linear-gradient(to right,#5b7bb4,#d0d7ff,#a6f0ff);">
+      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+    
+      <div class="collapse navbar-collapse" id="navbarSupportedContent">
+        <% if admin_signed_in? %>
+            <ul class="navbar-nav mr-auto">
+          <li class="nav-item active">
+          </li>
+          <li class="nav-item">
+            <%= link_to "ユーザー一覧", admin_users_path, class: "nav-link" %>
+          </li>
+          <li class="nav-item">
+            <%= link_to "ログアウト", destroy_admin_session_path, method: :delete, class: "nav-link" %>
+          </li>
+        </ul>
+      <% elsif !user_signed_in? %>
+          <ul class="navbar-nav mr-auto">
+          <li class="nav-item active">
+            <%= link_to "TOP", root_path, class: "nav-link" %>
+          </li>
+          <li class="nav-item">
+          <%= link_to "新規登録", new_user_registration_path, class: "nav-link" %>
+          </li>
+          <li>
+            <%= link_to "ログイン", new_user_session_path, class: "nav-link " %>
+          </li>
+        </ul>
+      <% elsif current_user.email == 'guest@example.com' %>
+          <ul class="navbar-nav mr-auto">
+          <li class="nav-item active">
+          <%= link_to "TOP", root_path, class: "nav-link" %>
+          </li>
+          <li>
+          <%= link_to "ログアウト", destroy_user_session_path, method: :delete, class: "nav-link" %>
+          </li>
+        </ul>
+      <% elsif user_signed_in? %>
+        <ul class="navbar-nav mr-auto">
+          <li class="nav-item active">
+          <%= link_to "TOP", root_path, class: "nav-link" %>
+          </li>
+          <li class="nav-item">
+          <%= link_to "マイページ", user_path(current_user), class: "nav-link" %>
+          </li>
+          <li class="nav-item">
+          <%= link_to "投稿", new_post_path, class: "nav-link" %>
+          </li>
+          <li class="nav-item">
+          <%= link_to "ブックマーク", favorites_user_path(current_user), class: "nav-link" %>
+          </li>
+          <li>
+          <%= link_to "ログアウト", destroy_user_session_path, method: :delete, class: "nav-link" %>
+          </li>
+        </ul>
+        <% end %>
+    <!--    <form class="form-inline my-2 my-lg-0">
+          <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
+          <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
+        </form>-->
+      </div>
+    </nav>
     <%= yield %>
+    <div id="page_top"><a href="#"></a></div>
+    <footer class="navbar navbar-expand-lg navbar-light" style="background: linear-gradient(to right,#5b7bb4,#d0d7ff,#a6f0ff); height: 60px;">
+    </footer>
   </body>
-<div id="page_top"><a href="#"></a></div>
 </html>
-<footer class="navbar navbar-expand-lg navbar-light" style="background: linear-gradient(to right,#5b7bb4,#d0d7ff,#a6f0ff); height: 60px;">
-
-</footer>

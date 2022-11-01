@@ -6,6 +6,12 @@ body {
     animation: fadeIn 2s ease 0s 1 normal;
     -webkit-animation: fadeIn 2s ease 0s 1 normal;
 }
+footer{
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+}
 .navbar-collapse{
     font-weight: bold;
 }
@@ -29,12 +35,13 @@ body {
 h2{
     text-align: center;
 }
-.container{
+.post_wrapper{
     border-bottom: solid 1px #cccccc;
     padding: 20px 0 20px 0;
 }
 .top{
     margin: 30px 0 0 30px;
+    text-align: center;
     }
     
 .search_container{
@@ -69,12 +76,23 @@ h2{
 }
 
 .fadeIn {
-animation-name: fadeInAnime;
-animation-duration:3s;
-animation-fill-mode:forwards;
-opacity: 0;
+  animation-name: fadeInAnime;
+  animation-duration:3s;
+  animation-fill-mode:forwards;
+  opacity: 0;
 }
 
+.alret{
+  background-color: #dc3545; 
+  text-align: center; 
+  color: white;  
+  }
+  
+.notice{
+  background-color: #17a2b8;
+  text-align: center;
+  color: white;
+  }
 @keyframes fadeInAnime{
   0% {
     opacity: 0;
@@ -259,18 +277,19 @@ html, body {
   width: 100%;
 }
 /*.back{
-  background-size: 100%;
+  background-size: 100%;  height: 280rem;
   }*/
-.example{
-   position: relative;
-  height: 174rem;
+.box{
+  position: relative;
+
   width: 100vW;
   }
-  
-
- .example2{
+ .box2{
   position: absolute;
   top: 0;
-  height: 100vh;
   width: 100vW;
  }
+ 
+body {
+  background-image: url("../images/back.jpeg");
+}

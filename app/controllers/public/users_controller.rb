@@ -1,8 +1,8 @@
 class Public::UsersController < ApplicationController
   def show
-    @posts = Post.page(params[:page])
     @user = User.find(params[:id])
     @post = @user.posts 
+    @posts = @post.page(params[:page])
   end
 
   def edit
@@ -26,6 +26,6 @@ class Public::UsersController < ApplicationController
   private
 
   def user_params
-    params.require(:user).permit(:user_name, :email, :birth)
+    params.require(:user).permit(:user_name, :email)
   end
 end

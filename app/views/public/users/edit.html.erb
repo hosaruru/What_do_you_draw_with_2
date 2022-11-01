@@ -1,26 +1,31 @@
-<div class="col-md-6 col-sm-10 mx-2 mx-sm-auto shadow-lg rounded px-0 my-5" style="text-align: center;">
-<div style="padding: 20px;">
-<%= form_with model: @user, url: update_user_path, method: :patch do |f| %>
-  <h4>マイページ編集</h4>
-　　
-　<table class='table'>
-  <tr>
-	  <th>氏名</th>
-	  <td><%= f.text_field :user_name %></td>
-  </tr>
-   <tr>
-	  <th>メールアドレス</th>
-	  <td><%= f.text_field :email %></td>
-  </tr>
-  <tr>
-  <div class="field">
-    <th><%= f.label :誕生日 %></th>
-    <td><%== sprintf(f.date_select(:birth, :use_month_numbers=>true, :date_separator => '%s', :start_year=>1930, :end_year => Time.now.year, :default =>'1990-1-1'.to_date), '年','月') + '日生まれ' %></td>
+<div style="background-color: #dc3545; text-align: center; color: white;">
+  <%= flash[:alret] %>
+</div>
+<div class="col-md-6 col-sm-10 mx-2 mx-sm-auto shadow-lg rounded px-0 my-5" style="background:rgba(255,255,255,0.5); text-align:center;">
+  <div class='pt-5', id="title">
+    	<p>
+    		<span>U</span>
+    		<span>S</span>
+    		<span>E</span>
+    		<span style ="margin-right:20px;">R</span>
+    		<span>S</span>
+    		<span>E</span>
+    		<span>T</span>
+    		<span>T</span>
+    		<span>I</span>
+    		<span>N</span>
+    		<span>G</span>
+    	</p>
   </div>
-  <div class="actions"></td>
-  </tr>
-
-</table>
-
-  <%= f.submit '編集内容を保存', class: "btn btn-success btn-sm px-5"  %>
-<% end %></div></div>
+  <%= form_with model: @user, url: update_user_path, method: :patch do |f| %>
+    <div>
+      <%= f.label :ユーザー名 %><br />
+      <%= f.text_field :user_name%>
+    </div>
+    <div>
+      <%= f.label :メールアドレス %><br />
+      <%= f.email_field :email %>
+    </div>
+      <%= f.submit '編集内容を保存',class: "btn btn-success  my-5" %>
+  <% end %>
+</div>

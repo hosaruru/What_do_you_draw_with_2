@@ -1,8 +1,7 @@
 class Public::PostsController < ApplicationController
   before_action :set_q, only: [:index, :search]
   def index
-    @posts = Post.page(params[:page])
-    @post = Post.new
+    
     if params[:search].present?
       @posts = Post.posts_serach(params[:search]).page(params[:page])
     elsif params[:tag_id].present?
@@ -45,11 +44,17 @@ class Public::PostsController < ApplicationController
     @post = Post.find(params[:id])
     @software = Software.all
     @post_comment = PostComment.new
+    @tag_lists = Tag.all
+    if @post_comment.save
+      redirect_to post_show_path(@post.id)
+    else
+      flash[:alret] = "コメントを入力してください。"
+      render :show
+    end
   end
 
   def edit
     @post = Post.find(params[:id])
-
   end
 
   def update

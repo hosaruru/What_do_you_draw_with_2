@@ -1,11 +1,14 @@
+<div style="background-color: #17a2b8; text-align: center; color: white;">
+  <%= flash[:notice] %>
+</div>
 <div class="wrap">
     <div class="top">
         <%= search_form_for @q, url: search_admin_users_path do |f| %>
-            <%= f.label :user_name_cont, 'ユーザー検索' %>
+            <%= f.label :user_name_cont, 'ユーザー名検索' %>
             <%= f.search_field :user_name_cont, class: 'search_container'  %>
             <%= f.submit '検索' %>
         <% end %>
-        <div class='mt-5', id="title">
+        <div class='mt-5 mb-5', id="title">
             <p>
                 <span>U</span>
                 <span>S</span>
@@ -24,7 +27,7 @@
                         <thead class="thead-light">
                             <tr>
                             <th scope="col">会員ID</th>
-                            <th scope="col">氏名</th>
+                            <th scope="col">ユーザー名</th>
                             <th scope="col">メールアドレス</th>
                             </tr>
                         </thead>
@@ -35,13 +38,12 @@
                             <td><%= link_to user.user_name, admin_user_path(user.id) %></td>
                             <td><%= user.email %></td>                   
                             </tr>
-                            <% end %>
+                        <% end %>
                         </tbody>
                     </table>
                 </div>
             </div>
         </div>
-        <footer> <%#= paginate @users %></footer>
     </div>
 </div>
 

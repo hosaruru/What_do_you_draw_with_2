@@ -1,3 +1,6 @@
+<div class="box">
+<canvas id="canvas" class="back"></canvas>
+<div class="box2">
 <div class='mt-5', id="title">
 	<p>
 		<span>S</span>
@@ -28,23 +31,26 @@
 								<%= link_to post_path(post.id) do %>
 									<%= post.twitter.to_s.html_safe %>
 								</div>
-								<div class="ml-3 col-md-3">
-								<h5><i class="bi bi-person-fill"></i></i> ユーザー</h5>
-									<p><%= link_to user_path(post.user.id) do %><%= post.user.user_name %><% end %></p>
-								<h5><i class="bi bi-magic"></i> 使用ソフト</h5>
-									<p>・<%= post.software.name %></p>
-								<h5><i class="bi bi-pen"></i> 線画ペン</h5>
-									<p>・<%= post.brush %></p>
-								<h5><i class="bi bi-pencil-fill"></i> 塗りペン</h5>
-								<% post.pens.each do |use_pen| %>
-									<% if use_pen.present? %>
-										<p>・<%= use_pen.use_pen %></p>
-									<% end %>
-								<% end %>
-								<br>
-									<p><%= link_to "詳細", post_path(post.id),class: "btn btn-success"  %></p>
-									<%= "#{post.post_comments.count} コメント" %>
-								</div>							
+									<div class="ml-3 col-md-3">
+									<h5><i class="bi bi-person-fill"></i></i> ユーザー</h5>
+										<p><%= link_to user_path(post.user.id) do %><%= post.user.user_name %><% end %></p>
+									<h5><i class="bi bi-magic"></i> 使用ソフト</h5>
+										<p>・<%= post.software.name %></p>
+									<h5><i class="bi bi-pen"></i> 線画ペン</h5>
+										<p>・<%= post.brush %></p>
+									<h5><i class="bi bi-pencil-fill"></i> 塗りペン</h5>
+									<% post.pens.each do |use_pen| %>
+											<% if use_pen.present? %>
+												<p>・<%= use_pen.use_pen %></p>
+											<% end %>
+										<% end %><br>									
+										<p><%= link_to "詳細", post_path(post.id), class: "btn btn-success" %></p>							
+										<% @tag_lists.each do |list| %>
+										<% if list.tag_name == post.tag_name %>
+											<p style="color: #17a2b8;"><i class="bi bi-tag-fill"></i><%= link_to post.tag_name, posts_path(tag_id: list.id) %></p>
+											<% end %>
+										<% end %>									
+									</div>								
 								<% end %>
 							</div>
 							</div>
@@ -53,6 +59,8 @@
 				</table>
 			</div>
 		</div>
-		<ul class="pagination"><li class="page-item"><%= paginate @posts%></li></ul>
+		<ul class="pagination"><li class="page-item"><%= paginate @post_page%></li></ul>
 	</div>
+</div>
+</div>
 </div>

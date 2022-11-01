@@ -29,7 +29,9 @@
                     <% end %>
                 <h5 class="mt-4"><i class="bi bi-card-text"></i> 補足説明</h5>
                     <p><%= @post.comments %></p>
-                    <p style="color: #17a2b8;"><i class="bi bi-tag"></i><%= @post.tag_name %></p> 
+						<% @post.tags.each do |tag| %>
+							<p style="color: #17a2b8;"><i class="bi bi-tag-fill"></i> <%= tag.tag_name %></p>											
+						<% end %>
                      <% if @post.image.attached? %>
                         <figure class="hover-img"> <%= link_to @post.image, "data-lightbox": @post.image do %>
                         <%= image_tag @post.image ,style: "max-width: 400px;", class:"img" %><% end %>
@@ -39,21 +41,12 @@
                     <% end %>
             </div>
         </div>
-            <% if @post.favorited?(current_user) %>
-                <%= link_to favorites_path(post_id: @post.id), method: :delete do %>
-                    <span style="color:red; font-size: 40px;">❤︎</span>
-                <% end %>
-                <% else %>
-                <%= link_to favorites_path(post_id: @post.id), method: :post do %>
-                    <span style="color:gray;font-size: 40px;">❤︎</span>
-                <% end %>
-            <% end %>
-            <% if  @post.user == current_user %>
+
                 <p>
                 <%= link_to "編集", edit_post_path(@post.id),class: "btn btn-success" %>
                 <%= link_to "削除", post_destroy_posts_path(@post.id), class: "btn btn-danger", method: :delete, "data-confirm" => "本当に削除しますか？" %>
                 </p>
-            <% end %>
+
             <div>
             <p>コメント件数：<%= @post.post_comments.count %></p>
             <% @post.post_comments.each do |post_comment| %>

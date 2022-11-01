@@ -1,5 +1,8 @@
 <div class="col-md-6 col-sm-10 mx-2 mx-sm-auto shadow-lg rounded px-0 my-5" style="text-align: center;">
-  <div class='pt-5', id="title">
+  <div style="background-color: #17a2b8; text-align: center; color: white;">
+  <%= alert %>
+  </div>
+<div class='pt-5', id="title">
     <p>
     <span>A</span>
     <span>D</span>
@@ -13,6 +16,7 @@
     <span>N</span>
     </p>
   </div>
+
   <%= form_for(resource, as: resource_name, url: session_path(resource_name)) do |f| %>
     <div class="field">
         <%= f.label :メールアドレス  %><br />
