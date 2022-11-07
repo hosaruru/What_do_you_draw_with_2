@@ -5,9 +5,10 @@ body {
 /*    background-color: ghostwhite;*/
     animation: fadeIn 2s ease 0s 1 normal;
     -webkit-animation: fadeIn 2s ease 0s 1 normal;
+    position: relative;
 }
 footer{
-  position: absolute;
+  position: fixed;
   bottom: 0;
   left: 0;
   width: 100%;

@@ -41,19 +41,17 @@
                     <% end %>
             </div>
         </div>
-
                 <p>
-                <%= link_to "編集", edit_post_path(@post.id),class: "btn btn-success" %>
+                <%= link_to "編集", edit_admin_post_path(@post.id),class: "btn btn-success" %>
                 <%= link_to "削除", post_destroy_posts_path(@post.id), class: "btn btn-danger", method: :delete, "data-confirm" => "本当に削除しますか？" %>
                 </p>
-
             <div>
-            <p>コメント件数：<%= @post.post_comments.count %></p>
-            <% @post.post_comments.each do |post_comment| %>
-                投稿者： <%= post_comment.user.user_name %><br>
-                <%= post_comment.created_at.strftime('%Y/%m/%d') %><br>
-                コメント：<%= post_comment.comment %>
-                <%= link_to '削除', admin_post_post_comment_path(@post, post_comment), data: {confirm: '本当に削除しますか？'}, method: :delete ,class: "btn btn-danger btn-sm "%><br>
-            <% end %>
+                <p>コメント件数：<%= @post.post_comments.count %></p>
+                <% @post.post_comments.each do |post_comment| %>
+                    投稿者： <%= post_comment.user.user_name %><br>
+                    <%= post_comment.created_at.strftime('%Y/%m/%d') %><br>
+                    コメント：<%= post_comment.comment %>
+                    <%= link_to '削除', admin_post_post_comment_path(@post, post_comment), data: {confirm: '本当に削除しますか？'}, method: :delete ,class: "btn btn-danger btn-sm "%><br>
+                <% end %>
             </div>
 </div>

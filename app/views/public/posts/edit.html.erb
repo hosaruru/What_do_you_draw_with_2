@@ -1,6 +1,3 @@
-<div class="box">
-<canvas id="canvas" class="back"></canvas>
-<div class="box2">
 <div class="col-md-6 col-sm-10 mx-2 mx-sm-auto shadow-lg rounded px-0 my-5" style="background:rgba(255,255,255,0.5);">
   <%= flash[:alret] %>
   <div class='pt-5', id="title">
@@ -25,7 +22,7 @@
             </p>
             <!--<p> 紹介文<br><%#= f.text_area :introduction %></p>-->
             <p>線画ペン<br><%= f.text_field :brush %></p> 
-            <p>塗りペン<br>
+            <p>塗りペン、他<br>
             <div class="pens">
             <%= f.fields_for :pens do |t| %>              
                 <div style="width: 400px;">
@@ -38,7 +35,7 @@
                 </div>
             <% end %>
             <div id="detail-association-insertion-point"></div>
-              <div class="col-10 mt-2 mb-3">
+              <div class="mt-2 mb-3">
                 <%= link_to_add_association "", f, :pens,
                 class: "btn btn-secondary btn-block bi bi-plus-circle",
                 data: {
@@ -61,5 +58,3 @@
       </div>
     </div>
 </div> 
-</div>
-</div>

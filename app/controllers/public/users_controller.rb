@@ -11,8 +11,13 @@ class Public::UsersController < ApplicationController
 
   def update
     @user =  current_user
-    @user.update(user_params)
-    redirect_to user_path
+    @user.update(user_params)    
+      if @user.save
+        redirect_to user_path
+      else
+        flash.now[:alret] = "未入力の箇所があります"
+        render:edit
+      end
   end
   
   def favorites

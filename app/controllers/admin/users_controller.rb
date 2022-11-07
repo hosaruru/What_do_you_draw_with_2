@@ -19,7 +19,12 @@ class Admin::UsersController < ApplicationController
   def update
     @user =  User.find(params[:id])
     @user.update(user_params)
-    redirect_to admin_user_path
+      if @user.save
+        redirect_to admin_user_path
+      else
+        flash.now[:alret] = "未入力の箇所があります"
+        render:edit
+      end
   end
   
   def search
