@@ -86,7 +86,8 @@ production:
   compile: false
 
   # Extract and emit a css file
-  extract_css: true
+  # 対症療法的にこちらをfalseに設定→リンク生成をさせない設定
+  extract_css: false
 
   # Cache manifest.json for performance
   cache_manifest: true
