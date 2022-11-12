@@ -112,8 +112,6 @@ ActiveRecord::Schema.define(version: 2022_10_29_083426) do
     t.integer "tag_id", null: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
-    t.index ["post_id"], name: "index_tagmaps_on_post_id"
-    t.index ["tag_id"], name: "index_tagmaps_on_tag_id"
   end
 
   create_table "tags", force: :cascade do |t|
@@ -144,6 +142,4 @@ ActiveRecord::Schema.define(version: 2022_10_29_083426) do
   add_foreign_key "favorites", "posts"
   add_foreign_key "favorites", "users"
   add_foreign_key "pens", "posts"
-  add_foreign_key "tagmaps", "posts"
-  add_foreign_key "tagmaps", "tags"
 end
