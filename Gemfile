@@ -68,3 +68,5 @@ end
 gem "net-smtp"
 gem "net-pop"
 gem "net-imap"
+gem 'omniauth', '1.9.1'
+gem 'omniauth-twitter'

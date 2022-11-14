@@ -31,6 +31,12 @@
   <div class="actions">
     <%= f.submit "ログイン" ,class: "btn btn-success  my-5" %>
   </div>
+  <%- if devise_mapping.omniauthable? %>
+    <%- resource_class.omniauth_providers.each do |provider| %>
+    <!--以下１行を編集-->
+      <%= link_to "#{OmniAuth::Utils.camelize(provider)}アカウントでログイン", omniauth_authorize_path(resource_name, provider), class:'fab fa-twitter', method: :post %>
+    <% end %>
+  <% end %>
 <% end %>
 
 </div>

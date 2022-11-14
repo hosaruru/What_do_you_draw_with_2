@@ -33,13 +33,17 @@
     <%= f.label :ユーザーネーム %><br />
     <%= f.text_field :user_name, autofocus: true, autocomplete: "user_name", class: 'search_container' %>
   </div>
-<!--  <div class="field">
-    <%#= f.label :誕生日 %><br />
-    <%#== sprintf(f.date_select(:birth, :use_month_numbers=>true, :date_separator => '%s', :start_year=>1930, :end_year => Time.now.year, :default =>'1990-1-1'.to_date), '年','月') + '日生まれ' %>
-  </div>-->
   <div class="actions">
-    <%= f.submit "アカウント作成" ,class: "btn btn-success  my-5" %>
+    <%= f.submit "アカウント作成" ,class: "btn btn-success  my-5" %>  
   </div>
+  <%- if devise_mapping.omniauthable? %>
+    <%- resource_class.omniauth_providers.each do |provider| %>
+    <!--以下１行を編集-->
+      <%= link_to "#{OmniAuth::Utils.camelize(provider)}アカウントでログイン", omniauth_authorize_path(resource_name, provider), class:'fab fa-twitter', method: :post %>
+    <% end %>
+  <% end %>
 <% end %>
 </div>
+
+
 <%#= render "public/shared/links" %>

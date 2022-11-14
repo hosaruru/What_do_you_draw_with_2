@@ -4,7 +4,8 @@ Rails.application.routes.draw do
 # URL /users/sign_in ...
 devise_for :users,skip: [:passwords], controllers: {
   registrations: "public/registrations",
-  sessions: 'public/sessions'
+  sessions: 'public/sessions',
+  :omniauth_callbacks => 'public/omniauth_callbacks'
 }
 
 # 管理者用
@@ -31,8 +32,7 @@ devise_for :admin, skip: [:registrations, :passwords] ,controllers: {
     resources :users, only: [:index, :show, :edit, :show]
     patch 'users/:id' => 'users#update', as: 'update_user'
   end
-
-  
+ 
   # devise_for :users
   namespace :admin do
     resources :tags, only: [:index, :create, :edit, :update]
