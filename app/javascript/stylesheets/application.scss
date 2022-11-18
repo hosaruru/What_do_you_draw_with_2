@@ -7,11 +7,12 @@ body {
     -webkit-animation: fadeIn 2s ease 0s 1 normal;
     position: relative;
 }
-footer{
-  position: fixed;
-  bottom: 0;
-  left: 0;
-  width: 100%;
+nav {
+  background: linear-gradient(to right,#5b7bb4,#d0d7ff,#a6f0ff);
+}
+footer {
+  background: linear-gradient(to right,#5b7bb4,#d0d7ff,#a6f0ff); 
+  height:60px;
 }
 .navbar-collapse{
     font-weight: bold;
@@ -43,8 +44,22 @@ h2{
 .top{
     margin: 30px 0 0 30px;
     text-align: center;
-    }
-    
+}
+.table{
+  background:rgba(255,255,255,0.5);
+  }
+.mypage{
+  text-align:center;
+  font-weight: bold;
+  font-size: 18px;
+  }
+.setting{
+  position:absolute; top:0%; right:0%; 
+  font-size: 26px;  
+  }
+.setting a{
+  color: gray;
+  }
 .search_container{
   box-sizing: border-box;
   position: relative;

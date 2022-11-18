@@ -37,10 +37,11 @@
 							<% end %>
           <% if @post.image.attached? %>
             <figure class="hover-img"> <%= link_to @post.image, "data-lightbox": @post.image do %>
-            <%= image_tag @post.image ,style: "max-width: 400px;", class:"img" %><% end %>
-            <figcaption>
-              <p>クリックして拡大</p>
-            </figcaption></figure>
+              <%= image_tag @post.image ,style: "max-width: 400px;", class:"img" %><% end %>
+              <figcaption>
+                <p>クリックして拡大</p>
+              </figcaption>
+            </figure>
           <% end %>
         </div>
       </div>

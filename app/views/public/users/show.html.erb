@@ -10,18 +10,14 @@
       			<span>E</span>
       		</p>
 	      </div>
-      	<span><%= link_to "編集", edit_user_path ,class: "btn btn-success"%></span>
-      	<table class='table' style="background:rgba(255,255,255,0.5);">
-      	  <tr>
-      		  <th>氏名</th>
-      		  <td><%= @user.user_name %></td>
-      	  </tr>
-          <tr>
-      		  <th>メールアドレス</th>
-      		  <td><%= @user.email %></td>
-          </tr>
 
+      	<table class='table mypage'>      	      	
+      	  <tr>
+      	  <span class='setting'><%= link_to "", edit_user_path ,class: "bi bi-gear-wide-connected"%></p>
+      		  <td><%= image_tag @user.image %><br><%= @user.user_name %></td>
+      	  </tr>
 	      </table>
+	      
       </div>
     	<div class='container px-5 px-sm-0'>
     		<div class='row'>
