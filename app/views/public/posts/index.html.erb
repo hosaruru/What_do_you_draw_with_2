@@ -1,7 +1,6 @@
 <div class="notice">
   <%= flash[:notice] %>
 </div>
-
 <div class='mt-5', id="title">
 	<p>
 		<span>P</span>
@@ -16,6 +15,7 @@
 		<span>S</span>
 	</p>
 </div>
+
 <div class="wrap">
 	<div class="top">
 	<% if user_signed_in? %>
@@ -33,12 +33,6 @@
 		
 		  <%= f.submit '検索' ,class: "btn btn-dark btn-sm"%>
 		<% end %>	
-<!--	<%# @tag_lists.each do |list| %>
-		<span> <%#= link_to "#"+list.tag_name, posts_path(tag_id: list.id), class: 'btn btn-info btn-sm' %></span>
-	<%# end %>-->
-<!--	<#% @post.tags.each do |tag| %>
-		<%#= link_to "#{tag.tag_name}", posts_path(tag), class: 't' %>
-	<#% end %>-->
 	</div>
 	<div class='container px-5 px-sm-0'>
 		<div class='row'>

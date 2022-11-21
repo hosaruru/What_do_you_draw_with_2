@@ -23,8 +23,8 @@
       <%= f.text_field :user_name%>
     </div>
     <div>
-      <%= f.label :メールアドレス %><br />
-      <%= f.email_field :email %>
+      <%= f.label :プロフィール画像 %><br />
+     <p> <%= f.file_field :image, accept: "image/*", class: "w-100" %></p>
     </div>
       <%= f.submit '編集内容を保存',class: "btn btn-success  my-5" %>
   <% end %>

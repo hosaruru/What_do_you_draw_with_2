@@ -1,129 +1,83 @@
-    <% if  @user == current_user %>
-      <div class="col-md-5 col-sm-10 mx-2 mx-sm-auto">
-	      <div class='mt-5', id="title">
-		      <p>
-      			<span>M</span>
-      			<span style ="margin-right:20px;">Y</span>
-      			<span>P</span>
-      			<span>A</span>
-      			<span>G</span>
-      			<span>E</span>
-      		</p>
-	      </div>
-
-      	<table class='table mypage'>      	      	
-      	  <tr>
-      	  <span class='setting'><%= link_to "", edit_user_path ,class: "bi bi-gear-wide-connected"%></p>
-      		  <td><%= image_tag @user.image %><br><%= @user.user_name %></td>
-      	  </tr>
-	      </table>
-	      
-      </div>
-    	<div class='container px-5 px-sm-0'>
-    		<div class='row'>
-    			<div class='col-md-8 offset-md-1' style='margin: 0 auto;'>
-    				<table class='table table-hover table-inverse'>
-    					<tbody>
-      					<% if user_signed_in? %>
-      						<% @post.each do |post| %>
-      							<div class="container">
-        							<div class="row o-2column">
-      								  <%= link_to post_path(post.id) do %>
-      								    <div class="col-md-8 ml-4">
-      									    <%= post.twitter.to_s.html_safe %>
-      								    </div>
-      							  	  <div class="ml-3 col-md-3">
-      								      <h5><i class="bi bi-magic"></i> 使用ソフト</h5>
-      									    <p>・<%= post.software.name %></p>
-      								      <h5><i class="bi bi-pen"></i> 線画ペン</h5>
-      									    <p>・<%= post.brush %></p>
-      								      <h5><i class="bi bi-pencil-fill"></i> 塗りペン、他</h5>
-            								<% post.pens.each do |use_pen| %>
-            									<% if use_pen.present? %>
-            										<p>・<%= use_pen.use_pen %></p>
-            									<% end %>
-            								<% end %>
-    								        <br>
-          									<p><%= link_to "詳細", post_path(post.id),class: "btn btn-success"  %></p>
-          									<%= "#{post.post_comments.count} コメント" %>
-    								      </div>							
-    								    <% end %>
-      							  </div>
-      							</div>
-      						<% end %>					
-					       <% end %>
-					     </tbody>
-            </table>
-			    </div>
-		    </div>
-		  </div>
-		  <ul class="pagination"><li class="page-item"><%= paginate @posts%></li></ul>
-    <% else %>
-      <div class="col-md-5 col-sm-10 mx-2 mx-sm-auto">
-	      <div class='mt-5', id="title">
-      		<p>
-      			<span>U</span>
-      			<span>S</span>
-      			<span>E</span>
-      			<span style ="margin-right:20px;">R</span>
-      			<span>P</span>
-      			<span>A</span>
-      			<span>G</span>
-      			<span>E</span>
-      		</p>
-	      </div>
-      	<table class='table'>
-          <tr>
-            <th>氏名</th>
-            <td><%= @user.user_name %></td>
-          </tr>
-          <tr>
-            <th>誕生日</th>
-            <td><%= @user.birth %></td>
-          </tr>
-      	</table>
-      </div>
-    	<div class='container px-5 px-sm-0'>
-    		<div class='row'>
-    			<div class='col-md-8 offset-md-1' style='margin: 0 auto;'>
-    				<table class='table table-hover table-inverse'>
-    					<tbody>
-      					<% if user_signed_in? %>
-      						<% @post.each do |post| %>
-      							<div class="container">
-        							<div class="row o-2column">
-        								<div class="col-md-8 ml-4">
-        								  <%= link_to post_path(post.id) do %>
-        								    <div class="col-md-8 ml-4">
-        									    <%= post.twitter.to_s.html_safe %>
-        								    </div>
-        								    <div class="ml-3 col-md-3">
-        								      <h5><i class="bi bi-magic"></i> 使用ソフト</h5>
-        									    <p>・<%= post.software.name %></p>
-        								      <h5><i class="bi bi-pen"></i> 線画ペン</h5>
-        									    <p>・<%= post.brush %></p>
-        								      <h5><i class="bi bi-pencil-fill"></i>塗りペン</h5>
-        								      <% post.pens.each do |use_pen| %>
-        									      <% if use_pen.present? %>
-        										      <p>・<%= use_pen.use_pen %></p>
-        									      <% end %>
-        								      <% end %>
-								              <br>
-            									<p><%= link_to "詳細", post_path(post.id),class: "btn btn-success"  %></p>
-            									<%= "#{post.post_comments.count} コメント" %>
-								            </div>							
-								          <% end %>
-							          </div>
-							        </div>
-						        <% end %>					
-					        <% end %>
-					      </tbody>
-			  	    </table>
-			      </div>
-		      </div>
-	      	<ul class="pagination"><li class="page-item"><%= paginate @posts%></li></ul>
-	      </div>
-      <% end %>
-    </div>
-
-<%#= render 'public/back' %>
+<% if  @user == current_user %>
+	<div class="col-md-5 col-sm-10 mx-2 mx-sm-auto">
+		<div class='mt-5', id="title">
+			<p>
+			<span>M</span>
+			<span style ="margin-right:20px;">Y</span>
+			<span>P</span>
+			<span>A</span>
+			<span>G</span>
+			<span>E</span>
+			</p>
+		</div>
+		<table class='table mypage'>      	      	
+			<tr>
+			<span class='setting'><%= link_to "", edit_user_path ,class: "bi bi-gear-wide-connected"%></p>
+			<td><%= image_tag @user.image %><br><%= @user.user_name %></td>
+			</tr>
+		</table>	      
+	</div>
+<% else %>
+	<div class="col-md-5 col-sm-10 mx-2 mx-sm-auto">
+		<div class='mt-5', id="title">
+			<p>
+			<span>U</span>
+			<span>S</span>
+			<span>E</span>
+			<span style ="margin-right:20px;">R</span>
+			<span>P</span>
+			<span>A</span>
+			<span>G</span>
+			<span>E</span>
+			</p>
+		</div>
+		<table class='table mypage'>      	      	
+			<tr>
+			<td><%= image_tag @user.image %><br><%= @user.user_name %></td>
+			</tr>
+		</table>	      
+	</div>
+<% end %>
+	<div class='container px-5 px-sm-0'>
+		<div class='row'>
+			<div class='col-md-8 offset-md-1' style='margin: 0 auto;'>
+				<table class='table table-hover table-inverse'>
+					<tbody>
+					<% if user_signed_in? %>
+						<% if @post.blank? %>
+							<p style="text-align: center;">投稿がありません。</p>
+						<% else %>
+							<% @post.each do |post| %>
+								<div class="container">
+									<div class="row o-2column">
+									    <%= link_to post_path(post.id) do %>
+											<div class="col-md-8 ml-4">
+												<%= post.twitter.to_s.html_safe %>
+											</div>
+											  <div class="ml-3 col-md-3">
+													<h5><i class="bi bi-magic"></i> 使用ソフト</h5>
+													<p>・<%= post.software.name %></p>
+													<h5><i class="bi bi-pen"></i> 線画ペン</h5>
+													<p>・<%= post.brush %></p>
+													<h5><i class="bi bi-pencil-fill"></i> 塗りペン、他</h5>
+													<% post.pens.each do |use_pen| %>
+														<% if use_pen.present? %>
+															<p>・<%= use_pen.use_pen %></p>
+														<% end %>
+													<% end %>
+											        <br>
+											  		<p><%= link_to "詳細", post_path(post.id),class: "btn btn-success"  %></p>
+											  		<%= "#{post.post_comments.count} コメント" %>
+										      </div>							
+									    <% end %>
+									</div>
+								</div>
+							<% end %>
+						<% end %>					
+					<% end %>
+					</tbody>
+				</table>
+			</div>
+		</div>
+	</div>
+<ul class="pagination"><li class="page-item"><%= paginate @posts%></li></ul>

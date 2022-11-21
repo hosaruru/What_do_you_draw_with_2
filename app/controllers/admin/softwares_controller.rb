@@ -7,8 +7,12 @@ class Admin::SoftwaresController < ApplicationController
 
   def create
     @software = Software.new(software_params)
-    @software.save
-    redirect_to admin_softwares_path
+    if @software.save
+      redirect_to admin_softwares_path
+    else
+      flash.now[:alret] = "未入力の箇所があります"
+      render :index
+    end
   end
 
   def edit
@@ -18,8 +22,13 @@ class Admin::SoftwaresController < ApplicationController
   def update
     @software = Software.find(params[:id])
     @software.update(software_params)
-    redirect_to admin_softwares_path
-  end
+    if @software.save
+      redirect_to admin_softwares_path
+    else
+      flash.now[:alret] = "ソフト名を入力してください"
+      render :edit
+
+  end end
   def destroy
     @software = Software.find(params[:id])
     @software.destroy

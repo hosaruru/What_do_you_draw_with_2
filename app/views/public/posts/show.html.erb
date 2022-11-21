@@ -61,11 +61,10 @@
         </p>
       <% end %>
       <div>
-        <p>コメント件数：<%= @post.post_comments.count %></p>
         <% @post.post_comments.each do |post_comment| %>
-          <p>投稿者： <%= post_comment.user.user_name %><br>
+          <p><%= image_tag post_comment.user.image %> <%= post_comment.user.user_name %><br>
           <%= post_comment.created_at.strftime('%Y/%m/%d') %><br>
-          コメント：<%= post_comment.comment %></p>
+          <%= post_comment.comment %></p>
         <% end %>      
       </div>
       <div class="mb-5">

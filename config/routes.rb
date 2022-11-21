@@ -83,9 +83,10 @@ devise_for :admin, skip: [:registrations, :passwords] ,controllers: {
    scope module: :public do
     root to: 'posts#index'
   post '/posts/guest_sign_in', to: 'posts#guest_sign_in'
-
   end
-# ゲストログイン
+   scope module: :public do
+    resources :notifications, only: [:index]
+  end
 
 
   # For details on the DSL available within this file, see https://guides.rubyonrails.org/routing.html

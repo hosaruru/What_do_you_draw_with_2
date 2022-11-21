@@ -1,5 +1,5 @@
 <div class='mt-5', id="title">
-		<p>
+	<p>
 		<span>B</span>
 		<span>O</span>
 		<span>O</span>
@@ -10,12 +10,12 @@
 		<span>K</span>
 	</p>
 </div>
-	<div class='container px-5 px-sm-0'>
-		<div class='row'>
-			<div class='col-md-8 offset-md-1' style='margin: 0 auto;'>
-			     <% if @favorite_posts.blank? %>
-         <p style="text-align: center;">ブックマークがありません。</p>
-     <% else %>
+<div class='container px-5 px-sm-0'>
+	<div class='row'>
+		<div class='col-md-8 offset-md-1' style='margin: 0 auto;'>
+			<% if @favorite_posts.blank? %>
+				<p style="text-align: center;">ブックマークがありません。</p>
+		    <% else %>
 				<table class='table table-hover table-inverse'>
 					<tbody>
 					<% if user_signed_in? %>
@@ -45,10 +45,11 @@
 							</div>
 							</div>
 						<% end %>					
-					<% end %><% end %>
+					<% end %>				
 					</tbody>
 				</table>
-			</div>
+			<% end %>
 		</div>
-		<!--<ul class="pagination"><li class="page-item"><%= paginate @posts%></li></ul>-->
 	</div>
+	<!--<ul class="pagination"><li class="page-item"><%= paginate @posts%></li></ul>-->
+</div>
