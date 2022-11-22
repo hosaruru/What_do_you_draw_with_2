@@ -238,8 +238,6 @@ figcaption p{ margin-top: 20px;
     transform: translateY(0);
   }
 }
-
-
 #page_top{
   width: 50px;
   height: 50px;
@@ -319,3 +317,16 @@ body {
   margin: 18px 0 0 20px;
   font-size: 20px;
   }
+nav{
+ position: relative;
+}
+
+nav p{
+  font-size: 20px;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  -webkit-transform: translate(-50%, -50%);
+  -ms-transform: translate(-50%, -50%);
+}
