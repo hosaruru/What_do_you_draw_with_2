@@ -87,6 +87,9 @@ setInterval(() => {
           <li class="nav-item">
           <%= link_to "ブックマーク", favorites_user_path(current_user), class: "nav-link" %>
           </li>
+          <li class="nav-item">
+          <%= link_to "質問掲示板", boards_path, class: "nav-link" %>
+          </li>
           <li>
           <%= link_to "ログアウト", destroy_user_session_path, method: :delete, class: "nav-link" %>
           </li>

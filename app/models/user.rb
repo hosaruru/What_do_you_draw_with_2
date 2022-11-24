@@ -9,6 +9,8 @@ class User < ApplicationRecord
           has_many :post_comments, dependent: :destroy
           has_many :active_notifications, class_name: 'Notification', foreign_key: 'visitor_id', dependent: :destroy
           has_many :passive_notifications, class_name: 'Notification', foreign_key: 'visited_id', dependent: :destroy
+          has_many :boards, dependent: :destroy
+          has_many :board_comments, dependent: :destroy
   # Twitter認証ログイン用
   # ユーザーの情報があれば探し、無ければ作成する
   def self.find_for_oauth(auth)

@@ -1,0 +1,33 @@
+
+<div>
+  <% if @board.image.attached? %>
+    <figure class="hover-img">
+      <%= link_to @board.image, "data-lightbox": @board.image do %>
+        <%= image_tag @board.image ,style: "max-width: 400px;", class:"img" %>
+      <% end %>
+      <figcaption>
+          <p>クリックして拡大</p>
+      </figcaption>
+    </figure>
+  <% end %>
+  <p>質問：<%= @board.headline %></p>
+  <p>質問内容：<%= @board.question %></p>
+  <p>ユーザーネーム：<%= @board.user.user_name %></p>
+  <p>投稿日：<%= @board.created_at.strftime('%Y/%m/%d') %></p>
+<% if @board.user == current_user %>
+<%= link_to '削除', board_destroy_board_path(@board), data: {confirm: '本当に削除しますか？'}, method: :delete ,class: "btn btn-danger btn-sm "%>
+<% end %>
+</div>
+
+  <% @board.board_comments.each do |board_comment| %>
+    <p><%#= image_tag board_comment.user.get_profile_image(100,100) %></p>
+    <%= board_comment.user.user_name %><br>
+    <%= board_comment.created_at.strftime('%Y/%m/%d') %><%= board_comment.board_comment %><br>
+        <% if board_comment.user == current_user %><br>
+    <%= link_to '削除', board_destroy_board_comment_path(@board, board_comment), data: {confirm: '本当に削除しますか？'}, method: :delete ,class: "btn btn-danger btn-sm "%><br>
+    <% end %>
+  <% end %>
+  <%= form_with model: [@board, @board_comment] do |f| %>
+    <%= f.text_area :board_comment, rows: '5', placeholder: "コメントをここに" %>
+    <%= f.submit "送信する" %>
+  <% end %>

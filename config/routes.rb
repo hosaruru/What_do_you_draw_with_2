@@ -1,5 +1,4 @@
 Rails.application.routes.draw do
-
   # ユーザー用
 # URL /users/sign_in ...
 devise_for :users,skip: [:passwords], controllers: {
@@ -86,6 +85,13 @@ devise_for :admin, skip: [:registrations, :passwords] ,controllers: {
   end
    scope module: :public do
     resources :notifications, only: [:index]
+  end
+   scope module: :public do
+    resources :boards, only: [:new, :show, :index, :create]do
+     delete 'boards/:id' => 'boards#destroy', as: 'destroy_board'
+     resources :board_comments, only: [:create]
+     delete 'board_comments/:id' => 'board_comments#destroy', as: 'destroy_board_comment'
+    end
   end
 
 
