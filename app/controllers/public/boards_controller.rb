@@ -3,13 +3,19 @@ class Public::BoardsController < ApplicationController
     @board = Board.new
   end
   def create
-    @board = Board.new(board_params)
-    @board.user_id = current_user.id
-    @board.save
-    redirect_to boards_path
+    board = Board.find(params[:board_id])
+    @board = current_user.board_comments.new(board_params)
+    @board.user_id = board.id
+    if @board.save
+      @board.board.create_notification_board_comment!(current_user, answer.id)
+      redirect_to board_path(@board.id)
+    else
+      flash.now[:alret] = "*は必須です。"
+      render :new
+    end
   end
   def index
-    @boards = Board.all
+    @boards = Board.all.order(created_at: :desc).page(params[:page])
 
   end
 
@@ -27,6 +33,6 @@ class Public::BoardsController < ApplicationController
   private
   
   def board_params
-    params.require(:board).permit(:question, :answer, :image)
+    params.require(:board).permit(:question, :answer, :image, :headline)
   end
 end

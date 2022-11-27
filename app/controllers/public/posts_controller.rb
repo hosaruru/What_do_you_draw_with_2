@@ -34,8 +34,8 @@ class Public::PostsController < ApplicationController
       @post.save_posts(tag_list)
       redirect_to post_path(@post.id)
     else
-      flash[:alret] = "*は必須です。"
-      render :new
+      flash.now[:alret] = "*は必須です。"
+      render:new
     end
   end
 

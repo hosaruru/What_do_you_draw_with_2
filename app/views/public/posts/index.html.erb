@@ -15,13 +15,12 @@
 		<span>S</span>
 	</p>
 </div>
-
 <div class="wrap">
 	<div class="top">
 	<% if user_signed_in? %>
 		<%=  %>
 	<% else %>
-		<%= link_to 'ゲストログイン（閲覧用）', posts_guest_sign_in_path, method: :post , class: "btn btn-primary btn-sm px-4" %>
+		<%= link_to 'ゲストログイン', posts_guest_sign_in_path, method: :post , class: "col btn btn-funky-moon btn-rounded" %>
 		<p>※ログインすると詳細が見れます</p>
 	<% end %>
 		<%= search_form_for @q, url: search_posts_path do |f| %>
@@ -36,15 +35,13 @@
 	</div>
 	<div class='container px-5 px-sm-0'>
 		<div class='row'>
-			<div class='col-md-8 offset-md-1' style='margin: 0 auto;'>
-				<table class='table table-hover table-inverse'>
-					<tbody>
+			<div class='col-md-8' style='margin: 0 auto;'>
 					<% if user_signed_in? %>
 						<% @posts.each do |post| %>
 							<div class="post_wrapper">
-								<div class="row o-2column">
+								<div class="row o-2column"  style="margin-left: -48px;">
 									<%= link_to post_path(post.id) do %>
-										<div class="col-md-8 ml-4">
+										<div class="col-md-8 ml-4" style="padding-left: 0px;">
 											<%= post.twitter.to_s.html_safe %>
 										</div>
 										<div class="ml-3 col-md-3">
@@ -55,12 +52,12 @@
 											<h5><i class="bi bi-pen"></i> 線画ペン</h5>
 											<p>・<%= post.brush %></p>
 											<% post.pens.each do |use_pen| %>
-													<% if use_pen.present? %>
-													<h5><i class="bi bi-pencil-fill"></i> 塗りペン、他</h5>
-													<p>・<%= use_pen.use_pen %></p>
+												<% if use_pen.use_pen.present? %>
+												<h5><i class="bi bi-pencil-fill"></i> 塗りペン、他</h5>
+												<p>・<%= use_pen.use_pen %></p>
 												<% end %>
 											<% end %><br>									
-											<p><%= link_to "詳細", post_path(post.id), class: "btn btn-success" %></p>							
+											<p><%= link_to "詳細", post_path(post.id), class: "col btn btn-dark-blue btn-rounded" %></p>							
 											<% post.tags.each do |tag| %>
 												<p style="color: #17a2b8;"><i class="bi bi-tag-fill"></i><%= link_to tag.tag_name, posts_path(tag_id: tag.id) %></p>											
 											<% end %>									
@@ -82,9 +79,9 @@
 										<p>・<%= post.software.name %></p>
 									<h5><i class="bi bi-pen"></i> 線画ペン</h5>
 										<p>・<%= post.brush %></p>
-									<h5><i class="bi bi-pencil-fill"></i>塗りペン</h5>
 										<% post.pens.each do |use_pen| %>
-											<% if use_pen.present? %>
+											<% if use_pen.use_pen.present? %>
+									<h5><i class="bi bi-pencil-fill"></i>塗りペン</h5>
 												<p>・<%= use_pen.use_pen %></p>
 											<% end %>
 										<% end %><br>								
@@ -100,3 +97,4 @@
 		</div>
 		<ul class="pagination"><li class="page-item"><%= paginate @posts%></li></ul>
 	</div>
+</div>

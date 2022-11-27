@@ -22,12 +22,12 @@
   <% @board.board_comments.each do |board_comment| %>
     <p><%#= image_tag board_comment.user.get_profile_image(100,100) %></p>
     <%= board_comment.user.user_name %><br>
-    <%= board_comment.created_at.strftime('%Y/%m/%d') %><%= board_comment.board_comment %><br>
+    <%= board_comment.created_at.strftime('%Y/%m/%d') %><%= board_comment.answer %><br>
         <% if board_comment.user == current_user %><br>
     <%= link_to '削除', board_destroy_board_comment_path(@board, board_comment), data: {confirm: '本当に削除しますか？'}, method: :delete ,class: "btn btn-danger btn-sm "%><br>
     <% end %>
   <% end %>
   <%= form_with model: [@board, @board_comment] do |f| %>
-    <%= f.text_area :board_comment, rows: '5', placeholder: "コメントをここに" %>
+    <%= f.text_area :answer, rows: '5', placeholder: "コメントをここに" %>
     <%= f.submit "送信する" %>
   <% end %>

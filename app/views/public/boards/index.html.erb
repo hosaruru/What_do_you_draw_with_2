@@ -1,26 +1,36 @@
+<div class="wrap  mb-5">
+  <div class='mt-5', id="title">
+    <p>
+    <span>T</span>
+    <span>H</span>
+    <span>R</span>
+    <span>E</span>
+    <span>A</span>
+    <span>D</span>
+    </p>
+  </div>
+</div>
+	<div class="row mt-3">
+		<div class="col btn_wrap">
+		    <%= link_to "質問する" , new_board_path, class: "col btn btn-funky-moon btn-rounded" %>
+		</div>
+	</div>
+<div class="container">
 <% @boards.each do |board| %>
-<div>
-  <p>投稿ユーザー画像：</p>
-          <% if board.image.attached? %>
-            <figure class="hover-img">
-              <%= link_to board.image, "data-lightbox": board.image do %>
-                <%= image_tag board.image ,style: "max-width: 400px;", class:"img" %>
-              <% end %>
-              <figcaption>
-                  <p>クリックして拡大</p>
-              </figcaption>
-            </figure>
-          <% end %>
-  <p><%= board.headline %></p>
-  <p><%= board.question %></p>
-  <p>ユーザーネーム：<%= board.user.user_name %></p>
-</div>
-<div>
-<p><%= link_to "#{board.board_comments.count} コメント", board_path(board.id) %></p>
-</div>
+  <div class="row board">
+    <div class="col-sm-2">
+      <%= image_tag board.user.image %>
+    </div>
+    <div class="col-sm-8">
+      <p><strong><i class="bi bi-patch-question"></i> <span><%= link_to board.headline, board_path(board.id) %></span></strong></p>
+      <p><%= board.question %></p>
+      <% if board.board_comments.present? %>
+      <span><%= link_to "#{board.board_comments.count} コメント", board_path(board.id) %></span>
+      <% elsif %>
+      <span><%= board.board_comments.count %> コメント</span>
+      <% end %>
+    </div>
+  </div>
 <% end %>
-<div>
-
-
 </div>
-
+<ul class="pagination"><li class="page-item"><%= paginate @boards%></li></ul>

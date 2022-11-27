@@ -93,8 +93,7 @@ setInterval(() => {
           <li>
           <%= link_to "ログアウト", destroy_user_session_path, method: :delete, class: "nav-link" %>
           </li>
-        </ul>
-        <% end %>
+        </ul>        
       </div>
           <p class"bell visible-xs">
           <%= link_to(notifications_path) do %>
@@ -107,6 +106,7 @@ setInterval(() => {
               <% end %>
           <% end %>
           </p>
+        <% end %>
     </nav>
     <%= yield %>
     <div id="page_top"><a href="#"></a></div>

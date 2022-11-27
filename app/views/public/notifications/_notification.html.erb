@@ -25,6 +25,19 @@
                         <%= "にコメントしました" %> 
                         <% end %>                      
                 <% end %>
+                <% when 'board_comment' then %> 
+                    <% if notification.board.user_id == visited.id %>
+                        <%= link_to "あなたの投稿", notification.board, style: "font-weight: bold;" %> 
+                        <%= "にコメントしました" %> 
+                    <% elsif visitor.user_name == notification.board.user.user_name %>
+                        <%= link_to "自分の投稿", notification.board, style: "font-weight: bold;" %>   
+                        <%= "にコメントしました" %>
+                    <% else %>
+                        <%= link_to post_path(notification.board) do %>
+                        <strong><%= notification.board.user.user_name + 'さんの投稿' %></strong>
+                        <%= "にコメントしました" %> 
+                        <% end %>                      
+                <% end %>
             <% end %>             
         </span>
     </div>
