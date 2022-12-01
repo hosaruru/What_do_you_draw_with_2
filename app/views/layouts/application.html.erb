@@ -54,12 +54,6 @@ setInterval(() => {
         </ul>
       <% elsif !user_signed_in? %>
           <ul class="navbar-nav mr-auto">
-          <li class="nav-item active">
-            <%= link_to "TOP", root_path, class: "nav-link" %>
-          </li>
-          <li class="nav-item">
-          <%= link_to "新規登録", new_user_registration_path, class: "nav-link" %>
-          </li>
           <li>
             <%= link_to "ログイン", new_user_session_path, class: "nav-link " %>
           </li>
@@ -88,7 +82,7 @@ setInterval(() => {
           <%= link_to "ブックマーク", favorites_user_path(current_user), class: "nav-link" %>
           </li>
           <li class="nav-item">
-          <%= link_to "質問掲示板", boards_path, class: "nav-link" %>
+          <%= link_to "掲示板", boards_path, class: "nav-link" %>
           </li>
           <li>
           <%= link_to "ログアウト", destroy_user_session_path, method: :delete, class: "nav-link" %>
@@ -100,7 +94,7 @@ setInterval(() => {
               <% if unchecked_notifications.any? %>
                   <span class="fa-stack">
                   <i class="far fa-bell fa-lg fa-stack-2x" style="font-size: 1.5em;"></i>
-                  <i class="fas fa-circle n-circle fa-stack-1x"></i>
+                  <i class="fas fa-circle n-circle fa-stack-1x"><%=current_user.passive_notifications.where(checked: false).count%></i>
               <% else %>
                   <i class="far fa-bell fa-lg" style="font-size: 1.5em;"></i>
               <% end %>

@@ -4,9 +4,8 @@
 <div class="wrap">
     <div class="top">
         <%= search_form_for @q, url: search_admin_users_path do |f| %>
-            <%= f.label :user_name_cont, 'ユーザー名検索' %>
-            <%= f.search_field :user_name_cont, class: 'search_container'  %>
-            <%= f.submit '検索' %>
+            <%= f.search_field :user_name_cont , class: 'search_container mb-2', placeholder: "ユーザー検索" %>
+            <%= f.submit '検索' ,class: "btn btn-dark btn-sm" %>
         <% end %>
         <div class='mt-5 mb-5', id="title">
             <p>

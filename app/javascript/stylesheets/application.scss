@@ -383,18 +383,82 @@ nav p{
 hr {
     border-top: 1px solid #9E9E9E;
 }
-.any::after {
-content: "任意";
-  color: rgb(255, 255, 255);
-  background-color: rgb(203, 203, 206);
-  border-color: rgb(203, 203, 206);
-}
 .question_box{
   margin: 0 auto;
   }
-.question_box .text_box input{
+.question_box .text_box textarea{
   width: 100%;
   }
-.question_box .text_box_main input{
+.question_box .text_box_main textarea{
   min-height: 300px;
+  }
+.field_with_errors textarea{
+  width: 100%;
+  }
+.text_box_main .field_with_errors textarea{
+  min-height: 300px;
+  }
+
+.board_box .board_title {
+
+    padding: 10px 38px;
+    line-height: 25px;
+    font-size: 17px;
+    background: #62c1ce;
+    color: #ffffff;
+    font-weight: bold;
+    border-radius: 5px 5px 0 0;
+    word-wrap: break-word;
+}
+.board_main {
+    width: 90%;
+    margin: 0 auto;
+    word-wrap: break-word;
+}
+.answer_box{
+  text-align: center;
+  }
+.balloon1-left {
+  position: relative;
+  display: inline-block;
+  margin: 1.5em 0 1.5em 15px;
+  padding: 7px 10px;
+  min-width: 120px;
+  max-width: 100%;
+  color: #555;
+  font-size: 16px;
+  background: #62c1ce;
+  width: 80%;
+  text-align: initial;
+  word-wrap: break-word;
+}
+
+.balloon1-left:before {
+  content: "";
+  position: absolute;
+  top: 78%;
+  left: -29px;
+  margin-top: -15px;
+  border: 15px solid transparent;
+  border-right: 15px solid #62c1ce;
+}
+
+.balloon1-left p {
+  margin: 0;
+  padding: 0;
+  color: white;
+}
+small .btn-pink-moon{
+  border: none;
+  font-size: 12px;
+  max-width: 57px;
+  }
+.login a{
+  min-width: 240px;
+  }
+.guest a{
+  background-color: gray;
+  }
+.step img{
+  max-width: 200px;
   }

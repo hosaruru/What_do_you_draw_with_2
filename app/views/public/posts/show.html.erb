@@ -17,19 +17,21 @@
 				<div class="post_wrapper">
 					<div class="row o-2column"  style="margin-left: -48px;">
 						<%= link_to user_path(@post.id) do %>
-							<div class="col-md-8 ml-4" style="padding-left: 0px;">
+							<div class="col-md-7 ml-4" style="padding-left: 0px;">
 								<%= @post.twitter.to_s.html_safe %>
 							</div>
-							<div class="ml-3 col-md-3">
-								<h5><i class="bi bi-person-fill"></i></i> ユーザー</h5>
-								<p><%= link_to user_path(@post.user.id) do %><%= @post.user.user_name %><% end %></p>
+							<div class="ml-3 col-md-4">
+							  <h5><i class="bi bi-person-fill"></i></i> ユーザー</h5>
+								<p><%= link_to user_path(@post.user.id) do %><%= image_tag @post.user.image %> <%= @post.user.user_name %><% end %></p>
 								<h5><i class="bi bi-magic"></i> 使用ソフト</h5>
 								<p>・<%= @post.software.name %></p>
                 <h5 class="mt-4"><i class="bi bi-pen"></i> 線画ペン</h5>
                   <p>・<%= @post.brush %></p> 
+                    <% if @post.pens.present? %>
+                      <h5 class="mt-4"><i class="bi bi-pencil-fill"></i> 塗りペン、他</h5>
+                    <% end %>
                 <% @post.pens.each do |use_pen| %>
                     <% if use_pen.use_pen.present? %>
-                      <h5 class="mt-4"><i class="bi bi-pencil-fill"></i> 塗りペン、他</h5>
                       <p>・<%= use_pen.use_pen %></p>
                     <% end %>
                 <% end %>
@@ -43,7 +45,7 @@
                 <% if @post.image.attached? %>
                   <figure class="hover-img">
                     <%= link_to @post.image, "data-lightbox": @post.image do %>
-                      <%= image_tag @post.image ,style: "max-width: 400px;", class:"img" %>
+                      <%= image_tag @post.image ,style: "max-width: 200px;", class:"img" %>
                     <% end %>
                     <figcaption>
                       <p>クリックして拡大</p>
@@ -56,54 +58,53 @@
                   <p><%= link_to "削除", post_destroy_posts_path(@post.id), class: "col btn btn-pink-moon btn-rounded", method: :delete, "data-confirm" => "本当に削除しますか？" %></p>
                   </div>
                 <% end %>
-                <% if @post.favorited?(current_user) %>
-                  <%= link_to favorites_path(post_id: @post.id), method: :delete do %>
-                    <span style="color:red; font-size: 40px;">❤︎</span>
-                  <% end %>
+                <% if current_user.email == 'guest@example.com' %>		
+                  <%=  %>    
                 <% else %>
-                  <%= link_to favorites_path(post_id: @post.id), method: :post do %>
-                    <span style="color:gray;font-size: 40px;">❤︎</span>
-                  <% end %>
-                <% end %>								
+                  <% if @post.favorited?(current_user) %>
+                    <%= link_to favorites_path(post_id: @post.id), method: :delete do %>
+                      <span style="color:red; font-size: 40px;">❤︎</span>
+                    <% end %>
+                  <% else %>
+                    <%= link_to favorites_path(post_id: @post.id), method: :post do %>
+                      <span style="color:gray;font-size: 40px;">❤︎</span>
+                    <% end %>
+                  <% end %>	
+                <% end %>
 							</div>							
 						<% end %>
 					</div>
-					<div class="pt-5">
-          <% @post.post_comments.each do |post_comment| %>
-            <p><%= image_tag post_comment.user.image %> <%= post_comment.user.user_name %><br>
-            <%= post_comment.created_at.strftime('%Y/%m/%d') %><br>
-            <%= post_comment.comment %></p>
-          <% end %>      
-          </div>
-          <div class="mb-5">
-          <% if current_user.email == 'guest@example.com' %>		
-            <%=  %>    
-          <% else %>
-            <%= form_with model: [@post, @post_comment] do |f| %>
-              <%= f.text_area :comment, rows: '5', placeholder: "コメントをここに" , style: "height: 80px;", class: 'search_container'%><br>
-              <%= f.submit "送信する",class: "col btn btn-dark-blue btn-rounded" %>
-            <% end %>
-          <% end %>
-          </div>
-          <%= link_to 'Twitter', "https://twitter.com/share?url=#{request.url}", title: 'Twitter', target: '_blank' ,class: "bi bi-twitter",style: "font-size: 20px;"%>
 				</div>
     </div>
   </div>
 </div>
-
-
-
-
-<div>
-
-  <% @post_image.post_comments.each do |post_comment| %>
-    <%= post_comment.user.name %>
-    <%= post_comment.created_at.strftime('%Y/%m/%d') %><%= post_comment.comment %>
+<div class="col-md-6 col-sm-10 mx-2 mx-sm-auto shadow-lg rounded px-0 my-5" style="background:rgba(255,255,255,0.5);"> 
+  <% @post.post_comments.each do |post_comment| %>
+    <div class="comment_box5 ml-3">
+      <%= image_tag post_comment.user.image %>
+      <div class="balloon1-left">
+        <p><b><%= post_comment.comment %></b></p>
+        <p class="pt-2 small">
+        <small>
+          <%= post_comment.user.user_name %><br>
+          <%= post_comment.created_at.strftime('%Y/%m/%d') %>
+          <% if post_comment.user == current_user %><br>
+            <%= link_to '削除', post_post_comment_path(@post, post_comment), data: {confirm: '本当に削除しますか？'}, method: :delete ,class: "col btn btn-pink-moon btn-rounded mt-3"%><br>
+          <% end %>
+        </small>
+        </p>
+      </div>
+    </div>
   <% end %>
-</div>
-<div>
-  <%= form_with model: [@post_image, @post_comment] do |f| %>
-    <%= f.text_area :comment, rows: '5', placeholder: "コメントをここに" %>
-    <%= f.submit "送信する" %>
-  <% end %>
+  <div class="mt-5 ml-4  pt-3">
+    <% if current_user.email == 'guest@example.com' %>		
+      <%=  %>    
+    <% else %>
+      <%= form_with model: [@post, @post_comment] do |f| %>
+        <%= f.text_area :comment, rows: '5', placeholder: "コメントをここに" , style: "height: 80px;", class: 'search_container' %>
+        <%= f.submit "送信する" ,class: "col btn btn-dark-blue btn-rounded mb-4"%>
+      <% end %>
+    <% end %>
+  </div>
+  <%= link_to 'Twitter', "https://twitter.com/share?url=#{request.url}", title: 'Twitter', target: '_blank' ,class: "bi bi-twitter ml-4",style: "font-size: 20px;"%>
 </div>

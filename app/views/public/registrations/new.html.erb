@@ -1,4 +1,4 @@
-<div class="col-md-6 col-sm-10 mx-2 mx-sm-auto shadow-lg rounded px-0 my-5 registrations" style="text-align: center;">
+<div class="col-md-6 col-sm-10 mx-2 mx-sm-auto shadow-lg rounded px-0 my-5 registrations pb-5" style="text-align: center;">
 	<div class='pt-5', id="title">
 		<p>
 			<span>S</span>
@@ -11,37 +11,12 @@
 	</div>
 <%= form_for(resource, as: resource_name, url: registration_path(resource_name)) do |f| %>
   <p><%= render "public/shared/error_messages", resource: resource %><p>
-
-  <div class="field mb-3">
-    <%= f.label :メールアドレス %><br />
-    <%= f.email_field :email, autofocus: true, autocomplete: "email", class: 'search_container' %>
-  </div>
-
-  <div class="field mb-3">
-    <%= f.label :パスワード %>
-    <% if @minimum_password_length %>
-    <em>（<%= @minimum_password_length %>文字以上）</em>
-    <% end %><br />
-    <%= f.password_field :password, autocomplete: "new-password", class: 'search_container' %>
-  </div>
-
-  <div class="field mb-3">
-  <%= f.label :パスワード（確認用） %><br />
-  <%= f.password_field :password_confirmation, autocomplete: "new-password", class: 'search_container' %>
-  </div>
-  <div class="field">
-    <%= f.label :ユーザーネーム %><br />
-    <%= f.text_field :user_name, autofocus: true, autocomplete: "user_name", class: 'search_container' %>
-  </div>
-  <div class="actions">
-    <%= f.submit "アカウント作成" ,class: "btn btn-success  my-5" %>  
-  </div>
   <%- if devise_mapping.omniauthable? %>
     <%- resource_class.omniauth_providers.each do |provider| %>
-      <%= link_to "#{OmniAuth::Utils.camelize(provider)}アカウントでログイン", omniauth_authorize_path(resource_name, provider), class:'fab fa-twitter btn btn-primary btn-sm px-4"', method: :post %>
+     <p class="login"> <%= link_to "Twitterアカウントでログイン", omniauth_authorize_path(resource_name, provider), class:'fab fa-twitter col btn btn-funky-moon btn-rounded mb-5 mt-5', method: :post %></p>
     <% end %>
   <% end %>
-  		<%= link_to 'ゲストログイン（閲覧用）', posts_guest_sign_in_path, method: :post , class: "btn btn-primary btn-sm px-4" %>
+  		  <br><p class="guest"><%= link_to 'ゲストログイン（閲覧用）', posts_guest_sign_in_path, method: :post , class: "btn btn-primary btn-sm px-4 btn-rounded " %></p>
 <% end %>
 </div>
 

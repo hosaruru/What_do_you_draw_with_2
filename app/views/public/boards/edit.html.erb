@@ -14,7 +14,7 @@
 		<span>N</span>
 	</p>
 </div>
-    <%= form_with model: @board do |f| %>
+    <%= form_with model: @board, url: board_update_board_path(@board.id), method: :patch do |f| %>
       <div class="container pb-5">
           <div class="question_box">
             <!--<p> 紹介文<br><%#= f.text_area :introduction %></p>-->
@@ -23,7 +23,7 @@
             <p><span class="any">画像<small>（任意）</small></span>
               <%= f.file_field :image, accept: "image/*" %>
             </p>
-            <p><%= f.submit "投稿！" ,class: "col btn btn-dark-blue btn-rounded" %></p>
+            <p><%= f.submit "保存" ,class: "col btn btn-dark-blue btn-rounded" %></p>
     <% end %>
       </div>
 

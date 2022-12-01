@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2022_11_27_084058) do
+ActiveRecord::Schema.define(version: 2022_11_22_155037) do
 
   create_table "active_storage_attachments", force: :cascade do |t|
     t.string "name", null: false
@@ -53,17 +53,19 @@ ActiveRecord::Schema.define(version: 2022_11_27_084058) do
   end
 
   create_table "board_comments", force: :cascade do |t|
-    t.text "answer"
-    t.integer "user_id"
-    t.integer "board_id"
+    t.text "answer", null: false
+    t.integer "user_id", null: false
+    t.integer "board_id", null: false
+    t.string "images"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
   end
 
   create_table "boards", force: :cascade do |t|
-    t.integer "user_id"
-    t.string "headline"
+    t.integer "user_id", null: false
+    t.string "headline", null: false
     t.text "question", null: false
+    t.string "images"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
   end
@@ -86,12 +88,13 @@ ActiveRecord::Schema.define(version: 2022_11_27_084058) do
     t.integer "visitor_id", null: false
     t.integer "visited_id", null: false
     t.integer "post_id"
-    t.integer "comment_id"
+    t.integer "post_comment_id"
+    t.integer "board_comment_id"
     t.string "action", default: "", null: false
     t.boolean "checked", default: false, null: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
-    t.index ["comment_id"], name: "index_notifications_on_comment_id"
+    t.index "\"comment_id\"", name: "index_notifications_on_comment_id"
     t.index ["post_id"], name: "index_notifications_on_post_id"
     t.index ["visited_id"], name: "index_notifications_on_visited_id"
     t.index ["visitor_id"], name: "index_notifications_on_visitor_id"
@@ -118,24 +121,23 @@ ActiveRecord::Schema.define(version: 2022_11_27_084058) do
   create_table "posts", force: :cascade do |t|
     t.integer "user_id"
     t.string "tag"
+    t.integer "software_id"
     t.string "brush"
     t.text "comments"
     t.string "images"
-    t.datetime "created_at", precision: 6, null: false
-    t.datetime "updated_at", precision: 6, null: false
     t.text "introduction"
     t.string "tag_name"
     t.string "name"
     t.text "twitter"
-    t.integer "software_id"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
   end
 
   create_table "softwares", force: :cascade do |t|
     t.string "name"
+    t.integer "post_id"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
-    t.integer "post_id"
-    t.index ["post_id"], name: "index_softwares_on_post_id", unique: true
   end
 
   create_table "tagmaps", force: :cascade do |t|
@@ -149,7 +151,6 @@ ActiveRecord::Schema.define(version: 2022_11_27_084058) do
     t.string "tag_name", null: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
-    t.integer "tag_id"
     t.index ["tag_name"], name: "index_tags_on_tag_name", unique: true
   end
 
@@ -161,13 +162,13 @@ ActiveRecord::Schema.define(version: 2022_11_27_084058) do
     t.datetime "remember_created_at"
     t.string "user_name"
     t.string "birthday"
-    t.datetime "created_at", precision: 6, null: false
-    t.datetime "updated_at", precision: 6, null: false
     t.date "birth"
     t.string "uid"
     t.string "provider"
     t.string "nickname"
     t.string "image"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
     t.index ["email"], name: "index_users_on_email", unique: true
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
   end

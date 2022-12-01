@@ -4,7 +4,7 @@
     <div class="form-inline"> 
         <span>
             <%= link_to user_path(visitor) do %>
-                 <%= image_tag visitor.image, class: "icon_mini" %>
+                 <%#= image_tag visitor.image, class: "icon_mini" %>
                 <strong><%= visitor.user_name %></strong>
             <% end %>
                 <%= 'さんが' %>     
@@ -21,21 +21,21 @@
                         <%= "にコメントしました" %>
                     <% else %>
                         <%= link_to post_path(notification.post) do %>
-                        <strong><%= notification.post.user.user_name + 'さんの投稿' %></strong>
-                        <%= "にコメントしました" %> 
+                            <strong><%= notification.post.user.user_name + 'さんの投稿' %></strong>
+                            <%= "にコメントしました" %> 
                         <% end %>                      
-                <% end %>
+                    <% end %>
                 <% when 'board_comment' then %> 
-                    <% if notification.board.user_id == visited.id %>
-                        <%= link_to "あなたの投稿", notification.board, style: "font-weight: bold;" %> 
-                        <%= "にコメントしました" %> 
-                    <% elsif visitor.user_name == notification.board.user.user_name %>
-                        <%= link_to "自分の投稿", notification.board, style: "font-weight: bold;" %>   
-                        <%= "にコメントしました" %>
+                    <% if notification.board_comment.board.user_id == notification.board_comment.user_id %>
+                        <%= link_to "自分の質問", notification.board_comment.board, style: "font-weight: bold;" %>   
+                        <%= "に回答しました" %>
+                    <% elsif notification.visited_id == current_user.id %>
+                        <%= link_to "あなたの質問", notification.board_comment.board, style: "font-weight: bold;" %> 
+                        <%= "に回答しました" %> 
                     <% else %>
                         <%= link_to post_path(notification.board) do %>
                         <strong><%= notification.board.user.user_name + 'さんの投稿' %></strong>
-                        <%= "にコメントしました" %> 
+                        <%= "に回答しました" %> 
                         <% end %>                      
                 <% end %>
             <% end %>             

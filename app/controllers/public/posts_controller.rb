@@ -1,4 +1,5 @@
 class Public::PostsController < ApplicationController
+  before_action :authenticate_user!
   before_action :set_q, only: [:index, :search]
   def index   
     if params[:search].present?
@@ -11,15 +12,6 @@ class Public::PostsController < ApplicationController
     end
     @tag_lists = Tag.all
   end
-  
-  def guest_sign_in
-    user = User.find_or_create_by!(email: 'guest@example.com', user_name: 'guest_user') do |user|
-      user.password = SecureRandom.urlsafe_base64
-    end
-    sign_in user
-    redirect_to root_path, notice: 'ゲストユーザーとしてログインしました。'
-  end
-  
   def new
      @post = Post.new
      @pens = @post.pens.build
@@ -79,12 +71,8 @@ class Public::PostsController < ApplicationController
   end
   def post_params
     params.require(:post).permit(:tag_name, :brush, :image, :comments, :image, :introduction, :twitter, :software_id, pens_attributes:[:use_pen, :_destroy])
-
   end
-  
   def hoge
     post_params.merge!("pens_attributes" => post_params[:pens_attributes].select {|_, attributes| attributes[:use_pen].present? })
   end
-  
-  
 end
