@@ -1,12 +1,5 @@
-<div style="background-color: #17a2b8; text-align: center; color: white;">
-  <%= flash[:notice] %>
-</div>
-<div class="wrap">
+<div class="wrap mx-sm-auto">
     <div class="top">
-        <%= search_form_for @q, url: search_admin_users_path do |f| %>
-            <%= f.search_field :user_name_cont , class: 'search_container mb-2', placeholder: "ユーザー検索" %>
-            <%= f.submit '検索' ,class: "btn btn-dark btn-sm" %>
-        <% end %>
         <div class='mt-5 mb-5', id="title">
             <p>
                 <span>U</span>
@@ -19,30 +12,28 @@
                 <span>T</span>
             </p>
         </div>
-        <div class='container px-5 px-sm-0'>
-            <div class='row' style="text-align: center;">
-                <div class='col-md-8 offset-md-1' style="margin: 0 auto;">
-                    <table class="table table-hover">
-                        <thead class="thead-light">
-                            <tr>
-                            <th scope="col">ID</th>
-                            <th scope="col">ユーザー名</th>
-                            <th scope="col">メールアドレス</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                        <% @users.each do |user| %>
-                            <tr>
-                            <td scope="row"><%= link_to user.id, admin_user_path(user.id) %></td>
-                            <td><%= link_to user.user_name, admin_user_path(user.id) %></td>
-                            <td><%= user.email %></td>                   
-                            </tr>
-                        <% end %>
-                        </tbody>
-                    </table>
-                </div>
-            </div>
-        </div>
+        <%= search_form_for @q, url: search_admin_users_path do |f| %>
+            <%= f.search_field :user_name_cont , class: 'search_container mb-2', placeholder: "ユーザー検索" %>
+            <%= f.submit '検索' ,class: "btn btn-dark btn-sm" %>
+        <% end %>
+        <table class="table table-hover">
+            <thead class="thead-light">
+                <tr>
+                <th scope="col">ID</th>
+                <th scope="col">ユーザー名</th>
+                <th scope="col">メールアドレス</th>
+                </tr>
+            </thead>
+            <tbody>
+            <% @users.each do |user| %>
+                <tr>
+                    <td scope="row"><%= link_to user.id, admin_user_path(user.id) %></td>
+                    <td><%= link_to user.user_name, admin_user_path(user.id) %></td>
+                    <td><%= user.email %></td>                   
+                </tr>
+            <% end %>
+            </tbody>
+        </table>
     </div>
 </div>
 

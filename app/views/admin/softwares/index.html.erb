@@ -1,4 +1,4 @@
-<div class="wrap">
+<div class="wrap mx-sm-auto">
     <div class="top">
         <div class='mt-5 mb-5', id="title">
             <p>
@@ -12,27 +12,25 @@
                 <span>E</span>
             </p>
         </div>
-        <div class='container px-5 px-sm-0'>
-            <div class='row' style="text-align: center;">
-                <div class='col-md-8 offset-md-1' style="margin: 0 auto;">
-                    <table class="table table-hover">
-                        <p class='mb-5'>
-                        <%= form_with model: @software,url:admin_softwares_path, local: true do |f| %>
-                            <%= f.text_field :name, class:'form-control' %>
-                            <%= f.submit '新規登録', class: 'col btn btn-dark-blue btn-rounded' %>
-                        </p>
-                        <tbody>
-                            <% @softwares.each do |software| %>
-                                <tr>
-                                <td><%= software.name %></td>
-                                <td><%= link_to "編集する", edit_admin_software_path(software.id) ,class: "col btn btn-dark-blue btn-rounded" %>
-                                <%= link_to "削除する", admin_destroy_software_path(software.id), class: "col btn btn-pink-moon btn-rounded ", method: :delete, "data-confirm" => "本当に削除しますか？" %></td>                   
-                                </tr>
-                            <% end %>
-                        </tbody>
+        <div class='px-5 px-sm-0'>
+            <div class='offset-md-1' style="margin: 0 auto;">
+                <table class="table table-hover">
+                    <p class='mb-5'>
+                    <%= form_with model: @software,url:admin_softwares_path, local: true do |f| %>
+                        <%= f.text_field :name, class:'form-control' %>
+                        <%= f.submit '新規登録', class: 'col btn btn-dark-blue btn-rounded' %>
+                    </p>
+                    <tbody>
+                        <% @softwares.each do |software| %>
+                            <tr>
+                            <td><%= software.name %></td>
+                            <td><%= link_to "編集する", edit_admin_software_path(software.id) ,class: "col btn btn-dark-blue btn-rounded" %>
+                            <%= link_to "削除する", admin_destroy_software_path(software.id), class: "col btn btn-pink-moon btn-rounded ", method: :delete, "data-confirm" => "本当に削除しますか？" %></td>                   
+                            </tr>
                         <% end %>
-                    </table>
-                </div>
+                    </tbody>
+                    <% end %>
+                </table>
             </div>
         </div>
     </div>

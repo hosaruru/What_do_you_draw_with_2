@@ -2,71 +2,69 @@
   <%= flash[:alret] %>
 </div>
 <div class="container mx-2 mx-sm-auto shadow-lg rounded px-5 py-5 my-5 post_back">
-<div id="title">
-		<p>
-		<span>P</span>
-		<span>O</span>
-		<span>S</span>
-		<span>T</span>
-	</p>
-</div>
-  <p>
-    <%= form_with model: @post,url:posts_path, method: :post do |f| %>
-        <div class="row input_area">
-          <div class="col-md-5">
-            <p><b style="color: #dc3545;">*</b> ツイッターURL<br><%= f.text_area :twitter , placeholder: "「<blockquote...」から始まるURL" %></p>
-            <div class="step_wrap">
-            <p><b class="attention mt-2">※通常のURLとは異なるので注意！</b><br>
-            ①ツイート右下の <i class="bi bi-upload"></i>（もしくは <i class="bi bi-share"></i>）をクリックし、<br><span class="step1_span"><i class="bi bi-link-45deg"></i>リンクをコピー</span>をクリック
-            </p>
-            <p class="step"><%= image_tag 'step1'%></p>
-            <p class="mt-5">
-            ②コピーされたリンクを<b><a href="https://publish.twitter.com/# " target="blank">このサイト</a></b>に貼り付け<br><br>
-            ③下にリンクが生成されるので、<br><span class="step2_span">Copy Code</span>をクリックし、これを使用する。</p>
-            <p class="step"><%= image_tag 'step2'%></p>
-            </div>
-          </div>
-          <div class="col-md-7">
-          <div class="ml-pc">
-            <p style="max-width:70%;">
-              <b style="color: #dc3545;">*</b> <%= f.label :software_id, '使用ソフト' %>
-              <%= f.collection_select :software_id, Software.all, :id, :name, { prompt: '選択してください' }, class: 'form-control' %>
-            </p>
-            <p class="main_pen"><b style="color: #dc3545;">*</b> 線画ペン<small>（メイン1つのみ）</small><br><%= f.text_area :brush, placeholder: "Gペン" %></p>             
-            <div class="pens">
-            塗りペン、他
-            <%= f.fields_for :pens do |t| %>              
-                <div>
-                  <div class="nested-fields" style="width: 400px;">
-                    <div class="row">
-                      <div class="col-5"><%= t.text_field :use_pen, class: "form-control", placeholder: "水彩筆" %></div>
-                      <div><%= link_to_remove_association "", t, class: "btn btn-secondary btn-block bi-trash" %></div>
-                    </div>
-                  </div>
-                </div>
-            <% end %>
-                <div id="detail-association-insertion-point"></div>
-                  <div class="col-10 mt-2 mb-3" style="padding: 0;">
-                    <%= link_to_add_association "", f, :pens,
-                    class: "btn btn-secondary btn-block bi bi-plus-circle",
-                    data: {
-                    association_insertion_node: '#detail-association-insertion-point',
-                    association_insertion_method: 'before'
-                    }%>
-                  </div>
-              </div>
-              </p>
-            <p class="sup">補足<br><%= f.text_area :comments , placeholder: "例：基本的にはGペンを使用ですが、刈り上げはざくざく塗りを使用しています。" %></p>
-            <p>説明画像 <%= f.file_field :image, accept: "image/*" %></p>
-             <p>タグ<small>（スペースで複数入力可）</small><br>
-              <%= form_with(model: [@tag,@post], local: true) do |f| %>
-                <%= f.text_area :tag_name, placeholder: "タグ入力", class: 'uk-input uk-form-small' %>
-              <% end %>
-            </p> 
-            <p><%= f.submit "投稿！" ,class: "col btn btn-dark-blue btn-rounded" %></p>
-    <% end %>
-           </div>
+  <div id="title">
+    <p>
+      <span>P</span>
+      <span>O</span>
+      <span>S</span>
+      <span>T</span>
+    </p>
+  </div>
+  <%= form_with model: @post,url:posts_path, method: :post do |f| %>
+    <div class="row input_area">
+      <div class="col-md-5">
+        <p><b style="color: #dc3545;">*</b> ツイッターURL<br><%= f.text_area :twitter , placeholder: "「<blockquote...」から始まるURL" %></p>
+        <div class="step_wrap">
+          <p><b class="attention mt-2">※通常のURLとは異なるので注意！</b><br>
+          ①載せたいツイート右下の <i class="bi bi-upload"></i>（もしくは <i class="bi bi-share"></i>）をクリックし、<br><span class="step1_span"><i class="bi bi-link-45deg"></i>リンクをコピー</span>をクリック
+          </p>
+          <p class="step"><%= image_tag 'step1'%></p>
+          <p class="mt-5">
+          ②コピーされたリンクを<b><a href="https://publish.twitter.com/# " target="blank">このサイト</a></b>に貼り付け<br><br>
+          ③下にリンクが生成されるので、<br><span class="step2_span">Copy Code</span>をクリックし、これを使用する。</p>
+          <p class="step"><%= image_tag 'step2'%></p>
         </div>
       </div>
+      <div class="col-md-7">
+        <div class="ml-pc">
+          <p style="max-width:70%;">
+          <b style="color: #dc3545;">*</b> <%= f.label :software_id, '使用ソフト' %>
+          <%= f.collection_select :software_id, Software.all, :id, :name, { prompt: '選択してください' }, class: 'form-control' %>
+          </p>
+          <p class="main_pen"><b style="color: #dc3545;">*</b> 線画ペン<small>（メイン1つのみ）</small><br><%= f.text_area :brush, placeholder: "Gペン" %></p>             
+          <div class="pens">
+            塗りペン、他
+            <%= f.fields_for :pens do |t| %>              
+              <div>
+                <div class="nested-fields" style="width: 400px;">
+                  <div class="row">
+                  <div class="col-5"><%= t.text_field :use_pen, class: "form-control", placeholder: "水彩筆" %></div>
+                  <div><%= link_to_remove_association "", t, class: "btn btn-secondary btn-block bi-trash" %></div>
+                  </div>
+                </div>
+              </div>
+            <% end %>
+            <div id="detail-association-insertion-point"></div>
+            <div class="col-10 mt-2 mb-3" style="padding: 0;">
+              <%= link_to_add_association "", f, :pens,
+              class: "btn btn-secondary btn-block bi bi-plus-circle",
+              data: {
+              association_insertion_node: '#detail-association-insertion-point',
+              association_insertion_method: 'before'
+              }%>
+            </div>
+          </div>
+          <p class="sup">補足<br><%= f.text_area :comments , placeholder: "例：基本的にはGペンを使用ですが、刈り上げはざくざく塗りを使用しています。" %></p>
+          <p>説明画像 <%= f.file_field :image, accept: "image/*" %></p>
+          <p>タグ<small>（スペースで複数入力可）</small><br>
+          <%= form_with(model: [@tag,@post], local: true) do |f| %>
+            <%= f.text_area :tag_name, placeholder: "タグ入力", class: 'uk-input uk-form-small' %>
+          <% end %>
+          </p> 
+          <p><%= f.submit "投稿！" ,class: "col btn btn-dark-blue btn-rounded" %></p>        
+        </div>
+      </div>
+    </div>
+  <% end %>
 </div> 
 
