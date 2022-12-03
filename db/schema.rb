@@ -87,6 +87,7 @@ ActiveRecord::Schema.define(version: 2022_11_22_155037) do
   create_table "notifications", force: :cascade do |t|
     t.integer "visitor_id", null: false
     t.integer "visited_id", null: false
+    t.integer "board_id"
     t.integer "post_id"
     t.integer "post_comment_id"
     t.integer "board_comment_id"
@@ -167,6 +168,7 @@ ActiveRecord::Schema.define(version: 2022_11_22_155037) do
     t.string "provider"
     t.string "nickname"
     t.string "image"
+    t.string "image_local"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.index ["email"], name: "index_users_on_email", unique: true

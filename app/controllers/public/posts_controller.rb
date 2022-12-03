@@ -1,6 +1,7 @@
 class Public::PostsController < ApplicationController
   before_action :authenticate_user!
   before_action :set_q, only: [:index, :search]
+  before_action :ensure_user, only: [:edit, :update, :destroy]
   def index   
     if params[:search].present?
       @posts = Post.posts_serach(params[:search]).page(params[:page])
@@ -25,6 +26,7 @@ class Public::PostsController < ApplicationController
     if @post.save
       @post.save_posts(tag_list)
       redirect_to post_path(@post.id)
+      flash[:notice] = ""
     else
       flash.now[:alret] = "*は必須です。"
       render:new
@@ -39,7 +41,7 @@ class Public::PostsController < ApplicationController
   end
 
   def edit
-    @post = Post.find(params[:id])
+
   end
 
   def update
@@ -74,5 +76,10 @@ class Public::PostsController < ApplicationController
   end
   def hoge
     post_params.merge!("pens_attributes" => post_params[:pens_attributes].select {|_, attributes| attributes[:use_pen].present? })
+  end
+  def ensure_user
+    @posts = current_user.posts
+    @post = @posts.find_by(id: params[:id])
+    redirect_to new_post_path unless @post
   end
 end

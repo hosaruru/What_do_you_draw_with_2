@@ -1,4 +1,4 @@
-<div class="wrap  mb-5">
+<div class="wrap mx-sm-auto">
   <div class='mt-5', id="title">
     <p>
     <span>T</span>
@@ -28,15 +28,19 @@
 <% @boards.each do |board| %>
   <div class="row board">
     <div class="col-sm-2">
-      <%= image_tag board.user.image %>
+		<% if board.user.image_local.present? %>
+			<%= image_tag board.user.image_local.variant(resize_to_fill: [48, 48]) %>
+		<% else %>
+			<%= image_tag board.user.image  %>
+		<% end %> 
     </div>
     <div class="col-sm-8">
       <p><strong><i class="bi bi-patch-question"></i> <span><%= link_to board.headline, board_path(board.id) %></span></strong></p>
       <p><%= board.question %></p>
       <% if board.board_comments.present? %>
-      <span><%= link_to "#{board.board_comments.count} コメント", board_path(board.id) %></span>
+        <span><%= link_to "#{board.board_comments.count} コメント", board_path(board.id) %></span>
       <% elsif %>
-      <span><%= board.board_comments.count %> コメント</span>
+        <span><%= board.board_comments.count %> コメント</span>
       <% end %>
     </div>
   </div>

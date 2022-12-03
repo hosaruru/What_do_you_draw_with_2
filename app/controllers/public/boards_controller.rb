@@ -1,4 +1,5 @@
 class Public::BoardsController < ApplicationController
+  before_action :ensure_user, only: [:edit, :update, :destroy]
   def new
     @board = Board.new
   end
@@ -48,5 +49,11 @@ class Public::BoardsController < ApplicationController
   
   def board_params
     params.require(:board).permit(:question, :answer, :image, :headline)
+  end
+  
+  def ensure_user
+    @boards = current_user.boards
+    @board = @boards.find_by(id: params[:id])
+    redirect_to root_path unless @board
   end
 end

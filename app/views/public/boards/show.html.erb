@@ -4,7 +4,7 @@
 <div class="col-md-6 col-sm-10 mx-2 mx-sm-auto shadow-lg rounded px-0 my-5" style="background:rgba(255,255,255,0.5);">
   <div class="board_box">
     <div class="board_title">
-      <%= @board.headline %>
+      <i class="bi bi-patch-question"></i> <%= @board.headline %>
     </div>
     <div class="board_main">
       <p class="py-5">
@@ -23,8 +23,14 @@
         <% end %>
       </p>
       <p>
-        <small>ユーザーネーム：<%= @board.user.user_name %></small><br>
-        <small>投稿日：<%= @board.created_at.strftime('%Y/%m/%d') %></small>
+        <small>
+        <% if @board.user.image_local.present? %>
+    			<%= image_tag @board.user.image_local.variant(resize_to_fill: [48, 48]) %>
+    		<% else %>
+    			<%= image_tag @board.user.image  %>
+    		<% end %> <%= @board.user.user_name %>
+    		</small><br>
+        <small><%= @board.created_at.strftime('%Y/%m/%d') %></small>
       </p>
       <% if @board.user == current_user %>
       <p class="pb-3">
@@ -38,7 +44,11 @@
 <div class="col-md-6 col-sm-10 mx-2 mx-sm-auto shadow-lg rounded px-0 my-5" style="background:rgba(255,255,255,0.5);"> 
   <% @board.board_comments.each do |board_comment| %>
     <div class="answer_box5 ml-3">
-      <%= image_tag board_comment.user.image %>
+  		<% if board_comment.user.image_local.present? %>
+  			<%= image_tag board_comment.user.image_local.variant(resize_to_fill: [48, 48]) %>
+  		<% else %>
+  			<%= image_tag board_comment.user.image  %>
+  		<% end %> 
       <div class="balloon1-left">
         <p><b><%= board_comment.answer %></b></p>
         <p class="pt-2 small">

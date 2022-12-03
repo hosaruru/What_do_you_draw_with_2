@@ -17,11 +17,18 @@ footer {
 .navbar-collapse{
     font-weight: bold;
 }
+.wrap{
+  max-width: 800px;
+  word-wrap: break-word;
+  }
 .registrations h2{
   font-size: 12px;
   }
 .registrations ul{
   list-style:none;
+  }
+.border_gray{
+  border-bottom: solid 1px #cccccc;
   }
 
 @keyframes fadeIn {
@@ -37,10 +44,6 @@ footer {
 h2{
     text-align: center;
 }
-.post_wrapper{
-    border-bottom: solid 1px #cccccc;
-    padding: 20px 0 20px 0;
-}
 .top{
     margin: 30px 0 0 30px;
     text-align: center;
@@ -52,6 +55,10 @@ h2{
   text-align:center;
   font-weight: bold;
   font-size: 18px;
+  }
+.post_back{
+  background:rgba(255,255,255,0.5);
+  max-width:800px;
   }
 .setting{
   position:absolute; top:0%; right:0%; 
@@ -272,29 +279,12 @@ figcaption p{ margin-top: 20px;
   text-align: center;
 }
 
-/* 見出し一文字ずつ表示 */
-
-/** {
-  margin: 0;
-  padding: 0;
-  min-height: 100%;
-  width: 100%;
-}
-
-html, body {
-  height: 100%;
-}*/
-
 #canvas{
   background-size: 100%;
   height: 100%;
   width: 100%;
 }
-/*.back{
-  background-size: 100%;  height: 280rem;
-  }*/
 
- 
 body {
   background-image: url("../images/back.jpeg");
 }
@@ -433,7 +423,7 @@ hr {
   word-wrap: break-word;
 }
 
-.balloon1-left:before {
+.balloon1-left:after {
   content: "";
   position: absolute;
   top: 78%;
@@ -459,6 +449,55 @@ small .btn-pink-moon{
 .guest a{
   background-color: gray;
   }
+.input_area textarea{
+  width: 100%;
+  }
+.main_pen textarea{
+  height: 38px;
+  }
+.sup textarea{
+  height: 130px;
+  }
+.step_wrap{
+  font-size: 11px;
+  background: #FFC5F0;
+  border-radius: 10px;
+  padding: 6px;
+  padding-left: 20px;
+  }
+.attention{
+  color: red;
+  }
 .step img{
   max-width: 200px;
   }
+.step1_span{
+  background: gray;
+  color: white;
+  border-radius: 10px;
+  }
+.step1_span{
+  background: gray;
+  color: white;
+  border-radius: 4px;
+  padding: 1px;
+  }
+.step2_span{
+  background:#1da1f2;
+  color: white;
+  border-radius: 4px;
+  padding: 1px;
+  }
+.notice_count{
+  font-size: 15px;
+  position: absolute;
+  left: 29px;
+  z-index: 10;
+  color: white;
+}
+@media screen and (min-width:769px) { 
+    /*　画面サイズが480pxからはここを読み込む　*/
+.ml-pc{
+  margin-left: 60px;
+  }
+}
