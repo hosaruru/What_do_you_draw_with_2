@@ -54,7 +54,10 @@ setInterval(() => {
       <% elsif !user_signed_in? %>
           <ul class="navbar-nav mr-auto">
           <li>
-            <%= link_to "ログイン", new_user_session_path, class: "nav-link bi bi-door-open-fill " %>
+            <%= link_to "新規登録・ログイン", new_user_session_path, class: "nav-link bi bi-door-open-fill " %>
+          </li>
+          <li>
+            <%= link_to "このサイト何？", public_homes_about_path, class: "nav-link bi bi-patch-question-fill " %>
           </li>
         </ul>
       <% elsif current_user.email == 'guest@example.com' %>

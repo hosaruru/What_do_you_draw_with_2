@@ -1,12 +1,12 @@
 @import '~bootstrap/scss/bootstrap';
-
-
+@import url('https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@300&display=swap');
 body {
 /*    background-color: ghostwhite;*/
     animation: fadeIn 2s ease 0s 1 normal;
     -webkit-animation: fadeIn 2s ease 0s 1 normal;
     position: relative;
     background-image: url("../images/back.jpeg");
+    font-family: 'Noto Sans JP', sans-serif;
 }
 nav {
   background: linear-gradient(to right,#5b7bb4,#d0d7ff,#a6f0ff);
@@ -53,7 +53,9 @@ footer {
     0% {opacity: 0}
     100% {opacity: 1}
 }
-
+.about{
+  line-height: 1.65;
+  }
 h2{
     text-align: center;
 }

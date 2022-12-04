@@ -1,4 +1,7 @@
 Rails.application.routes.draw do
+  namespace :public do
+    get 'homes/about'
+  end
   # ユーザー用
 # URL /users/sign_in ...
 devise_for :users,skip: [:passwords], controllers: {
@@ -26,7 +29,7 @@ devise_for :admin, skip: [:registrations, :passwords] ,controllers: {
     
     resources :bookmarks, only: [:show, :edit, :update]
 
-    resources :posts, only: [:new, :show, :edit, :index, :about]do
+    resources :posts, only: [:new, :show, :edit, :index]do
       delete 'posts/:id' => 'posts#destroy', as: 'destroy_posts'
       resources :post_comments, only: [:create, :destroy]
     end
