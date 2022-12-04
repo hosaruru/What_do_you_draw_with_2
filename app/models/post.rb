@@ -16,6 +16,12 @@ class Post < ApplicationRecord
      def self.posts_serach(search)
        Post.where(['title LIKE ? OR content LIKE ?', "%#{search}%", "%#{search}%"])
      end
+     
+     def pen_present?
+        pens.any? do |pen|
+          !pen.nil? && pen.use_pen != ""
+        end
+     end
     
      def save_posts(tags)
        current_tags = self.tags.pluck(:tag_name) unless self.tags.nil?
