@@ -2,14 +2,14 @@
   <%= flash[:alret] %>
 </div>
 <div class="container mx-2 mx-sm-auto shadow-lg rounded px-5 py-5 my-5 post_back">
-<div id="title">
-  <p>
-		<span>E</span>
-		<span>D</span>
-		<span>I</span>
-		<span>T</span>
-	</p>
-</div>
+  <div id="title">
+    <p>
+  		<span>E</span>
+  		<span>D</span>
+  		<span>I</span>
+  		<span>T</span>
+  	</p>
+  </div>
   <%= form_with model: @post, url: update_post_path(@post.id), method: :patch do |f| %>
     <div class="row input_area">
       <div class="col-md-5">

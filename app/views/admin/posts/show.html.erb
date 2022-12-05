@@ -26,7 +26,7 @@
 								<p>・<%= @post.software.name %></p>
                 <h5 class="mt-4"><i class="bi bi-pen"></i> 線画ペン</h5>
                   <p>・<%= @post.brush %></p> 
-                    <% if @post.pens.present? %>
+                    <% if @post.pen_present? %>
                       <h5 class="mt-4"><i class="bi bi-pencil-fill"></i> 塗りペン、他</h5>
                     <% end %>
                 <% @post.pens.each do |use_pen| %>

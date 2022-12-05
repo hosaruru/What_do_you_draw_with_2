@@ -15,7 +15,7 @@ class Public::UsersController < ApplicationController
       if @user.save
         redirect_to user_path
       else
-        flash.now[:alret] = "未入力の箇所があります"
+        flash.now[:alret] = "ユーザー名を入力してください。"
         render:edit
       end
   end

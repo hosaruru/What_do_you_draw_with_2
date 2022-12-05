@@ -51,7 +51,7 @@
 <% if user_signed_in? %>
 	<div class="container mx-sm-auto">
 	<% if @post.blank? %>
-		<p>投稿がありません。</p>
+		<p class ="top">投稿がありません。</p>
 	<% else %>
 		<% @post.each do |post| %>			
 		    <%= link_to post_path(post.id) do %>
@@ -64,7 +64,7 @@
 					<p>・<%= post.software.name %></p>
 					<h5><i class="bi bi-pen"></i> 線画ペン</h5>
 					<p>・<%= post.brush %></p>													
-					<% if post.pens.present? %>
+					<% if post.pen_present? %>
 					  <h5 class="mt-4"><i class="bi bi-pencil-fill"></i> 塗りペン、他</h5>
 					<% end %>
 					<% post.pens.each do |use_pen| %>

@@ -11,20 +11,27 @@ body {
 nav {
   background: linear-gradient(to right,#5b7bb4,#d0d7ff,#a6f0ff);
 }
-nav{
-  position: relative;
+.fa-bell{
+    top: 15px;
+    left: -12px;
 }
 .navbar-collapse{
   font-weight: bold;
 }
 .n-circle {
-  position: absolute;
-  padding-left: 1rem;
-  padding-top: 0rem;
   color: #efa04c;
+  font-size: 20px;
 }
 .bell {
   margin: 0 0 0 auto;
+}
+.notice_count{
+    font-size: 13px;
+    position: absolute;
+    left: 17px;
+    z-index: 10;
+    color: white;
+    top: -1px;
 }
 footer {
   background: linear-gradient(to right,#5b7bb4,#d0d7ff,#a6f0ff); 
@@ -55,13 +62,15 @@ footer {
 }
 .about{
   line-height: 1.65;
+  margin: 0 auto;
+  text-align: center;
   }
 h2{
-    text-align: center;
+  text-align: center;
 }
 .top{
-    margin: 30px 0 0 30px;
-    text-align: center;
+  margin-top: 30px;
+  text-align: center;
 }
 .table{
   background:rgba(255,255,255,0.5);
@@ -307,10 +316,6 @@ figcaption p{ margin-top: 20px;
   justify-content: center;
   align-items: center;
   }
-.pagination{
-  width: 150px;
-  margin: 15px auto;
-  }
 .btn_wrap{
   display: flex;
   justify-content: center;
@@ -476,17 +481,19 @@ small .btn-pink-moon{
   border-radius: 4px;
   padding: 1px;
   }
-.notice_count{
-  font-size: 15px;
-  position: absolute;
-  left: 29px;
-  z-index: 10;
-  color: white;
-}
-@media screen and (min-width:769px) { 
-    /*　画面サイズが480pxからはここを読み込む　*/
+
+@media screen and (min-width:992px) { 
 .ml-pc{
   margin-left: 60px;
   }
+.sp{
+  display: none;
+  }
 }
+@media screen and (max-width:991px) { 
+.pc{
+  display: none;
+  }
+}
+
 

@@ -2,6 +2,7 @@ class Public::PostsController < ApplicationController
   before_action :authenticate_user!
   before_action :set_q, only: [:index, :search]
   before_action :ensure_user, only: [:edit, :update, :destroy]
+  
   def index   
     if params[:search].present?
       @posts = Post.posts_serach(params[:search]).page(params[:page])
@@ -48,13 +49,14 @@ class Public::PostsController < ApplicationController
     @post = Post.find(params[:id])
     tag_list = params[:post][:tag_name].split(/[[:blank:]]/)
     @post.user_id = current_user.id
-    @post.clean_pen   
-    if @post.update(hoge) 
+    @post.clean_pen
+    # if @post.update(hoge) 
+    if @post.update(post_params)
        @post.save_posts(tag_list)
       redirect_to post_path(@post.id)
     else
-      flash.now[:alert] = "*は必須です。"
-      render:new
+      flash.now[:alret] = "*は必須です。"
+      render:edit
     end
   end
   def destroy
@@ -65,7 +67,7 @@ class Public::PostsController < ApplicationController
   end   
   def search
     @results = @q.result
-    @posts = Post.page(params[:page])
+    @posts = @results.page(params[:page])
   end
   private
   def set_q
@@ -74,9 +76,9 @@ class Public::PostsController < ApplicationController
   def post_params
     params.require(:post).permit(:tag_name, :brush, :image, :comments, :image, :introduction, :twitter, :software_id, pens_attributes:[:use_pen, :_destroy])
   end
-  def hoge
-    post_params.merge!("pens_attributes" => post_params[:pens_attributes].select {|_, attributes| attributes[:use_pen].present? })
-  end
+  # def hoge
+  #   post_params.merge!("pens_attributes" => post_params[:pens_attributes].select {|_, attributes| attributes[:use_pen].present? })
+  # end
   def ensure_user
     @posts = current_user.posts
     @post = @posts.find_by(id: params[:id])

@@ -12,25 +12,22 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.1/css/all.min.css" integrity="sha512-MV7K8+y+gLIBoVD59lQIYicR65iaqukzvf/nwasF0nqhPay5w/9lJmVM2hMDcnK1OnMGCdVK+iQrJ7lzPJQd1w==" crossorigin="anonymous" referrerpolicy="no-referrer" />
     <%= csrf_meta_tags %>
     <%= csp_meta_tag %>
-
     <%= stylesheet_pack_tag 'application', media: 'all', 'data-turbolinks-track': 'reload' %>
     <%= javascript_pack_tag 'application', 'data-turbolinks-track': 'reload' %>
-<script src="//code.jquery.com/jquery-1.11.3.min.js"></script>
-<script src="//cdnjs.cloudflare.com/ajax/libs/jquery.pjax/1.9.6/jquery.pjax.js"></script>
-<script>
-const CLASSNAME = "-visible";
-const TIMEOUT = 1500;
-const $target = $(".title");
-
-setInterval(() => {
-  $target.addClass(CLASSNAME);
-  setTimeout(() => {
-    $target.removeClass(CLASSNAME);
-  }, TIMEOUT);
-}, TIMEOUT * 2);
-</script>
+    <script src="//code.jquery.com/jquery-1.11.3.min.js"></script>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/jquery.pjax/1.9.6/jquery.pjax.js"></script>
+    <script>
+    const CLASSNAME = "-visible";
+    const TIMEOUT = 1500;
+    const $target = $(".title");
+    setInterval(() => {
+      $target.addClass(CLASSNAME);
+      setTimeout(() => {
+        $target.removeClass(CLASSNAME);
+      }, TIMEOUT);
+    }, TIMEOUT * 2);
+    </script>
   </head>
-
     <nav class="navbar navbar-expand-lg navbar-light">
       <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
@@ -91,7 +88,7 @@ setInterval(() => {
           </li>
         </ul>        
       </div>
-          <span class="bell visible-xs">
+          <span class="bell visible-xs pc">
           <%= link_to(notifications_path) do %>
               <% if unchecked_notifications.any? %>
                   <span class="fa-stack">
@@ -99,17 +96,28 @@ setInterval(() => {
                   <i class="far fa-bell fa-lg fa-stack-2x" style="font-size: 1.5em;"></i>
                   <i class="fas fa-circle n-circle fa-stack-1x"></i>
               <% else %>
-                  <i class="bi bi-bell-fill" style="font-size: 1.5em;"></i>
+                  <i class="fas fa-bell" style="font-size: 1.5em;"></i>
+                  </span>
+              <% end %>
+          <% end %>
+          </span>
+      </div>
+          <span class="bell visible-xs sp">
+          <%= link_to(notifications_path) do %>
+              <% if unchecked_notifications.any? %>
+                  <span class="fa-stack">
+                  <span class="notice_count"><%=current_user.passive_notifications.where(checked: false).count%></span>
+                  <i class="far fa-bell fa-lg fa-stack-2x" style="font-size: 1.5em;"></i>
+                  <i class="fas fa-circle n-circle fa-stack-1x"></i>
+              <% else %>
+                  <i class="fas fa-bell" style="font-size: 1.5em;"></i>
                   </span>
               <% end %>
           <% end %>
           </span>
         <% end %>
-        </div>
     </nav>
     <%= yield %>
     <div id="page_top"><a href="#"></a></div>
-    <footer class="navbar navbar-expand-lg navbar-light">
-    </footer>
-
+    <footer class="navbar navbar-expand-lg navbar-light"></footer>
 </html>

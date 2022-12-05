@@ -16,9 +16,7 @@ class Public::BoardsController < ApplicationController
   end
   def index
     @boards = Board.all.order(created_at: :desc).page(params[:page])
-
   end
-
   def show
     @board = Board.find(params[:id])
     @board_comment = BoardComment.new
@@ -40,7 +38,7 @@ class Public::BoardsController < ApplicationController
     if @board.save
       redirect_to board_path(@board)
     else
-      flash.now[:alert] = "*は必須です。"
+      flash.now[:alret] = "*は必須です。"
       render:edit
     end
   end
