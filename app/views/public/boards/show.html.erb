@@ -8,16 +8,16 @@
     </div>
     <div class="board_main">
       <p class="py-5">
-        <%= @board.question.to_s.html_safe %>
+        <%= @board.question %>
       </p>
       <p>
         <% if @board.image.attached? %>
         <figure class="hover-img">
           <%= link_to @board.image, "data-lightbox": @board.image do %>
-            <%= image_tag @board.image ,style: "max-height: 400px;", class:"img" %>
+            <%= image_tag @board.image ,class:"img" %>
           <% end %>
           <figcaption>
-            <p>クリックして拡大</p>
+            <p>画像をクリックして拡大</p>
           </figcaption>
         </figure>
         <% end %>

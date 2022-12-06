@@ -212,7 +212,8 @@ h2{
 }
 .hover-img img {
   height: auto;
-  transition: transform .6s ease; 
+  transition: transform .6s ease;
+  max-height: 400px;
 }
 .hover-img:hover img {
   transform: scale(1.1); 
