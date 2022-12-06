@@ -8,7 +8,7 @@
     </div>
     <div class="board_main">
       <p class="py-5">
-        <%= @board.question %>
+        <%= @board.question.to_s.html_safe %>
       </p>
       <p>
         <% if @board.image.attached? %>

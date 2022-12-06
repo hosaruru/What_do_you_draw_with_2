@@ -308,7 +308,13 @@ Devise.setup do |config|
   # When set to false, does not sign a user in automatically after their password is
   # changed. Defaults to true, so a user is signed in automatically after changing a password.
   # config.sign_in_after_change_password = true
-  
-config.omniauth :twitter, ENV['TWITTER_CONSUMER_KEY'], ENV['TWITTER_CONSUMER_SECRET'], scope: 'email', oauth_callback: "http://#{ENV['DOMAIN_NAME']}/users/auth/twitter/callback"
-  OmniAuth.config.logger = Rails.logger# debug用
+if Rails.env.development? 
+  config.omniauth :twitter, ENV['TWITTER_CONSUMER_KEY'], ENV['TWITTER_CONSUMER_SECRET'], scope: 'email', oauth_callback: "https://d7147af2a4ac44a8b7989fea874acf92.vfs.cloud9.us-east-1.amazonaws.com/users/auth/twitter/callback"
+  pp ENV['TWITTER_CONSUMER_KEY']
+  pp ENV['TWITTER_CONSUMER_SECRET']
+end
+if Rails.env.production?
+  config.omniauth :twitter, ENV['TWITTER_CONSUMER_KEY'], ENV['TWITTER_CONSUMER_SECRET'], scope: 'email', oauth_callback: "http://#{ENV['DOMAIN_NAME']}/users/auth/twitter/callback"  
+end
+  OmniAuth.config.logger = Rails.logger #if Rails.env.development? # debug用
 end
