@@ -4,7 +4,7 @@ class CreateBoardComments < ActiveRecord::Migration[6.1]
       t.text :answer, null: false
       t.integer :user_id, null: false
       t.integer :board_id, null: false
-      t.string :images      t.string :images
+      t.string :images
       t.timestamps
     end
   end
