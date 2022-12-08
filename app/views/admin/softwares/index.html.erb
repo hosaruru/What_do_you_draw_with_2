@@ -18,7 +18,7 @@
                     <p class='mb-5'>
                     <%= form_with model: @software,url:admin_softwares_path, local: true do |f| %>
                         <%= f.text_field :name, class:'form-control' %>
-                        <%= f.submit '新規登録', class: 'col btn btn-dark-blue btn-rounded' %>
+                        <%= f.submit '新規登録', class: 'col btn btn-dark-blue btn-rounded mt-5' %>
                     </p>
                     <tbody>
                         <% @softwares.each do |software| %>

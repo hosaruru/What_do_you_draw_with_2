@@ -25,6 +25,11 @@ nav {
 .bell {
   margin: 0 0 0 auto;
 }
+.right_icon{
+  margin: 0 0 0 auto;
+  font-size: 1.5rem;
+  margin-bottom: 8px;
+  }
 .notice_count{
     font-size: 13px;
     position: absolute;
@@ -490,11 +495,18 @@ small .btn-pink-moon{
 .sp{
   display: none;
   }
-}
+.twitter-tweet{
+  max-width: 350px;
+  margin: 0 auto;
+  }}
 @media screen and (max-width:991px) { 
 .pc{
   display: none;
   }
+ .twitter-tweet{
+  max-width: 500px;
+  margin: 0 auto;
+  } 
 }
 
 

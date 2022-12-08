@@ -4,22 +4,30 @@
 <div class="container mx-2 mx-sm-auto shadow-lg rounded px-5 py-5 my-5 post_back">
   <div id="title">
     <p>
-      <span>P</span>
-      <span>O</span>
-      <span>S</span>
-      <span>T</span>
+      <span>投</span>
+      <span>稿</span>
     </p>
   </div>
   <%= form_with model: @post,url:posts_path, method: :post do |f| %>
     <div class="row input_area">
       <div class="col-md-5">
-        <p><b style="color: #dc3545;">*</b> ツイッターURL<br><%= f.text_area :twitter , placeholder: "「<blockquote...」から始まるURL" %></p>
-        <div class="step_wrap">
-          <p><b class="attention mt-2">※通常のURLとは異なるので注意！</b><br>
+        <div class="step_wrap sp">
+          <p><b class="attention mt-2">ツイッターURLは、<br>通常のURLとは異なるので注意！</b><br>
           ①載せたいツイート右下の <i class="bi bi-upload"></i>（もしくは <i class="bi bi-share"></i>）をクリックし、<br><span class="step1_span"><i class="bi bi-link-45deg"></i>リンクをコピー</span>をクリック
           </p>
           <p class="step"><%= image_tag 'step1.jpg'%></p>
           <p class="mt-5">
+          ②コピーされたリンクを<b><a href="https://publish.twitter.com/# " target="blank">このサイト</a></b>に貼り付け<br><br>
+          ③下にリンクが生成されるので、<br><span class="step2_span">Copy Code</span>をクリックし、これを使用する。</p>
+          <p class="step"><%= image_tag 'step2.jpg'%></p>
+        </div>
+        <p><b style="color: #dc3545;">*</b> ツイッターURL<br><small><b class="attention mt-2 ">※必ず<span class="pc">下</span><span class="sp">上</span>の注意事項をお読みください！</b></small><%= f.text_area :twitter , placeholder: "「<blockquote...」から始まるURL" %></p>
+        <div class="step_wrap pc">
+          <p><b class="attention mt-2">ツイッターURLは、<br>通常のURLとは異なるので注意！</b><br>
+          ①載せたいツイート右下の <i class="bi bi-upload"></i>（もしくは <i class="bi bi-share"></i>）をクリックし、<br><span class="step1_span"><i class="bi bi-link-45deg"></i>リンクをコピー</span>をクリック
+          </p>
+          <p class="step"><%= image_tag 'step1.jpg'%></p>
+          <p class="mt-3">
           ②コピーされたリンクを<b><a href="https://publish.twitter.com/# " target="blank">このサイト</a></b>に貼り付け<br><br>
           ③下にリンクが生成されるので、<br><span class="step2_span">Copy Code</span>をクリックし、これを使用する。</p>
           <p class="step"><%= image_tag 'step2.jpg'%></p>
@@ -58,7 +66,7 @@
           <p>説明画像 <%= f.file_field :image, accept: "image/*" %></p>
           <p>タグ<small>（スペースで複数入力可）</small><br>
           <%= form_with(model: [@tag,@post], local: true) do |f| %>
-            <%= f.text_area :tag_name, placeholder: "タグ入力", class: 'uk-input uk-form-small' %>
+            <%= f.text_area :tag_name, placeholder: "ばじふゆ 漫画 イラスト ", class: 'uk-input uk-form-small' %>
           <% end %>
           </p> 
           <p><%= f.submit "投稿！" ,class: "col btn btn-dark-blue btn-rounded" %></p>        

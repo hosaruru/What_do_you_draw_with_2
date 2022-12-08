@@ -1,27 +1,15 @@
 <div class="wrap mx-sm-auto">
   <div class='mt-5', id="title">
     <p>
-    <span>T</span>
-    <span>H</span>
-    <span>R</span>
-    <span>E</span>
-    <span>A</span>
-    <span>D</span>
+    <span>掲</span>
+    <span>示</span>
+    <span>板</span>
     </p>
-    <!--<p>-->
-    <!--<span>お</span>-->
-    <!--<span>す</span>-->
-    <!--<span>き</span>-->
-    <!--<span>な</span>-->
-    <!--<span>よ</span>-->
-    <!--<span>う</span>-->
-    <!--<span>に</span>-->
-    <!--</p>-->
   </div>
 </div>
 	<div class="row mt-3">
 		<div class="col btn_wrap">
-		    <%= link_to "質問する" , new_board_path, class: "col btn btn-funky-moon btn-rounded" %>
+		    <%= link_to "投稿する" , new_board_path, class: "col btn btn-funky-moon btn-rounded" %>
 		</div>
 	</div>
 <div class="container">
@@ -35,8 +23,8 @@
 		<% end %> 
     </div>
     <div class="col-sm-8">
-      <p><strong><i class="bi bi-patch-question"></i> <span><%= link_to board.headline, board_path(board.id) %></span></strong></p>
-      <p><%= board.question %></p>
+      <p><strong><i class="bi bi-chat-right-dots-fill"></i> <span><%= link_to board.headline, board_path(board.id) %></span></strong></p>
+      <p><%= board.question.html_safe %></p>
       <% if board.board_comments.present? %>
         <span><%= link_to "#{board.board_comments.count} コメント", board_path(board.id) %></span>
       <% elsif %>

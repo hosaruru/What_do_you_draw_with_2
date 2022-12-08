@@ -27,15 +27,15 @@
                     <% end %>
                 <% when 'board_comment' then %> 
                     <% if notification.board_comment.board.user_id == notification.board_comment.user_id %>
-                        <%= link_to "自分の質問", notification.board_comment.board, style: "font-weight: bold;" %>   
-                        <%= "に回答しました" %>
+                        <%= link_to "自分の掲示板投稿", notification.board_comment.board, style: "font-weight: bold;" %>   
+                        <%= "にコメントしました" %>
                     <% elsif notification.visited_id == current_user.id %>
-                        <%= link_to "あなたの質問", notification.board_comment.board, style: "font-weight: bold;" %> 
-                        <%= "に回答しました" %> 
+                        <%= link_to "あなたの掲示板投稿", notification.board_comment.board, style: "font-weight: bold;" %> 
+                        <%= "にコメントしました" %> 
                     <% else %>
                         <%= link_to post_path(notification.board) do %>
-                        <strong><%= notification.board.user.user_name + 'さんの投稿' %></strong>
-                        <%= "に回答しました" %> 
+                        <strong><%= notification.board.user.user_name + 'さんの掲示板投稿' %></strong>
+                        <%= "にコメントしました" %> 
                         <% end %>                      
                 <% end %>
             <% end %>             
