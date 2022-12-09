@@ -4,17 +4,14 @@
 <div class="col-md-6 col-sm-10 mx-2 mx-sm-auto shadow-lg rounded px-0 my-5" style="background:rgba(255,255,255,0.5); text-align:center;">
   <div class='pt-5', id="title">
     	<p>
-    		<span>U</span>
-    		<span>S</span>
-    		<span>E</span>
-    		<span style ="margin-right:20px;">R</span>
-    		<span>S</span>
-    		<span>E</span>
-    		<span>T</span>
-    		<span>T</span>
-    		<span>I</span>
-    		<span>N</span>
-    		<span>G</span>
+    		<span>プ</span>
+    		<span>ロ</span>
+    		<span>フ</span>
+    		<span>ィ</span>
+    		<span>ー</span>
+    		<span>ル</span>
+    		<span>編</span>
+    		<span>集</span>
     	</p>
   </div>
   <%= form_with model: @user, url: update_user_path, method: :patch do |f| %>
@@ -23,7 +20,6 @@
       <%= f.text_field :user_name , class: 'search_container mb-2'%></p>
       <p class="mt-3"><%= f.label :アイコン %><br>
       <%= f.file_field :image_local, accept: "image/*" %></p>
-
     </div>
       <%= f.submit '保存',class: "col btn btn-dark-blue btn-rounded  my-5" %>
   <% end %>

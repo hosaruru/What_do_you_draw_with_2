@@ -10,12 +10,8 @@
 <div class="wrap mx-sm-auto">
 <div class='mt-5 mb-5', id="title">
   <p>
-  <span>D</span>
-  <span>E</span>
-  <span>T</span>
-  <span>A</span>
-  <span>I</span>
-  <span>L</span>
+  <span>詳</span>
+  <span>細</span>
   </p>
 </div>
   <div class='container'>
@@ -75,11 +71,11 @@
           <% else %>
             <% if @post.favorited?(current_user) %>
               <%= link_to favorites_path(post_id: @post.id), method: :delete do %>
-                <span style="color:red; font-size: 40px;">❤︎</span>
+                <span style="color:red; font-size: 30px;"><i class="bi bi-heart-fill"></i></span>
               <% end %>
             <% else %>
               <%= link_to favorites_path(post_id: @post.id), method: :post do %>
-                <span style="color:gray;font-size: 40px;">❤︎</span>
+                <span style="color:gray;font-size: 30px;"><i class="bi bi-heart-fill"></i></span>
               <% end %>
             <% end %>	
           <% end %><br>

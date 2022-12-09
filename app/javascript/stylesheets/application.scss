@@ -389,7 +389,6 @@ hr {
   }
 
 .board_box .board_title {
-
     padding: 10px 38px;
     line-height: 25px;
     font-size: 17px;
@@ -498,7 +497,8 @@ small .btn-pink-moon{
 .twitter-tweet{
   max-width: 350px;
   margin: 0 auto;
-  }}
+  }
+}
 @media screen and (max-width:991px) { 
 .pc{
   display: none;
@@ -507,6 +507,11 @@ small .btn-pink-moon{
   max-width: 500px;
   margin: 0 auto;
   } 
+  .navbar-collapse{
+  padding-left: 40px;
+  }
 }
 
-
+#board_main .twitter-tweet{
+  max-width: 300px;
+  }
