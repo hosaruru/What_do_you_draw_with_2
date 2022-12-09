@@ -6,32 +6,45 @@
     <span>板</span>
     </p>
   </div>
+		<table class='table mypage bell'>      	      	
+			<tr>
+			<td>
+			<small>おすすめの素材や機能の紹介、ちょっと質問したいことなど、<br>
+      常識の範囲内で自由に使ってください！</small>
+			</td>
+			</tr>
+		</table>
 </div>
-	<div class="row mt-3">
-		<div class="col btn_wrap">
-		    <%= link_to "投稿する" , new_board_path, class: "col btn btn-funky-moon btn-rounded" %>
-		</div>
-	</div>
-<div class="container">
-<% @boards.each do |board| %>
-  <div class="row board">
-    <div class="col-sm-2">
-		<% if board.user.image_local.present? %>
-			<%= image_tag board.user.image_local.variant(resize_to_fill: [48, 48]) %>
-		<% else %>
-			<%= image_tag board.user.image  %>
-		<% end %> 
+
+<% if current_user.email == 'guest@example.com' %>		
+  <%=  %>    
+<% else %>
+  <div class="row mt-3">
+    <div class="col btn_wrap">
+        <%= link_to "投稿する" , new_board_path, class: "col btn btn-funky-moon btn-rounded" %>
     </div>
-    <div class="col-sm-8">
-      <p><strong><i class="bi bi-chat-right-dots-fill"></i> <span><%= link_to board.headline, board_path(board.id) %></span></strong></p>
-      <p><%= board.question.truncate(150)  %></p>
-      <% if board.board_comments.present? %>
-        <span><%= link_to "#{board.board_comments.count} コメント", board_path(board.id) %></span>
-      <% elsif %>
-        <span><%=  %> </span>
-      <% end %>
     </div>
-  </div>
 <% end %>
+<div class="container">
+  <% @boards.each do |board| %>
+    <div class="row board">
+      <div class="col-sm-2">
+  		<% if board.user.image_local.present? %>
+  			<%= image_tag board.user.image_local.variant(resize_to_fill: [48, 48]) %>
+  		<% else %>
+  			<%= image_tag board.user.image  %>
+  		<% end %> 
+      </div>
+      <div class="col-sm-8">
+        <p><strong><i class="bi bi-chat-right-dots-fill"></i> <span><%= link_to board.headline, board_path(board.id) %></span></strong></p>
+        <p><%= board.question.truncate(150)  %></p>
+        <% if board.board_comments.present? %>
+          <span><%= link_to "#{board.board_comments.count} コメント", board_path(board.id) %></span>
+        <% elsif %>
+          <span><%=  %> </span>
+        <% end %>
+      </div>
+    </div>
+  <% end %>
 </div>
 <ul class="pagination"><li class="page-item"><%= paginate @boards%></li></ul>

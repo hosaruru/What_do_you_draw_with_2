@@ -48,7 +48,7 @@
             <p><%=safe_join(@post.comments.split("\n"),tag(:br))%></p>
           <% end %>
           <% @post.tags.each do |tag| %>
-            <p style="color: #17a2b8;"><i class="bi bi-tag-fill"></i><%= link_to tag.tag_name, posts_path(tag_id: tag.id) %></p>											
+            <p style="color: #17a2b8;  margin-bottom: 0;"><i class="bi bi-tag-fill"></i><%= link_to tag.tag_name, posts_path(tag_id: tag.id) %></p>											
           <% end %>
           <% if @post.image.attached? %>
             <figure class="hover-img">

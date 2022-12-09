@@ -488,15 +488,18 @@ small .btn-pink-moon{
   }
 
 @media screen and (min-width:992px) { 
-.ml-pc{
-  margin-left: 60px;
-  }
-.sp{
-  display: none;
-  }
-.twitter-tweet{
-  max-width: 350px;
-  margin: 0 auto;
+  .ml-pc{
+    margin-left: 60px;
+    }
+  .sp{
+    display: none;
+    }
+  .twitter-tweet{
+    max-width: 350px;
+    margin: 0 auto;
+    }
+  .navbar-collapse{
+  padding-left: 80px;
   }
 }
 @media screen and (max-width:991px) { 
@@ -507,9 +510,6 @@ small .btn-pink-moon{
   max-width: 500px;
   margin: 0 auto;
   } 
-  .navbar-collapse{
-  padding-left: 40px;
-  }
 }
 
 #board_main .twitter-tweet{
