@@ -9,10 +9,11 @@
     </div>
     <div class="board_main">
       <p class="py-5">
-        <%= @board.question.html_safe %>
+        <%=safe_join(@board.question.split("\n"),tag(:br))%>
       </p>
       <p>
         <% if @board.image.attached? %>
+        <small>※画像をクリックすると拡大できます</small>
         <figure class="hover-img">
           <%= link_to @board.image, "data-lightbox": @board.image do %>
             <%= image_tag @board.image ,class:"img" %>
@@ -28,7 +29,7 @@
         <% if @board.user.image_local.present? %>
     			<%= image_tag @board.user.image_local.variant(resize_to_fill: [48, 48]) %>
     		<% else %>
-    			<%= image_tag @board.user.image  %>
+    			<%= image_tag @board.user.image %>
     		<% end %> <%= @board.user.user_name %>
     		</small><br>
         <small><%= @board.created_at.strftime('%Y/%m/%d') %></small>
@@ -51,7 +52,7 @@
   			<%= image_tag board_comment.user.image %>
   		<% end %> 
       <div class="balloon1-left">
-        <p><b><%= board_comment.answer %></b></p>
+        <p><b><%=safe_join(board_comment.answer.split("\n"),tag(:br))%></b></p>
         <p class="pt-2 small">
         <small>
           <%= board_comment.user.user_name %><br>

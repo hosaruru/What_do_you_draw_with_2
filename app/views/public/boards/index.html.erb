@@ -24,11 +24,11 @@
     </div>
     <div class="col-sm-8">
       <p><strong><i class="bi bi-chat-right-dots-fill"></i> <span><%= link_to board.headline, board_path(board.id) %></span></strong></p>
-      <p><%= board.question.html_safe %></p>
+      <p><%= board.question.truncate(150)  %></p>
       <% if board.board_comments.present? %>
         <span><%= link_to "#{board.board_comments.count} コメント", board_path(board.id) %></span>
       <% elsif %>
-        <span><%= board.board_comments.count %> コメント</span>
+        <span><%=  %> </span>
       <% end %>
     </div>
   </div>

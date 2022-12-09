@@ -45,7 +45,7 @@
           <% end %>
           <% if @post.comments.present? %>
             <h5 class="mt-4"><i class="bi bi-card-text"></i> 補足説明</h5>
-            <p><%= @post.comments %></p>
+            <p><%=safe_join(@post.comments.split("\n"),tag(:br))%></p>
           <% end %>
           <% @post.tags.each do |tag| %>
             <p style="color: #17a2b8;"><i class="bi bi-tag-fill"></i><%= link_to tag.tag_name, posts_path(tag_id: tag.id) %></p>											
@@ -93,7 +93,7 @@
   				<%= image_tag post_comment.user.image  %>
   			<% end %> 
         <div class="balloon1-left">
-          <p><b><%= post_comment.comment %></b></p>
+          <p><b><%=safe_join(post_comment.comment.split("\n"),tag(:br))%></b></p>
           <p class="pt-2 small">
           <small>
             <%= post_comment.user.user_name %><br>
