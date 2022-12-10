@@ -41,7 +41,7 @@
           </p>
           <p class="main_pen"><b style="color: #dc3545;">*</b> 線画ペン<small>（メイン1つのみ）</small><br><%= f.text_area :brush, placeholder: "Gペン" %></p>             
           <div class="pens">
-            塗りペン、他
+            塗りペン、他<small>（任意）</small>
             <%= f.fields_for :pens do |t| %>              
               <div>
                 <div class="nested-fields" style="width: 400px;">
@@ -62,9 +62,9 @@
               }%>
             </div>
           </div>
-          <p class="sup">補足<br><%= f.text_area :comments , placeholder: "例：基本的にはGペンを使用ですが、刈り上げはざくざく塗りを使用しています。" %></p>
-          <p>説明画像 <%= f.file_field :image, accept: "image/*" %></p>
-          <p>タグ<small>（スペースで複数入力可）</small><br>
+          <p class="sup">補足<small>（任意）</small><br><%= f.text_area :comments , placeholder: "例：基本的にはGペンを使用ですが、刈り上げはざくざく塗りを使用しています。" %></p>
+          <p>説明画像 <small>（任意）</small><%= f.file_field :image, accept: "image/*" %></p>
+          <p>タグ<small>（任意・スペースで複数入力可）</small><br>
           <%= form_with(model: [@tag,@post], local: true) do |f| %>
             <%= f.text_area :tag_name, placeholder: "ばじふゆ 漫画 イラスト ", class: 'uk-input uk-form-small' %>
           <% end %>
