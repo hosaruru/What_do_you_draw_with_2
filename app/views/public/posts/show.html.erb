@@ -48,7 +48,7 @@
             <p><%=safe_join(@post.comments.split("\n"),tag(:br))%></p>
           <% end %>
           <% @post.tags.each do |tag| %>
-            <p style="color: #17a2b8;  margin-bottom: 0;"><i class="bi bi-tag-fill"></i><%= link_to tag.tag_name, posts_path(tag_id: tag.id) %></p>											
+            <p class="tag"><i class="bi bi-tag-fill"></i><%= link_to tag.tag_name, posts_path(tag_id: tag.id) %></p>											
           <% end %>
           <% if @post.image.attached? %>
           <small>※画像をクリックすると拡大できます</small>
@@ -85,7 +85,7 @@
 			<% end %>
   </div>
   </div>
-  <div class="mx-2 mx-sm-auto shadow-lg rounded px-0 my-5" style="background:rgba(255,255,255,0.5);"> 
+  <div class="mx-2 mx-sm-auto shadow-lg rounded px-0 my-5 table"> 
     <% @post.post_comments.each do |post_comment| %>
       <div class="ml-3">
   			<% if post_comment.user.image_local.present? %>
