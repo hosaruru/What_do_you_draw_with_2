@@ -39,13 +39,16 @@
           <li class="nav-item">
           </li>
           <li class="nav-item">
-            <%= link_to "ユーザー", admin_users_path, class: "nav-link" %>
+            <%= link_to "ユーザー", admin_users_path, class: "nav-link bi bi-person-lines-fill" %>
           </li>
           <li class="nav-item">
-            <%= link_to "ソフト", admin_softwares_path, class: "nav-link" %>
+            <%= link_to "ソフト", admin_softwares_path, class: "nav-link bi bi-magic" %>
           </li>
           <li class="nav-item">
-            <%= link_to "ログアウト", destroy_admin_session_path, method: :delete, class: "nav-link" %>
+          <%= link_to "掲示板", boards_path, class: "nav-link bi bi-chat-left-dots-fill" %>
+          </li>
+          <li class="nav-item">
+            <%= link_to "ログアウト", destroy_admin_session_path, method: :delete, class: "nav-link bi bi-door-open-fill" %>
           </li>
         </ul>
       <% elsif !user_signed_in? %>

@@ -1,13 +1,13 @@
 @import '~bootstrap/scss/bootstrap';
 @import url('https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@300&display=swap');
 body {
-/*    background-color: ghostwhite;*/
     animation: fadeIn 2s ease 0s 1 normal;
     -webkit-animation: fadeIn 2s ease 0s 1 normal;
     position: relative;
     background-image: url("../images/back.jpeg");
     font-family: 'Noto Sans JP', sans-serif;
 }
+/* ナビゲーション */
 nav {
   background: linear-gradient(to right,#5b7bb4,#d0d7ff,#a6f0ff);
 }
@@ -50,7 +50,7 @@ footer {
   font-size: 12px;
   }
 .registrations ul{
-  list-style:none;
+  list-style: none;
   }
 .border_gray{
   border-bottom: solid 1px #cccccc;
@@ -314,14 +314,8 @@ figcaption p{ margin-top: 20px;
   height: 100%;
   width: 100%;
 }
-.board{
-  border-bottom: solid 1px #cccccc;
-  padding: 20px;
-  word-wrap: break-word;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  }
+
+/* ボタン */
 .btn_wrap{
   display: flex;
   justify-content: center;
@@ -372,6 +366,7 @@ figcaption p{ margin-top: 20px;
 hr {
     border-top: 1px solid #9E9E9E;
 }
+
 .question_box{
   margin: 0 auto;
   }
@@ -387,7 +382,14 @@ hr {
 .text_box_main .field_with_errors textarea{
   min-height: 300px;
   }
-
+.board{
+  border-bottom: solid 1px #cccccc;
+  padding: 20px;
+  word-wrap: break-word;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}  
 .board_box .board_title {
     padding: 10px 38px;
     line-height: 25px;

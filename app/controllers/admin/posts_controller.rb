@@ -16,11 +16,9 @@ class Admin::PostsController < ApplicationController
   def update
     @post = Post.find(params[:id])
     tag_list = params[:post][:tag_name].split(/[[:blank:]]/)
-    @post.user_id = current_user.id
     @post.clean_pen   
-    if @post.update(hoge) 
-       @post.save_posts(tag_list)
-      redirect_to post_path(@post.id)
+    if @post.update(post_params)
+      redirect_to admin_post_path(@post.id)
     else
       flash.now[:alert] = "*は必須です。"
       render:new
