@@ -51,6 +51,7 @@
             <p style="color: #17a2b8;  margin-bottom: 0;"><i class="bi bi-tag-fill"></i><%= link_to tag.tag_name, posts_path(tag_id: tag.id) %></p>											
           <% end %>
           <% if @post.image.attached? %>
+          <small>※画像をクリックすると拡大できます</small>
             <figure class="hover-img">
               <%= link_to @post.image, "data-lightbox": @post.image do %>
                 <%= image_tag @post.image ,style: "max-width: 200px;", class:"img" %>
