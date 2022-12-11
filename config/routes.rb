@@ -82,6 +82,13 @@ devise_for :admin, skip: [:registrations, :passwords] ,controllers: {
     resources :softwares, only: [:index, :create, :edit]
     patch 'softwares/:id' => 'softwares#update', as: 'update_software'
     delete 'softwares/:id' => 'softwares#destroy', as: 'destroy_software'
+    
+    resources :boards, only: [:new, :show, :index, :create, :edit]do
+      delete 'boards/:id' => 'boards#destroy', as: 'destroy_board'
+      patch 'boards/:id' => 'boards#update', as: 'update_board'
+      resources :board_comments, only: [:create]
+      delete 'board_comments/:id' => 'board_comments#destroy', as: 'destroy_board_comment'
+    end
   end
 
 

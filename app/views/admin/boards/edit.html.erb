@@ -1,0 +1,31 @@
+<div class="alret">
+  <%= flash[:alret] %>
+</div>
+<div class="col-md-6 col-sm-10 mx-2 mx-sm-auto shadow-lg rounded px-0 my-5" style="background:rgba(255,255,255,0.5);">
+<div class='pt-5', id="title">
+		<p>
+		<span>Q</span>
+		<span>U</span>
+		<span>E</span>
+		<span>S</span>
+		<span>T</span>
+		<span>I</span>
+		<span>O</span>
+		<span>N</span>
+	</p>
+</div>
+    <%= form_with model: @board, url: admin_board_update_board_path(@board.id), method: :patch do |f| %>
+      <div class="container pb-5">
+          <div class="question_box">
+            <div class="text_box"><b style="color: #dc3545;">*</b>タイトル<br><%= f.text_area :headline %></div> 
+            <div class="text_box text_box_main"><b style="color: #dc3545;">*</b>本文<br><%= f.text_area :question %></div> 
+            <p><span class="any">画像<small>（任意）</small></span>
+              <%= f.file_field :image, accept: "image/*" %>
+            </p>
+            <p><%= f.submit "保存" ,class: "col btn btn-dark-blue btn-rounded" %></p>
+    <% end %>
+      </div>
+
+    </div>
+</div> 
+
