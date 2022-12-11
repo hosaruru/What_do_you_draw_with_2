@@ -1,12 +1,6 @@
 <div class="alret">
   <%= flash[:alret] %>
 </div>
-<% if flash[:notice] %>
-<div class="notice pb-1">
-  <span>投稿できました。Twitterで共有してみましょう！</span><br>
-  <%= link_to 'Twitter', "https://twitter.com/share?url=#{request.url}/&text=&hashtags=なにで描いたの", title: 'Twitter', target: '_blank' ,class: "bi bi-twitter ml-4 col btn btn-dark-blue btn-rounded" %>
-</div>
-<% end %>
 <div class="wrap mx-sm-auto">
 <div class='mt-5 mb-5', id="title">
   <p>
@@ -85,9 +79,7 @@
           <small>
             <%= post_comment.user.user_name %><br>
             <%= post_comment.created_at.strftime('%Y/%m/%d') %>
-            <% if post_comment.user == current_user %><br>
-              <%= link_to '削除', post_post_comment_path(@post, post_comment), data: {confirm: '本当に削除しますか？'}, method: :delete ,class: "col btn btn-pink-moon btn-rounded mt-3"%><br>
-            <% end %>
+              <%= link_to '削除', admin_post_post_comment_path(@post, post_comment), data: {confirm: '本当に削除しますか？'}, method: :delete ,class: "col btn btn-pink-moon btn-rounded mt-3"%><br>
           </small>
           </p>
         </div>

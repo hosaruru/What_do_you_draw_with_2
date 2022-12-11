@@ -15,20 +15,22 @@ class Admin::PostsController < ApplicationController
 
   def update
     @post = Post.find(params[:id])
-    tag_list = params[:post][:tag_name].split(/[[:blank:]]/)
-    @post.clean_pen   
+    tag_list = params[:post][:tag_name].split(/[[:blank:]]/)    
+    @post.clean_pen
     if @post.update(post_params)
+       @post.save_posts(tag_list)
       redirect_to admin_post_path(@post.id)
     else
-      flash.now[:alert] = "*は必須です。"
-      render:new
+      flash.now[:alret] = "*は必須です。"
+      render:edit
     end
   end
   
   def destroy
     @post = Post.find(params[:id])
+    @user = @post.user.id
     @post.destroy
-    redirect_to admin_posts_path
+    redirect_to admin_user_path(@user)
   end
   private
   def move_to_signed_in
@@ -37,6 +39,6 @@ class Admin::PostsController < ApplicationController
     end
   end
   def post_params
-    params.require(:post).permit(:tag, :software, :brush, :image, :comments, :image, :introduction)
+    params.require(:post).permit(:tag_name, :brush, :image, :comments, :image, :introduction, :twitter, :software_id, pens_attributes:[:use_pen, :_destroy])
   end
 end
