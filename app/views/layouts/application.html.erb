@@ -81,6 +81,7 @@
           <%= link_to "投稿", new_post_path, class: "nav-link bi bi-plus-square-fill" %>
           </li>
           <li class="nav-item">
+          <%= link_to "ブックマーク", favorites_user_path(current_user), class: "nav-link bi bi-heart-fill" %>
           </li>
           <li class="nav-item">
           <%= link_to "掲示板", boards_path, class: "nav-link bi bi-chat-left-dots-fill" %>
