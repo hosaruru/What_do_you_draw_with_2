@@ -55,9 +55,7 @@
         <small>
           <%= board_comment.user.user_name %><br>
           <%= board_comment.created_at.strftime('%Y/%m/%d') %>
-          <% if board_comment.user == current_user %><br>
             <%= link_to '削除', admin_board_destroy_board_comment_path(@board, board_comment), data: {confirm: '本当に削除しますか？'}, method: :delete ,class: "col btn btn-pink-moon btn-rounded mt-2"%><br>
-          <% end %>
         </small>
         </p>
       </div>

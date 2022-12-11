@@ -16,7 +16,7 @@
      <p class="login"> <%= link_to "Twitterアカウントでログイン", omniauth_authorize_path(resource_name, provider), class:'fab fa-twitter col btn btn-funky-moon btn-rounded mb-5 mt-5', method: :post %></p>
     <% end %>
   <% end %>
-  		  <br><p class="guest"><%= link_to 'ゲストログイン（閲覧用）', posts_guest_sign_in_path, method: :post , class: "btn btn-primary btn-sm px-4 btn-rounded " %></p>
+  		  <br><p class="guest"><%= link_to 'ゲストログイン（閲覧用）', posts_guest_sign_in_path, method: :post , class: "btn btn-secondary btn-sm px-4 btn-rounded" %></p>
 <% end %>
 </div>
 

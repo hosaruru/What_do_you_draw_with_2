@@ -17,7 +17,7 @@
 				<p class="login"> <%= link_to "Twitterアカウントで新規登録・ログイン", omniauth_authorize_path(resource_name, provider), class:'fab fa-twitter col btn btn-funky-moon btn-rounded mb-5 mt-3', method: :post %></p>
 			<% end %>
 		<% end %>
-		<%= link_to 'ゲストログイン（閲覧用）', guest_sign_in_path, method: :post , class: "btn btn-primary btn-sm px-4 btn-rounded " %>
+		<%= link_to 'ゲストログイン（閲覧用）', guest_sign_in_path, method: :post , class: "btn btn-secondary btn-sm px-4 btn-rounded " %>
 	<% end %>
 	<p style="padding-right :60px;"><%= image_tag 'drow.gif'%></p>
 	<div class="wrap about">
