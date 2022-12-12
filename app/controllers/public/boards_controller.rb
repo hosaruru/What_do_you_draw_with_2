@@ -1,4 +1,5 @@
 class Public::BoardsController < ApplicationController
+  before_action :authenticate_user!
   before_action :ensure_user, only: [:edit, :update, :destroy]
   def new
     @board = Board.new
