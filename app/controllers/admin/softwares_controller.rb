@@ -28,7 +28,9 @@ class Admin::SoftwaresController < ApplicationController
       flash.now[:alret] = "ソフト名を入力してください"
       render :edit
 
-  end end
+    end 
+  end
+  
   def destroy
     @software = Software.find(params[:id])
     @software.destroy

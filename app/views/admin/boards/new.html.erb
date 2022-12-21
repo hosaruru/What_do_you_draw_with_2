@@ -13,17 +13,15 @@
 </div>
     <%= form_with model: @board do |f| %>
       <div class="container pb-5">
-          <div class="question_box">
-            <!--<p> 紹介文<br><%#= f.text_area :introduction %></p>-->
-            <div class="text_box"><b style="color: #dc3545;">*</b>タイトル<br><%= f.text_area :headline %></div> 
-            <div class="text_box text_box_main"><b style="color: #dc3545;">*</b>本文<br><%= f.text_area :question %></div> 
-            <p><span class="any">画像<small>（任意）</small></span>
-              <%= f.file_field :image, accept: "image/*" %>
-            </p>
-            <p><%= f.submit "投稿！" ,class: "col btn btn-dark-blue btn-rounded" %></p>
-    <% end %>
+        <div class="question_box">
+          <div class="text_box"><b style="color: #dc3545;">*</b>タイトル<br><%= f.text_area :headline %></div> 
+          <div class="text_box text_box_main"><b style="color: #dc3545;">*</b>本文<br><%= f.text_area :question %></div> 
+          <p><span class="any">画像<small>（任意）</small></span>
+            <%= f.file_field :image, accept: "image/*" %>
+          </p>
+          <p><%= f.submit "投稿！" ,class: "col btn btn-dark-blue btn-rounded" %></p>
+        </div>      
       </div>
-
-    </div>
+    <% end %> 
 </div> 
 

@@ -14,9 +14,10 @@
             <div class='offset-md-1' style="margin: 0 auto;">
                 <table class="table table-hover">
                     <p class='mb-5'>
-                    <%= form_with model: @software,url:admin_softwares_path, local: true do |f| %>
-                        <%= f.text_field :name, class:'form-control' %>
+                    <%= form_with model: @software, url:admin_softwares_path do |f| %>
+                        <%= f.text_field :name, class: 'form-control'%>
                         <%= f.submit '新規登録', class: 'col btn btn-dark-blue btn-rounded mt-5' %>
+                    <% end %>
                     </p>
                     <tbody>
                         <% @softwares.each do |software| %>
@@ -26,8 +27,7 @@
                             <%= link_to "削除する", admin_destroy_software_path(software.id), class: "col btn btn-pink-moon btn-rounded ", method: :delete, "data-confirm" => "本当に削除しますか？" %></td>                   
                             </tr>
                         <% end %>
-                    </tbody>
-                    <% end %>
+                    </tbody>                   
                 </table>
             </div>
         </div>
