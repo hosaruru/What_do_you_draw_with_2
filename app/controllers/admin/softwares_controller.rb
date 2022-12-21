@@ -2,16 +2,17 @@ class Admin::SoftwaresController < ApplicationController
   before_action :authenticate_admin!
   def index
     @softwares = Software.all
+  end
+  def new
     @software = Software.new
   end
-
   def create
     @software = Software.new(software_params)
     if @software.save
       redirect_to admin_softwares_path
     else
-      flash.now[:alret] = "未入力の箇所があります"
-      render :index
+      flash.now[:alret] = "ソフト名を入力してください"
+      render :new
     end
   end
 

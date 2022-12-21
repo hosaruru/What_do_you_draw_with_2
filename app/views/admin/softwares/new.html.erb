@@ -1,0 +1,20 @@
+<div class="alret">
+  <%= flash[:alret] %>
+</div>
+<div class="container mx-2 mx-sm-auto shadow-lg rounded px-5 py-5 my-5 post_back">
+<div class='mb-5', id="title">
+		<p>
+    <span>新</span>
+    <span>規</span>
+    <span>登</span>
+		<span>録</span>
+	</p>
+</div>
+<div class='answer_box'>
+<%= form_with model: @software, url:admin_softwares_path do |f| %>
+    <%= f.text_field :name, class: 'form-control'%>
+    <%= f.submit '新規登録', class: 'col btn btn-dark-blue btn-rounded mt-5' %>
+<% end %>
+</div>
+</div>
+
