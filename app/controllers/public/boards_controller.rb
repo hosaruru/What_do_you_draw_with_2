@@ -1,9 +1,11 @@
 class Public::BoardsController < ApplicationController
   before_action :authenticate_user!
   before_action :ensure_user, only: [:edit, :update, :destroy]
+  
   def new
     @board = Board.new
   end
+  
   def create
     @board = Board.new(board_params)
     @board.image.attach(params[:board][:image])
@@ -15,9 +17,11 @@ class Public::BoardsController < ApplicationController
       render :new
     end
   end
+  
   def index
     @boards = Board.all.order(created_at: :desc).page(params[:page]).per(10)
   end
+  
   def show
     @board = Board.find(params[:id])
     @board_comment = BoardComment.new
@@ -32,10 +36,11 @@ class Public::BoardsController < ApplicationController
   def edit
     @board = Board.find(params[:id])
   end
-    def update
-    @board = Board.find(params[:id])
-    @board.user_id = current_user.id
-    @board.update(board_params)
+  
+  def update
+  @board = Board.find(params[:id])
+  @board.user_id = current_user.id
+  @board.update(board_params)
     if @board.save
       redirect_to board_path(@board)
     else
