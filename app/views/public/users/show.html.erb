@@ -1,83 +1,83 @@
 <div class="wrap mx-sm-auto">
-<% if  @user == current_user %>
-	<div class="mt-5 mb-5">
-		<div id="title">
-			<p>
-			<span>マ</span>
-			<span>イ</span>
-			<span>ペ</span>
-			<span>ー</span>
-			<span>ジ</span>
-			</p>
-		</div>
-		<table class='table mypage'>      	      	
-			<tr>
-			<td><% if @user.image_local.present? %>
-			<%= image_tag @user.image_local.variant(resize_to_fill: [48, 48]) %>
-			<% else %>
-			<%= image_tag @user.image  %>
-			<% end %>
-			<br><%= @user.user_name %>	<span><%= link_to "", edit_user_path ,class: "bi bi-gear"%></span></td>
-			</tr>
-		</table>	      
-	</div>
-<% else %>
-	<div class="mt-5 mb-5">
-		<div id="title">
-			<p>
-			<span>ユ</span>
-			<span>ー</span>
-			<span>ザ</span>
-			<span>ー</span>
-			<span>ペ</span>
-			<span>ー</span>
-			<span>ジ</span>
-			</p>
-		</div>
-		<table class='table mypage'>      	      	
-			<tr>
-			<td><% if @user.image_local.present? %>
-			<%= image_tag @user.image_local.variant(resize_to_fill: [48, 48]) %>
-			<% else %>
-			<%= image_tag @user.image  %>
-			<% end %>
-			<br><%= @user.user_name %></td>
-			</tr>
-		</table>	      
-	</div>
-<% end %>
-<% if user_signed_in? %>
-	<div class="container mx-sm-auto">
-	<% if @post.blank? %>
-		<p class ="top">投稿がありません。</p>
-	<% else %>
-		<% @post.each do |post| %>			
-		    <%= link_to post_path(post.id) do %>
-		    <div class="row py-4 border_gray">
-				<div class="col-md-7">
-					<%= post.twitter.to_s.html_safe %>
-				</div>
-				<div class="col-md-5 pl-5">
-					<h5><i class="bi bi-magic"></i> 使用ソフト</h5>
-					<p>・<%= post.software.name %></p>
-					<h5><i class="bi bi-pen"></i> 線画ペン</h5>
-					<p>・<%= post.brush %></p>													
-					<% if post.pen_present? %>
-					  <h5 class="mt-4"><i class="bi bi-pencil-fill"></i> 塗りペン、他</h5>
-					<% end %>
-					<% post.pens.each do |use_pen| %>
-						<% if use_pen.use_pen.present? %>
-							  <p>・<%= use_pen.use_pen %></p>
-						<% end %>
-					<% end %>
-				    <br>
-				  	<p><%= link_to "詳細", post_path(post.id),class: "col btn btn-dark-blue btn-rounded"  %></p>
-				</div>
+	<% if  @user == current_user %>
+		<div class="mt-5 mb-5">
+			<div id="title">
+				<p>
+				<span>マ</span>
+				<span>イ</span>
+				<span>ペ</span>
+				<span>ー</span>
+				<span>ジ</span>
+				</p>
 			</div>
-		   <% end %>
-		<% end %>
+			<table class='table mypage'>      	      	
+				<tr>
+				<td><% if @user.image_local.present? %>
+				<%= image_tag @user.image_local.variant(resize_to_fill: [48, 48]) %>
+				<% else %>
+				<%= image_tag @user.image  %>
+				<% end %>
+				<br><%= @user.user_name %>	<span><%= link_to "", edit_user_path ,class: "bi bi-gear"%></span></td>
+				</tr>
+			</table>	      
+		</div>
+	<% else %>
+		<div class="mt-5 mb-5">
+			<div id="title">
+				<p>
+				<span>ユ</span>
+				<span>ー</span>
+				<span>ザ</span>
+				<span>ー</span>
+				<span>ペ</span>
+				<span>ー</span>
+				<span>ジ</span>
+				</p>
+			</div>
+			<table class='table mypage'>      	      	
+				<tr>
+				<td><% if @user.image_local.present? %>
+				<%= image_tag @user.image_local.variant(resize_to_fill: [48, 48]) %>
+				<% else %>
+				<%= image_tag @user.image  %>
+				<% end %>
+				<br><%= @user.user_name %></td>
+				</tr>
+			</table>	      
+		</div>
 	<% end %>
-	</div>
-<% end %>
-<ul class="pagination"><li class="page-item"><%= paginate @posts%></li></ul>
+	<% if user_signed_in? %>
+		<div class="container mx-sm-auto">
+		<% if @post.blank? %>
+			<p class ="top">投稿がありません。</p>
+		<% else %>
+			<% @post.each do |post| %>			
+			    <%= link_to post_path(post.id) do %>
+			    <div class="row py-4 border_gray">
+					<div class="col-md-7">
+						<%= post.twitter.to_s.html_safe %>
+					</div>
+					<div class="col-md-5 pl-5">
+						<h5><i class="bi bi-magic"></i> 使用ソフト</h5>
+						<p>・<%= post.software.name %></p>
+						<h5><i class="bi bi-pen"></i> 線画ペン</h5>
+						<p>・<%= post.brush %></p>													
+						<% if post.pen_present? %>
+						  <h5 class="mt-4"><i class="bi bi-pencil-fill"></i> 塗りペン、他</h5>
+						<% end %>
+						<% post.pens.each do |use_pen| %>
+							<% if use_pen.use_pen.present? %>
+								  <p>・<%= use_pen.use_pen %></p>
+							<% end %>
+						<% end %>
+					    <br>
+					  	<p><%= link_to "詳細", post_path(post.id),class: "col btn btn-dark-blue btn-rounded"  %></p>
+					</div>
+				</div>
+			   <% end %>
+			<% end %>
+		<% end %>
+		</div>
+	<% end %>
+		<ul class="pagination"><li class="page-item"><%= paginate @posts%></li></ul>
 </div>
