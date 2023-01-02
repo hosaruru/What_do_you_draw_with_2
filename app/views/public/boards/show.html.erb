@@ -2,78 +2,78 @@
   <%= flash[:alret] %>
 </div>
 <div class="wrap mx-sm-auto">
-<div class="shadow-lg rounded px-0 my-5 table">
-  <div class="board_box">
-    <div class="board_title">
-      <i class="bi bi-chat-right-dots-fill"></i> <%= @board.headline %>
-    </div>
-    <div class="board_main">
-      <p class="py-5">
-        <%=safe_join(@board.question.split("\n"),tag(:br))%>
-      </p>
-      <p>
-        <% if @board.image.attached? %>
-        <small>※画像をクリックすると拡大できます</small>
-        <figure class="hover-img">
-          <%= link_to @board.image, "data-lightbox": @board.image do %>
-            <%= image_tag @board.image ,class:"img" %>
-          <% end %>
-          <figcaption>
-            <p>画像をクリックして拡大</p>
-          </figcaption>
-        </figure>
-        <% end %>
-      </p>
-      <p>
-        <small>
-        <% if @board.user.image_local.present? %>
-    			<%= image_tag @board.user.image_local.variant(resize_to_fill: [48, 48]) %>
-    		<% else %>
-    			<%= image_tag @board.user.image %>
-    		<% end %> <%= @board.user.user_name %>
-    		</small><br>
-        <small><%= @board.created_at.strftime('%Y/%m/%d') %></small>
-      </p>
-      <% if @board.user == current_user %>
-      <p class="pb-3">
-        <%= link_to "編集", edit_board_path(@board.id),class: "col btn btn-dark-blue btn-rounded" %><br>
-        <%= link_to "削除", board_destroy_board_path(@board), class: "col btn btn-pink-moon btn-rounded", method: :delete, "data-confirm" => "本当に削除しますか？" %>
-      </p>
-      <% end %>
-    </div>
-  </div>
-</div>
-<div class="shadow-lg rounded px-0 my-5 table"> 
-  <% @board.board_comments.each do |board_comment| %>
-    <div class="answer_box5 ml-3">
-  		<% if board_comment.user.image_local.present? %>
-  			<%= image_tag board_comment.user.image_local.variant(resize_to_fill: [48, 48]) %>
-  		<% else %>
-  			<%= image_tag board_comment.user.image %>
-  		<% end %> 
-      <div class="balloon1-left">
-        <p><b><%=safe_join(board_comment.answer.split("\n"),tag(:br))%></b></p>
-        <p class="pt-2 small">
-        <small>
-          <%= board_comment.user.user_name %><br>
-          <%= board_comment.created_at.strftime('%Y/%m/%d') %>
-          <% if board_comment.user == current_user %><br>
-            <%= link_to '削除', board_destroy_board_comment_path(@board, board_comment), data: {confirm: '本当に削除しますか？'}, method: :delete ,class: "col btn btn-pink-moon btn-rounded mt-2"%><br>
-          <% end %>
-        </small>
+  <div class="shadow-lg rounded px-0 my-5 table">
+    <div class="board_box">
+      <div class="board_title">
+        <i class="bi bi-chat-right-dots-fill"></i> <%= @board.headline %>
+      </div>
+      <div class="board_main">
+        <p class="py-5">
+          <%=safe_join(@board.question.split("\n"),tag(:br))%>
         </p>
+        <p>
+          <% if @board.image.attached? %>
+          <small>※画像をクリックすると拡大できます</small>
+          <figure class="hover-img">
+            <%= link_to @board.image, "data-lightbox": @board.image do %>
+              <%= image_tag @board.image ,class:"img" %>
+            <% end %>
+            <figcaption>
+              <p>画像をクリックして拡大</p>
+            </figcaption>
+          </figure>
+          <% end %>
+        </p>
+        <p>
+          <small>
+          <% if @board.user.image_local.present? %>
+      			<%= image_tag @board.user.image_local.variant(resize_to_fill: [48, 48]) %>
+      		<% else %>
+      			<%= image_tag @board.user.image %>
+      		<% end %> <%= @board.user.user_name %>
+      		</small><br>
+          <small><%= @board.created_at.strftime('%Y/%m/%d') %></small>
+        </p>
+        <% if @board.user == current_user %>
+        <p class="pb-3">
+          <%= link_to "編集", edit_board_path(@board.id),class: "col btn btn-dark-blue btn-rounded" %><br>
+          <%= link_to "削除", board_destroy_board_path(@board), class: "col btn btn-pink-moon btn-rounded", method: :delete, "data-confirm" => "本当に削除しますか？" %>
+        </p>
+        <% end %>
       </div>
     </div>
-  <% end %>
-  <div class="mt-5 ml-4  pt-3">
-    <% if current_user.email == 'guest@example.com' %>		
-      <%=  %>    
-    <% else %>
-      <%= form_with model: [@board, @board_comment] do |f| %>
-        <%= f.text_area :answer, rows: '5', placeholder: "コメントをここに" , style: "height: 80px;", class: 'search_container' %>
-        <%= f.submit "送信する" ,class: "col btn btn-dark-blue btn-rounded mb-4"%>
-      <% end %>
-    <% end %>
   </div>
-</div>
+  <div class="shadow-lg rounded px-0 my-5 table"> 
+    <% @board.board_comments.each do |board_comment| %>
+      <div class="answer_box5 ml-3">
+    		<% if board_comment.user.image_local.present? %>
+    			<%= image_tag board_comment.user.image_local.variant(resize_to_fill: [48, 48]) %>
+    		<% else %>
+    			<%= image_tag board_comment.user.image %>
+    		<% end %> 
+        <div class="balloon1-left">
+          <p><b><%=safe_join(board_comment.answer.split("\n"),tag(:br))%></b></p>
+          <p class="pt-2 small">
+          <small>
+            <%= board_comment.user.user_name %><br>
+            <%= board_comment.created_at.strftime('%Y/%m/%d') %>
+            <% if board_comment.user == current_user %><br>
+              <%= link_to '削除', board_destroy_board_comment_path(@board, board_comment), data: {confirm: '本当に削除しますか？'}, method: :delete ,class: "col btn btn-pink-moon btn-rounded mt-2"%><br>
+            <% end %>
+          </small>
+          </p>
+        </div>
+      </div>
+    <% end %>
+    <div class="mt-5 ml-4  pt-3">
+      <% if current_user.email == 'guest@example.com' %>		
+        <%=  %>    
+      <% else %>
+        <%= form_with model: [@board, @board_comment] do |f| %>
+          <%= f.text_area :answer, rows: '5', placeholder: "コメントをここに" , style: "height: 80px;", class: 'search_container' %>
+          <%= f.submit "送信する" ,class: "col btn btn-dark-blue btn-rounded mb-4"%>
+        <% end %>
+      <% end %>
+    </div>
+  </div>
 </div>
