@@ -14,6 +14,7 @@ class Public::PostsController < ApplicationController
     end
     @tag_lists = Tag.all
   end
+  
   def new
      @post = Post.new
      @pens = @post.pens.build
