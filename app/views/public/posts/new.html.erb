@@ -66,7 +66,7 @@
           <p>説明画像 <small>（任意）</small><%= f.file_field :image, accept: "image/*" %></p>
           <p>タグ<small>（任意・スペースで複数入力可）</small><br>
           <%= form_with(model: [@tag,@post], local: true) do |f| %>
-            <%= f.text_area :tag_name, placeholder: "ばじふゆ 漫画 イラスト ", class: 'uk-input uk-form-small' %>
+            <%= f.text_area :tag_name, placeholder: "漫画 イラスト ", class: 'uk-input uk-form-small' %>
           <% end %>
           </p> 
           <p><%= f.submit "投稿！" ,class: "col btn btn-dark-blue btn-rounded" %></p>        

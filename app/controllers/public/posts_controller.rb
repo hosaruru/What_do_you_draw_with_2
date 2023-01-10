@@ -9,6 +9,7 @@ class Public::PostsController < ApplicationController
     elsif params[:tag_id].present?
       @tag = Tag.find(params[:tag_id])
       @posts = @tag.posts.order(created_at: :desc).page(params[:page])
+      @tag_name = "タグ：" + @tag.tag_name + " の一覧"
     else
       @posts = Post.all.order(created_at: :desc).page(params[:page])
     end
@@ -51,7 +52,6 @@ class Public::PostsController < ApplicationController
     tag_list = params[:post][:tag_name].split(/[[:blank:]]/)
     @post.user_id = current_user.id
     @post.clean_pen
-    # if @post.update(hoge) 
     if @post.update(post_params)
        @post.save_posts(tag_list)
       redirect_to post_path(@post.id)
@@ -77,9 +77,6 @@ class Public::PostsController < ApplicationController
   def post_params
     params.require(:post).permit(:tag_name, :brush, :image, :comments, :image, :introduction, :twitter, :software_id, pens_attributes:[:use_pen, :_destroy])
   end
-  # def hoge
-  #   post_params.merge!("pens_attributes" => post_params[:pens_attributes].select {|_, attributes| attributes[:use_pen].present? })
-  # end
   def ensure_user
     @posts = current_user.posts
     @post = @posts.find_by(id: params[:id])

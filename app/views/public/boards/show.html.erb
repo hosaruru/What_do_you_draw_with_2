@@ -32,7 +32,7 @@
       			<%= image_tag @board.user.image %>
       		<% end %> <%= @board.user.user_name %>
       		</small><br>
-          <small><%= @board.created_at.strftime('%Y/%m/%d') %></small>
+          <small><%= @board.created_at.strftime('%Y/%m/%d %H:%M:%S') %></small>
         </p>
         <% if @board.user == current_user %>
         <p class="pb-3">
@@ -45,7 +45,7 @@
   </div>
   <div class="shadow-lg rounded px-0 my-5 table"> 
     <% @board.board_comments.each do |board_comment| %>
-      <div class="answer_box5 ml-3">
+      <div class="answer_box5 ml-3"><small>
     		<% if board_comment.user.image_local.present? %>
     			<%= image_tag board_comment.user.image_local.variant(resize_to_fill: [48, 48]) %>
     		<% else %>
@@ -56,7 +56,7 @@
           <p class="pt-2 small">
           <small>
             <%= board_comment.user.user_name %><br>
-            <%= board_comment.created_at.strftime('%Y/%m/%d') %>
+            <%= board_comment.created_at.strftime('%Y/%m/%d %H:%M:%S') %>
             <% if board_comment.user == current_user %><br>
               <%= link_to '削除', board_destroy_board_comment_path(@board, board_comment), data: {confirm: '本当に削除しますか？'}, method: :delete ,class: "col btn btn-pink-moon btn-rounded mt-2"%><br>
             <% end %>

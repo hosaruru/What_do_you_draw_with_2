@@ -66,7 +66,7 @@
             <p><%= link_to "編集", edit_post_path(@post.id),class: "col btn btn-dark-blue btn-rounded" %></p>
             <p><%= link_to "削除", post_destroy_posts_path(@post.id), class: "col btn btn-pink-moon btn-rounded", method: :delete, "data-confirm" => "本当に削除しますか？" %></p>
             </div>
-          <% end %>
+          <% end %>          
           <% if current_user.email == 'guest@example.com' %>		
             <%=  %>    
           <% else %>
@@ -80,7 +80,8 @@
               <% end %>
             <% end %>	
           <% end %><br>
-          <span class=""><%= link_to 'Twitter', "https://twitter.com/share?url=#{request.url}/&text=&hashtags=なにで描いたの", title: 'Twitter', target: '_blank' ,class: "bi bi-twitter ml-1",style: "font-size: 20px;"%></span>
+          <span class=""><%= link_to 'Twitter', "https://twitter.com/share?url=#{request.url}/&text=&hashtags=なにで描いたの", title: 'Twitter', target: '_blank' ,class: "bi bi-twitter ml-1",style: "font-size: 20px;"%></span><br>
+  				<small><%= @post.created_at.strftime('%Y/%m/%d %H:%M:%S') %></small>
 				</div>							
 			<% end %>
   </div>
@@ -98,7 +99,7 @@
           <p class="pt-2 small">
           <small>
             <%= post_comment.user.user_name %><br>
-            <%= post_comment.created_at.strftime('%Y/%m/%d') %>
+            <%= post_comment.created_at.strftime('%Y/%m/%d %H:%M:%S') %>
             <% if post_comment.user == current_user %><br>
               <%= link_to '削除', post_post_comment_path(@post, post_comment), data: {confirm: '本当に削除しますか？'}, method: :delete ,class: "col btn btn-pink-moon btn-rounded mt-3"%><br>
             <% end %>
