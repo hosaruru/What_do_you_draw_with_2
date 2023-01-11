@@ -52,8 +52,8 @@
 			<p class ="top">投稿がありません。</p>
 		<% else %>
 			<% @post.each do |post| %>			
-			    <%= link_to post_path(post.id) do %>
-			    <div class="row py-4 border_gray">
+			  <%= link_to post_path(post.id) do %>
+			   <div class="row py-4 border_gray">
 					<div class="col-md-7">
 						<%= post.twitter.to_s.html_safe %>
 					</div>
@@ -74,7 +74,7 @@
 					  	<p><%= link_to "詳細", post_path(post.id),class: "col btn btn-dark-blue btn-rounded"  %></p>
 					</div>
 				</div>
-			   <% end %>
+			 <% end %>
 			<% end %>
 		<% end %>
 		</div>
