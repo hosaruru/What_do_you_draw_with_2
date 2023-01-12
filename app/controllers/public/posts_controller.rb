@@ -60,23 +60,29 @@ class Public::PostsController < ApplicationController
       render:edit
     end
   end
+  
   def destroy
     @post = Post.find(params[:id])
     @post.clean_tag
     @post.destroy
     redirect_to root_path
-  end   
+  end
+  
   def search
     @results = @q.result
     @posts = @results.page(params[:page])
   end
+  
   private
+  
   def set_q
     @q = Post.ransack(params[:q])
   end
+  
   def post_params
     params.require(:post).permit(:tag_name, :brush, :image, :comments, :image, :introduction, :twitter, :software_id, pens_attributes:[:use_pen, :_destroy])
   end
+  
   def ensure_user
     @posts = current_user.posts
     @post = @posts.find_by(id: params[:id])
