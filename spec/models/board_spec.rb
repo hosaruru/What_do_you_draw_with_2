@@ -13,9 +13,6 @@ describe '投稿のテスト' do
       it 'トップ画面(root_path)に掲示板へのリンクが表示されているか' do
         expect(page).to have_link "", href: boards_path
       end
-      it 'root_pathが"/"であるか' do
-        expect(current_path).to eq('/')
-      end
     end
   end
 end

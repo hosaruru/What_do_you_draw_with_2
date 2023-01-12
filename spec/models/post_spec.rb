@@ -36,5 +36,8 @@ RSpec.describe 'Postモデルのテスト', type: :model do
         expect(Post.reflect_on_association(:user).macro).to eq :belongs_to
       end
     end
+      it 'root_pathが"/"であるか' do
+        expect(current_path).to eq('/')
+      end
   end
 end

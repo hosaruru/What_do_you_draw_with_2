@@ -17,8 +17,8 @@ class Public::PostsController < ApplicationController
   end
   
   def new
-     @post = Post.new
-     @pens = @post.pens.build
+   @post = Post.new
+   @pens = @post.pens.build
   end
 
   def create
