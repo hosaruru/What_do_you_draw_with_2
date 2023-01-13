@@ -7,16 +7,16 @@ RSpec.describe 'Postモデルのテスト', type: :model do
     let(:user) { create(:user) }
     let!(:post) { build(:post, user_id: user.id) }
 
-    context 'titleカラム' do
+    context 'twitterカラム' do
       it '空欄でないこと' do
-        post.title = ''
+        post.twitter = ''
         is_expected.to eq false
       end
     end
 
-    context 'bodyカラム' do
+    context 'brushカラム' do
       it '空欄でないこと' do
-        post.body = ''
+        post.brush = ''
         is_expected.to eq false
       end
     end
@@ -26,6 +26,11 @@ RSpec.describe 'Postモデルのテスト', type: :model do
     context 'Userモデルとの関係' do
       it 'N:1となっている' do
         expect(Post.reflect_on_association(:user).macro).to eq :belongs_to
+      end
+    end
+    context 'Softwareモデルとの関係' do
+      it 'N:1となっている' do
+        expect(Post.reflect_on_association(:software).macro).to eq :belongs_to
       end
     end
       it 'root_pathが"/"であるか' do
