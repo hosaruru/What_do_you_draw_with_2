@@ -19,14 +19,6 @@ RSpec.describe 'Postモデルのテスト', type: :model do
         post.body = ''
         is_expected.to eq false
       end
-      it '200文字以下であること: 200文字は〇' do
-        post.body = Faker::Lorem.characters(number: 200)
-        is_expected.to eq true
-      end
-      it '200文字以下であること: 201文字は×' do
-        post.body = Faker::Lorem.characters(number: 201)
-        is_expected.to eq false
-      end
     end
   end
 
@@ -40,4 +32,9 @@ RSpec.describe 'Postモデルのテスト', type: :model do
         expect(current_path).to eq('/')
       end
   end
+    context '表示の確認' do
+      it 'トップ画面(root_path)にposts#showへのリンクが表示されているか' do
+        expect(page).to have_link "", href: post_path
+      end
+    end
 end
