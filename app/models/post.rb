@@ -24,24 +24,28 @@ class Post < ApplicationRecord
      end
     
      def save_posts(tags)
+       # フォームから送られてきたタグのうち、すでに存在するタグがひとつでもあった場合は、
+       # tagsテーブルのtag_nameカラムからpluckメソッドを使い一旦すべてのデータを引っ張ってきてcurrent_tagsに代入
        current_tags = self.tags.pluck(:tag_name) unless self.tags.nil?
+       # これから登録するタグの中から、すでに登録済のタグのみをold_tagsに入れる
        old_tags = current_tags - tags
+       # これから登録するタグの中から、新規のタグのみをold_tagsに入れる
        new_tags = tags - current_tags
     
        # Destroy
-       old_tags.each do |old_name|
-         tag= Tag.find_by(tag_name:old_name)
-         self.tags.delete tag
-         if Tagmap.where(tag_id:tag.id).count == 0
-           tag.destroy
-         end
-       end
+    #   old_tags.each do |old_name|
+    #      tag= Tag.find_by(tag_name:old_name)
+    #      self.tags.delete tag
+    #      if Tagmap.where(tag_id:tag.id).count == 0
+    #       tag.destroy
+    #      end
+    #   end
     
-       # Create
-       new_tags.each do |new_name|
-         post_tag = Tag.find_or_create_by(tag_name:new_name)
-         self.tags << post_tag
-       end
+    #   # Create
+    #   new_tags.each do |new_name|
+    #      post_tag = Tag.find_or_create_by(tag_name:new_name)
+    #      self.tags << post_tag
+    #   end
      end
      def clean_tag
         self.tags.each do |tag|

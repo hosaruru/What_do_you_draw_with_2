@@ -23,7 +23,6 @@ devise_for :admin, skip: [:registrations, :passwords] ,controllers: {
     resources :posts do
       collection do
         get 'search'
-        #get 'search_pens'
       end
     end
     

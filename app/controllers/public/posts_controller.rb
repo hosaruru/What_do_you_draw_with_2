@@ -3,10 +3,11 @@ class Public::PostsController < ApplicationController
   before_action :set_q, only: [:index, :search]
   before_action :ensure_user, only: [:edit, :update, :destroy]
   
-  def index   
-    if params[:search].present?
-      @posts = Post.posts_serach(params[:search]).page(params[:page])
-    elsif params[:tag_id].present?
+  def index 
+    #     if params[:search].present?
+    #   @posts = Post.posts_serach(params[:search]).page(params[:page])
+    # els
+    if params[:tag_id].present?
       @tag = Tag.find(params[:tag_id])
       @posts = @tag.posts.order(created_at: :desc).page(params[:page])
       @tag_name = "タグ：" + @tag.tag_name + " の一覧"
