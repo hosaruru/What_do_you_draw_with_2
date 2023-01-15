@@ -1,7 +1,7 @@
 require 'rails_helper'
 
 describe '投稿のテスト' do
-  let!(:post) { create(:post,title:'hoge',body:'body') }
+  let!(:post) { create(:post,twitter:'test',software_id:'1',brush:'test') }
   describe 'トップ画面(root_path)のテスト' do
     before do 
       visit root_path
@@ -9,8 +9,8 @@ describe '投稿のテスト' do
     context '表示の確認' do
       it 'root_pathが"/"であるか' do
         expect(current_path).to eq('/')
-      end
     end
+  end
   end
   describe "一覧画面のテスト" do
     before do
