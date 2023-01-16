@@ -1,4 +1,4 @@
-require 'rails_helper'
+require 'rails helper'
 describe '投稿のテスト' do
   describe 'トップ画面(root_path)のテスト' do
     before do 

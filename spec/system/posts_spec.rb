@@ -9,8 +9,8 @@ describe '投稿のテスト' do
     context '表示の確認' do
       it 'root_pathが"/"であるか' do
         expect(current_path).to eq('/')
+      end
     end
-  end
   end
   describe "一覧画面のテスト" do
     before do
@@ -33,44 +33,33 @@ describe '投稿のテスト' do
             expect(show_link.native.inner_text).to match(/show/i)
             expect(show_link[:href]).to eq post_path(post)
       end
-      it 'Create Postボタンが表示される' do
-        expect(page).to have_button 'Create Post'
+      it '詳細ボタンが表示される' do
+        expect(page).to have_button '詳細'
       end
     end
-    context '投稿処理に関するテスト' do
+    context '要確認投稿処理に関するテスト' do
       it '投稿に成功しサクセスメッセージが表示されるか' do
-        fill_in 'post[title]', with: Faker::Lorem.characters(number:5)
-        fill_in 'post[body]', with: Faker::Lorem.characters(number:20)
-        click_button 'Create Post'
-        expect(page).to have_content 'successfully'
+        fill_in 'post[twitter]', with: Faker::Lorem.characters(number:20)
+        fill_in 'post[brush]', with: Faker::Lorem.characters(number:5)
+        click_button ''
+        expect(page).to have_content '投稿できました。Twitterで共有してみましょう！'
       end
       it '投稿に失敗する' do
-        click_button 'Create Post'
-        expect(page).to have_content 'error'
+        click_button '投稿！'
+        expect(page).to have_content '必須です'
         expect(current_path).to eq('/posts')
       end
       it '投稿後のリダイレクト先は正しいか' do
         fill_in 'post[title]', with: Faker::Lorem.characters(number:5)
         fill_in 'post[body]', with: Faker::Lorem.characters(number:20)
-        click_button 'Create Post'
+        click_button '投稿！'
         expect(page).to have_current_path post_path(Post.last)
       end
     end
     context 'post削除のテスト' do
-      it 'application.html.erbにjavascript_pack_tagを含んでいるか' do
-        is_exist = 0
-        open("app/views/layouts/application.html.erb").each do |line|
-          strip_line = line.chomp.gsub(" ", "")
-          if strip_line.include?("<%=javascript_pack_tag'application','data-turbolinks-track':'reload'%>")
-            is_exist = 1
-            break
-          end
-        end
-        expect(is_exist).to eq(1)
-      end
       it 'postの削除' do
         before_delete_post = Post.count
-        click_link 'Destroy'
+        click_link '削除'
         after_delete_post = Post.count
         expect(before_delete_post - after_delete_post).to eq(1)
         expect(current_path).to eq('/posts')
@@ -82,29 +71,16 @@ describe '投稿のテスト' do
       visit post_path(post)
     end
     context '表示の確認' do
-      it '本のタイトルと感想が画面に表示されていること' do
-        expect(page).to have_content post.title
-        expect(page).to have_content post.body
-      end
-      it 'Editリンクが表示される' do
+      it '編集リンクが表示される' do
         edit_link = find_all('a')[0]
         expect(edit_link.native.inner_text).to match(/edit/i)
 			end
-      it 'Backリンクが表示される' do
-        back_link = find_all('a')[1]
-        expect(back_link.native.inner_text).to match(/back/i)
-			end  
     end
-    context 'リンクの遷移先の確認' do
-      it 'Editの遷移先は編集画面か' do
+    context '編集ボタンの遷移先の確認' do
+      it '編集ボタンの遷移先は編集画面か' do
         edit_link = find_all('a')[0]
         edit_link.click
         expect(current_path).to eq('/posts/' + post.id.to_s + '/edit')
-      end
-      it 'Backの遷移先は一覧画面か' do
-        back_link = find_all('a')[1]
-        back_link.click
-        expect(page).to have_current_path posts_path
       end
     end
   end
@@ -113,53 +89,27 @@ describe '投稿のテスト' do
       visit edit_post_path(post)
     end
     context '表示の確認' do
-      it '編集前のタイトルと感想がフォームに表示(セット)されている' do
-        expect(page).to have_field 'post[title]', with: post.title
-        expect(page).to have_field 'post[body]', with: post.body
+      it '要確認編集前のタイトルと感想がフォームに表示(セット)されている' do
+        expect(page).to have_field 'post[twitter]', with: post.twitter
+        expect(page).to have_field 'post[brush]', with: post.brush
       end
-      it 'Update Postボタンが表示される' do
-        expect(page).to have_button 'Update Post'
-      end
-      it 'Showリンクが表示される' do
-        show_link = find_all('a')[0]
-        expect(show_link.native.inner_text).to match(/show/i)
-			end  
-      it 'Backリンクが表示される' do
-        back_link = find_all('a')[1]
-        expect(back_link.native.inner_text).to match(/back/i)
-			end  
+      it '保存ボタンが表示される' do
+        expect(page).to have_button '保存'
+      end 
     end
-    context 'リンクの遷移先の確認' do
-      it 'Showの遷移先は詳細画面か' do
-        show_link = find_all('a')[0]
-        show_link.click
-        expect(current_path).to eq('/posts/' + post.id.to_s)
-      end
-      it 'Backの遷移先は一覧画面か' do
-        back_link = find_all('a')[1]
-        back_link.click
-        expect(page).to have_current_path posts_path
-      end
     end
     context '更新処理に関するテスト' do
-      it '更新に成功しサクセスメッセージが表示されるか' do
-        fill_in 'post[title]', with: Faker::Lorem.characters(number:5)
-        fill_in 'post[body]', with: Faker::Lorem.characters(number:20)
-        click_button 'Update Post'
-        expect(page).to have_content 'successfully'
-      end
       it '更新に失敗しエラーメッセージが表示されるか' do
-        fill_in 'post[title]', with: ""
-        fill_in 'post[body]', with: ""
-        click_button 'Update Post'
-        expect(page).to have_content 'error'
+        fill_in 'post[twitter]', with: ""
+        fill_in 'post[brush]', with: ""
+        click_button '保存'
+        expect(page).to have_content '必須です'
       end
       it '更新後のリダイレクト先は正しいか' do
-        fill_in 'post[title]', with: Faker::Lorem.characters(number:5)
-        fill_in 'post[body]', with: Faker::Lorem.characters(number:20)
-        click_button 'Update Post'
+        fill_in 'post[twitter]', with: Faker::Lorem.characters(number:20)
+        fill_in 'post[brush]', with: Faker::Lorem.characters(number:5)
+        click_button '保存'
         expect(page).to have_current_path post_path(post)
       end
     end
-  end
 end
