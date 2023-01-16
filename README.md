@@ -26,4 +26,3 @@
 
 ## 使用素材
 - Bootstrap Icons（https://icons.getbootstrap.jp/）
-- 
