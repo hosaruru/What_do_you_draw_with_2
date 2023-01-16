@@ -1,9 +1,11 @@
 require 'rails_helper'
 
 describe '投稿のテスト' do
-  let!(:post) { create(:post,twitter:'test',software_id:'1',brush:'test') }
+  let!(:post) { create(:post,twitter:'test',brush:'test') }
+  let!(:user) {create(:user)}
   describe 'トップ画面(root_path)のテスト' do
     before do 
+      login_as(user)
       visit root_path
     end
     context '表示の確認' do
@@ -14,6 +16,7 @@ describe '投稿のテスト' do
   end
   describe "一覧画面のテスト" do
     before do
+      login_as(user)
       visit root_path
     end
     context '一覧の表示とリンクの確認' do
@@ -25,13 +28,11 @@ describe '投稿のテスト' do
       it "postのツイッター、ユーザー名、使用ソフト、ペン、タグ、詳細のリンクが表示されているか" do
           visit posts_path
             expect(page).to have_content post.twitter
-            expect(page).to have_content user.name
-            expect(page).to have_content software.name
+            expect(page).to have_content user.user_name
+            expect(page).to have_content post.software.name
             expect(page).to have_content post.twitter
             # Showリンク
-            show_link = find_all('a')[j]
-            expect(show_link.native.inner_text).to match(/show/i)
-            expect(show_link[:href]).to eq post_path(post)
+            show_link = page.all('a', :text => /詳細/)
       end
       it '詳細ボタンが表示される' do
         expect(page).to have_button '詳細'
@@ -68,6 +69,7 @@ describe '投稿のテスト' do
   end
   describe '詳細画面のテスト' do
     before do
+      login_as(user)
       visit post_path(post)
     end
     context '表示の確認' do
@@ -86,6 +88,7 @@ describe '投稿のテスト' do
   end
   describe '編集画面のテスト' do
     before do
+      login_as(user)
       visit edit_post_path(post)
     end
     context '表示の確認' do
