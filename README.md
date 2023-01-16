@@ -25,4 +25,4 @@
 - IDE：Cloud9
 
 ## 使用素材
-- Bootstrap Icons（https://icons.getbootstrap.jp/）
+- Bootstrap Icons（ https://icons.getbootstrap.jp/ ）
