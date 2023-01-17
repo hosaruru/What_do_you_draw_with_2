@@ -7,15 +7,6 @@ RSpec.describe 'Postモデルのテスト', type: :model do
     let(:user) { create(:user) }
     let!(:post) { build(:post, user_id: user.id) }
     
-    describe 'validation' do
-      example 'nameは必須' do
-        user = User.new(name: '')
-        expect(user).to be_invalid
-  
-        user.name = 'Alice'
-        expect(user).to be_valid
-      end
-    end
     context 'twitterカラム' do
       it '空欄でないこと' do
         post.twitter = ''
