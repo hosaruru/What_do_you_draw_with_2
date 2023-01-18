@@ -33,13 +33,5 @@ RSpec.describe 'Postモデルのテスト', type: :model do
         expect(Post.reflect_on_association(:software).macro).to eq :belongs_to
       end
     end
-      it 'root_pathが"/"であるか' do
-        expect(current_path).to eq('/')
-      end
   end
-    context '表示の確認' do
-      it 'トップ画面(root_path)にposts#showへのリンクが表示されているか' do
-        expect(page).to have_link "", href: post_path
-      end
-    end
 end

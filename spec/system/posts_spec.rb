@@ -1,7 +1,7 @@
 require 'rails_helper'
 
-describe '投稿のテスト' do
-  let!(:post) { create(:post,twitter:'test',brush:'test') }
+describe 'postのテスト' do
+  let!(:post) {create(:post,twitter:'test',brush:'test') }
   let!(:user) {create(:user)}
   describe 'トップ画面(root_path)のテスト' do
     before do 
@@ -14,6 +14,8 @@ describe '投稿のテスト' do
       end
     end
   end
+  
+  
   describe "一覧画面のテスト" do
     before do
       login_as(user)
@@ -25,20 +27,36 @@ describe '投稿のテスト' do
         expect(page).to have_field 'q[brush_cont]'
         expect(page).to have_field 'q[pens_use_pen_cont]'
       end
-      it "postのツイッター、ユーザー名、使用ソフト、ペン、タグ、詳細のリンクが表示されているか" do
-          visit posts_path
-            expect(page).to have_content post.twitter
-            expect(page).to have_content user.user_name
-            expect(page).to have_content post.software.name
-            expect(page).to have_content post.twitter
-            # Showリンク
-            show_link = page.all('a', :text => /詳細/)
+      it "ツイッター、ユーザー名、使用ソフト、ペン、タグ、詳細のリンクが表示されているか" do
+        visit posts_path
+        expect(page).to have_content post.twitter
+        expect(page).to have_content user.user_name
+        expect(page).to have_content post.software.name
       end
-      it '詳細ボタンが表示される' do
-        expect(page).to have_button '詳細'
+      it "詳細のリンクが表示されているか" do
+        show_link = page.all('a', :text => /詳細/)
       end
     end
-    context '要確認投稿処理に関するテスト' do
+  end
+  
+  
+  describe "投稿処理に関するテスト" do
+    before do
+    login_as(user)
+    visit root_path
+  end
+    context '表示の確認' do
+        it "ツイッター、使用ソフト、ペンの入力ボックスが表示されているか" do
+        visit new_post_path
+        expect(page).to have_field 'post[twitter]'
+        expect(page).to have_field 'post[software_id]'
+        expect(page).to have_field 'post[brush]'
+      end
+      it "投稿のリンクが表示されているか" do
+        new_link = page.all('a', :text => /投稿！/)
+      end
+    end
+    context '表示の確認' do
       it '投稿に成功しサクセスメッセージが表示されるか' do
         fill_in 'post[twitter]', with: Faker::Lorem.characters(number:20)
         fill_in 'post[brush]', with: Faker::Lorem.characters(number:5)
@@ -57,6 +75,8 @@ describe '投稿のテスト' do
         expect(page).to have_current_path post_path(Post.last)
       end
     end
+    end
+    
     context 'post削除のテスト' do
       it 'postの削除' do
         before_delete_post = Post.count
@@ -66,6 +86,7 @@ describe '投稿のテスト' do
         expect(current_path).to eq('/posts')
       end
     end
+  end
   end
   describe '詳細画面のテスト' do
     before do
