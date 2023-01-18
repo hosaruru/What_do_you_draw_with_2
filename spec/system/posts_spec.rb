@@ -43,10 +43,9 @@ describe 'postのテスト' do
   describe "投稿処理に関するテスト" do
     before do
     login_as(user)
-    visit root_path
   end
     context '表示の確認' do
-        it "ツイッター、使用ソフト、ペンの入力ボックスが表示されているか" do
+      it "ツイッター、使用ソフト、ペンの入力ボックスが表示されているか" do
         visit new_post_path
         expect(page).to have_field 'post[twitter]'
         expect(page).to have_field 'post[software_id]'
@@ -56,17 +55,19 @@ describe 'postのテスト' do
         new_link = page.all('a', :text => /投稿！/)
       end
     end
-    context '表示の確認' do
+    context '挙動の確認' do
       it '投稿に成功しサクセスメッセージが表示されるか' do
+        visit new_post_path
         fill_in 'post[twitter]', with: Faker::Lorem.characters(number:20)
         fill_in 'post[brush]', with: Faker::Lorem.characters(number:5)
-        click_button ''
+        click_button '投稿！'
         expect(page).to have_content '投稿できました。Twitterで共有してみましょう！'
       end
       it '投稿に失敗する' do
+        visit new_post_path
         click_button '投稿！'
         expect(page).to have_content '必須です'
-        expect(current_path).to eq('/posts')
+        expect(current_path).to eq posts_path
       end
       it '投稿後のリダイレクト先は正しいか' do
         fill_in 'post[title]', with: Faker::Lorem.characters(number:5)
@@ -75,19 +76,12 @@ describe 'postのテスト' do
         expect(page).to have_current_path post_path(Post.last)
       end
     end
-    end
+  end
     
-    context 'post削除のテスト' do
-      it 'postの削除' do
-        before_delete_post = Post.count
-        click_link '削除'
-        after_delete_post = Post.count
-        expect(before_delete_post - after_delete_post).to eq(1)
-        expect(current_path).to eq('/posts')
-      end
-    end
-  end
-  end
+    
+
+
+
   describe '詳細画面のテスト' do
     before do
       login_as(user)
@@ -106,7 +100,18 @@ describe 'postのテスト' do
         expect(current_path).to eq('/posts/' + post.id.to_s + '/edit')
       end
     end
+    context 'post削除のテスト' do
+      it 'postの削除' do
+        before_delete_post = Post.count
+        click_link '削除'
+        after_delete_post = Post.count
+        expect(before_delete_post - after_delete_post).to eq(1)
+        expect(current_path).to eq('/posts')
+      end
+    end
   end
+  
+  
   describe '編集画面のテスト' do
     before do
       login_as(user)
@@ -120,7 +125,6 @@ describe 'postのテスト' do
       it '保存ボタンが表示される' do
         expect(page).to have_button '保存'
       end 
-    end
     end
     context '更新処理に関するテスト' do
       it '更新に失敗しエラーメッセージが表示されるか' do
@@ -136,4 +140,5 @@ describe 'postのテスト' do
         expect(page).to have_current_path post_path(post)
       end
     end
+  end
 end
