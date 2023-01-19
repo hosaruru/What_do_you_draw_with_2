@@ -112,6 +112,7 @@ describe 'postのテスト' do
   end
   
   
+  
   describe '編集画面のテスト' do
     before do
       login_as(user)
