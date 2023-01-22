@@ -81,7 +81,6 @@ describe 'postのテスト' do
     
 
 
-
   describe '詳細画面のテスト' do
     before do
       login_as(user)
