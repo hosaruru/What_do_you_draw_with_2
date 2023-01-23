@@ -1,28 +1,15 @@
-a = gets.chomp.split(":")
-tokei = a.map(&:to_i)
-tokei[1] = tokei[1]+30
+# 1. ふたつのペアのりんごの数が異なる場合、りんごの数が多い方が偉い（この際、バナナの数は関係ない）。
+# 2. りんごの数が同じである場合、バナナの数が多い方が偉い。
+## 入力例1
+# 2
+# 1 3
+# 2 2
 
+## 出力例1
+# 2 2
+# 1 3
 
-#もし[1]60以上なら、[0]に1を足す
-if tokei[1] >= 60
-    tokei[1] = tokei[1]-60
-    tokei[0] = tokei[0]+1
-end
-
-if tokei[0] >= 24
-    tokei[0] = tokei[0]-24
-    
-end
-
-#もし0がぬけていたら足す
-tokei = tokei.map(&:to_s)
-
-if tokei[0].length == 1
-    tokei[0] = "0"+tokei[0]
-end
-if tokei[1].length == 1
-    tokei[1] = "0"+tokei[1]
-end
-
-puts "#{tokei[0]}:#{tokei[1]}"
-
+kazu = gets.to_i
+set = readlines.map(&:chomp)
+p set
+puts set.sort.reverse
