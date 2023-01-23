@@ -1,15 +1,41 @@
-# 1. ふたつのペアのりんごの数が異なる場合、りんごの数が多い方が偉い（この際、バナナの数は関係ない）。
-# 2. りんごの数が同じである場合、バナナの数が多い方が偉い。
-## 入力例1
-# 2
-# 1 3
-# 2 2
+# 1. 持っている銀が多い方が財産が多い。
+# 2. 持っている銀が同じなら、持っている金が多い方が財産が多い。
 
-## 出力例1
-# 2 2
-# 1 3
+# 入力例1
+# 2 二人いるよ
+# 2 1　左が金、右が銀
+# 1 2　左が金、右が銀
 
-kazu = gets.to_i
-set = readlines.map(&:chomp)
-p set
-puts set.sort.reverse
+# 出力例1
+# 1 2
+# 2 1
+
+
+
+
+people = gets.to_i
+lines = readlines(chomp: true).map{|line| line.split(' ').map(&:to_i)}
+
+
+lines = lines.sort {|a,b| a[1] <=> b[1]}.reverse
+
+
+lines.each do |fruits|
+    puts fruits.join(' ')
+end
+
+
+
+
+# people = gets.to_i
+# lines = readlines(chomp: true).map{|line| line.split(' ').map(&:to_i)}
+# lines = lines.reverse
+
+# lines.sort.reverse
+
+# lines = lines
+
+
+# lines.each do |fruits|
+#     puts fruits.join(' ')
+# end
