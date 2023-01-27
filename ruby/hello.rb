@@ -1,37 +1,88 @@
-line = gets.chomp.split('')
-nyuryoku = gets.chomp
-kazu = line.length
+sum = 0
 
-kyoka = line.repeated_permutation(3).to_a
-kyoka_len = kyoka.length
-kyoka_list = []
-
-q = 0
-for i in 1..kyoka_len
-kyoka_list[q] = 
+k = 1
+w = 2
+t = 3
 
 
-kyoka[q][0]+kyoka[q][1]+kyoka[q][2]
+  sum = k.to_f * w.to_f / t.to_f + k.to_f * w.to_f / t.to_f + k.to_f * w.to_f / t.to_f
+
+
+
+puts sum
 
 
 
 
 
-q += 1
+///////////////
+
+
+k = 1
+w = 2
+t = 3
+for i in 1..3
+  sum = k.to_f * w.to_f / t.to_f
 end
- p kyoka_list
-line_len = line.length
-l = 0
-pass = ""
-for i in 1..line_len
-pass = pass + line[l]
-l += 1
+p sum
+
+////////
+
+array = [*(0..10)]
+p array
+
+
+arry 
+
+k = 1
+w = 2
+t = 3
+for i in 1..3
+  sum = k * w / t
 end
 
 
-if kyoka_list.include?(nyuryoku) && !(nyuryoku == pass)
-  puts "YES"
-  else
-  puts "NO"   
-end
 
+//////////
+nyo = 0
+num = 1
+i = 1
+while nyo < 4 do
+    i = i + 1
+    puts num
+    puts i
+    num = num * i.to_f
+    puts num
+    i = i + 1
+    num = num / i.to_f
+    puts num
+    i = i + 1
+    num = num + i.to_f
+    puts num
+    nyo = nyo + 3
+end
+puts num
+
+
+/////////
+
+sum = 0
+for i in 1..9 do
+    sum = sum + i
+    sum = sum / (i+1)
+    
+end
+print sum
+
+
+num = 0
+i = 0
+while nyo < 10000 do
+    i = i + 1
+    num = num * i
+    i = i + 1
+    num = num / i
+    i = i + 1
+    num = num + i
+    nyo
+end
