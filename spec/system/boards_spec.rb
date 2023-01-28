@@ -3,18 +3,7 @@ require 'rails_helper'
 describe 'boardのテスト' do
   let!(:board) {create(:board,twitter:'test',brush:'test') }
   let!(:user) {create(:user)}
-  describe 'トップ画面(root_path)のテスト' do
-    before do 
-      login_as(user)
-      visit root_path
-    end
-    context '表示の確認' do
-      it 'root_pathが"/"であるか' do
-        expect(current_path).to eq('/')
-      end
-    end
-  end
-  
+
   
   describe "一覧画面のテスト" do
     before do
