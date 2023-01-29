@@ -3,7 +3,12 @@ require 'rails_helper'
 describe 'boardのテスト' do
   let!(:board) {create(:board,headline:'test',text:'test') }
   let!(:user) {create(:user)}
-
+  describe 'トップ画面(root_path)のテスト' do
+    before do 
+      login_as(user)
+      visit root_path
+    end
+  end
   
   describe "一覧画面のテスト" do
     before do
