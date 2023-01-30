@@ -13,11 +13,11 @@ describe 'boardのテスト' do
   describe "一覧画面のテスト" do
     before do
       login_as(user)
-      visit board_path
+      visit boards_path
     end
     context '一覧の表示とリンクの確認' do
-      it "詳細のリンクが表示されているか" do
-        new_link = page.all('a', :text => /投稿する/)
+      it "投稿のリンクが表示されているか" do
+        new_link = page.all('a', :text => /投稿！/)
       end
     end
   end

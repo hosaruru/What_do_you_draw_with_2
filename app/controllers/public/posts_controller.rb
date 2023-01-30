@@ -4,9 +4,7 @@ class Public::PostsController < ApplicationController
   before_action :ensure_user, only: [:edit, :update, :destroy]
   
   def index 
-    #     if params[:search].present?
-    #   @posts = Post.posts_serach(params[:search]).page(params[:page])
-    # els
+    #タグがクリックされたとき
     if params[:tag_id].present?
       @tag = Tag.find(params[:tag_id])
       @posts = @tag.posts.order(created_at: :desc).page(params[:page])

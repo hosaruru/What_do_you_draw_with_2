@@ -22,7 +22,7 @@ class Post < ApplicationRecord
           !pen.nil? && pen.use_pen != ""
         end
      end
-    
+    ## タグ機能
      def save_posts(tags)
        # フォームから送られてきたタグのうち、すでに存在するタグがひとつでもあった場合は、
        # tagsテーブルのtag_nameカラムからpluckメソッドを使い一旦すべてのデータを引っ張ってきてcurrent_tagsに代入。（すべて新しいものの場合はnilになる）
@@ -36,13 +36,6 @@ class Post < ApplicationRecord
        old_tags.each do |old_name|
          self.tags.delete Tag.find_by(tag_name:old_name)
        end
-    #   old_tags.each do |old_name|
-    #      tag= Tag.find_by(tag_name:old_name)
-    #      self.tags.delete tag
-    #      if Tagmap.where(tag_id:tag.id).count == 0
-    #       tag.destroy
-    #      end
-    #   end
     
        # Create
        new_tags.each do |new_name|
@@ -52,6 +45,7 @@ class Post < ApplicationRecord
          self.tags << post_tag
        end
      end
+     
      def clean_tag
         self.tags.each do |tag|
            if Tagmap.where(tag_id:tag.id).where.not(post_id:self.id).count == 0
@@ -64,6 +58,7 @@ class Post < ApplicationRecord
             use_pen.destroy
         end
      end
+     ## 通知機能
      def create_notification_favorite!(current_user)
          temp = Notification.where(["visitor_id = ? and visited_id = ? and post_id = ? and action = ? ", current_user.id, user_id, id, 'favorite'])
         if temp.blank?
