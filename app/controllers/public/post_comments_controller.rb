@@ -1,10 +1,10 @@
 class Public::PostCommentsController < ApplicationController
     def create
     post = Post.find(params[:post_id])
-    comment = current_user.post_comments.new(post_comment_params)#同じ可能性100%
+    comment = current_user.post_comments.new(post_comment_params)
     comment.post_id = post.id
         if comment.save
-          comment.post.create_notification_post_comment!(current_user, comment.id)#コメントに基づいてるポスト(@comment.post)を使って「create_notification」メソッドを呼び出す（今のユーザー、ポストコメントid）
+          comment.post.create_notification_post_comment!(current_user, comment.id)
           redirect_to post_path(post)
         else
           flash[:alret] = "コメントを入力してください。"

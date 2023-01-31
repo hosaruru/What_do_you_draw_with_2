@@ -79,6 +79,7 @@ class Public::PostsController < ApplicationController
   end
   
   def post_params
+    # :_destroyトで、子モデルの削除及び編集の動作が利用可能
     params.require(:post).permit(:tag_name, :brush, :image, :comments, :image, :introduction, :twitter, :software_id, pens_attributes:[:use_pen, :_destroy])
   end
   
