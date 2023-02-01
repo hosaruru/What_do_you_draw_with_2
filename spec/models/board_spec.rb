@@ -3,6 +3,7 @@
 require 'rails_helper'
 
 RSpec.describe 'Postモデルのテスト', type: :model do
+    let(:user) { create(:user) }
   describe '投稿のテスト' do
     let!(:board) { create(:board,title:'hoge',body:'body') }
     describe 'トップ画面(root_path)のテスト' do
