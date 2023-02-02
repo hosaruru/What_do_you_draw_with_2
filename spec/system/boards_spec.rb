@@ -3,21 +3,22 @@ require 'rails_helper'
 describe 'boardのテスト' do
   let!(:board) {create(:board,headline:'test',text:'test') }
   let!(:user) {create(:user)}
-  describe 'トップ画面(root_path)のテスト' do
+  describe '掲示板画面(boards_path)のテスト' do
     before do 
       login_as(user)
-      visit root_path
+      visit boards_path
     end
   end
   
-  describe "一覧画面のテスト" do
+  describe "掲示画面のテスト" do
     before do
       login_as(user)
       visit boards_path
     end
     context '一覧の表示とリンクの確認' do
       it "投稿のリンクが表示されているか" do
-        new_link = page.all('a', :text => /投稿！/)
+        visit boards_path
+        new_link = page.all('a', :text => /投稿する/)
       end
     end
   end
