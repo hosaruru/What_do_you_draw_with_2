@@ -70,3 +70,4 @@ gem "net-imap"
 gem 'omniauth', '1.9.1'
 gem 'omniauth-twitter'
 gem 'net-smtp'
+gem 'jquery-rails'

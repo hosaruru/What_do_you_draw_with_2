@@ -53,4 +53,5 @@ $(function(){
      return false;
   });
 });
-
+//= require jquery
+//= require rails-ujs
