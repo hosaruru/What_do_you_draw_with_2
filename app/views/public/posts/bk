@@ -70,9 +70,15 @@
           <% if current_user.email == 'guest@example.com' %>		
             <%=  %>    
           <% else %>
-            <p id="post_<%= @post.id %>">
-				      <%= render 'post', post: @post %>
-				    </p>
+            <% if @post.favorited?(current_user) %>
+              <%= link_to favorites_path(post_id: @post.id), method: :delete do %>
+                <span style="color:red; font-size: 30px;"><i class="bi bi-heart-fill"></i></span>
+              <% end %>
+            <% else %>
+              <%= link_to favorites_path(post_id: @post.id), method: :post do %>
+                <span style="color:gray;font-size: 30px;"><i class="bi bi-heart-fill"></i></span>
+              <% end %>
+            <% end %>	
           <% end %><br>
           <span class=""><%= link_to 'Twitter', "https://twitter.com/share?url=#{request.url}/&text=&hashtags=なにで描いたの", title: 'Twitter', target: '_blank' ,class: "bi bi-twitter ml-1",style: "font-size: 20px;"%></span><br>
   				<small><%= @post.created_at.strftime('%Y/%m/%d %H:%M:%S') %></small>

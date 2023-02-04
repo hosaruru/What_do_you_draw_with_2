@@ -32,5 +32,7 @@ class User < ApplicationRecord
   def self.dummy_email(auth)
     "#{Time.now.strftime('%Y%m%d%H%M%S').to_i}-#{auth.uid}-#{auth.provider}@example.com"
   end
-
+  def liked_by?(post_id)
+    favorites.where(post_id: post_id).exists?
+  end
 end

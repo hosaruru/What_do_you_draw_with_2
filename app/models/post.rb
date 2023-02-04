@@ -14,6 +14,11 @@ class Post < ApplicationRecord
     def favorited?(user)
       favorites.where(user_id: user.id).exists?
     end
+    
+    # def liked_by?(post_id)
+    # favorites.where(post_id: post_id).exists?
+    # end
+    
      def self.posts_serach(search)
        Post.where(['title LIKE ? OR content LIKE ?', "%#{search}%", "%#{search}%"])
      end

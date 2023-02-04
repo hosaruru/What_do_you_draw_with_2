@@ -32,9 +32,14 @@ devise_for :admin, skip: [:registrations, :passwords] ,controllers: {
       delete 'posts/:id' => 'posts#destroy', as: 'destroy_posts'
       resources :post_comments, only: [:create, :destroy]
     end
+    # resource :favorites, only: [:create, :destroy]
+    # patch 'posts/:id' => 'posts#update', as: 'update_post'
+    # post 'posts' => 'posts#create'
+    
     resource :favorites, only: [:create, :destroy]
-    patch 'posts/:id' => 'posts#update', as: 'update_post'
-    post 'posts' => 'posts#create'
+    post 'favorite/:id' => 'favorites#create', as: 'create_favorite'
+    delete 'favorite/:id' => 'favorites#destroy', as: 'destroy_favorite'
+
 
     resources :users, only: [:show, :edit]
     patch 'users/:id' => 'users#update', as: 'update_user'

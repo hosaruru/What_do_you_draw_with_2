@@ -1,0 +1,10 @@
+<%# if current_user.liked_by?(post.id) %>
+<% if @post.favorited?(current_user) %>
+  <%= link_to destroy_favorite_path(post), method: :delete, remote: true do %>
+    <span style="color:red; font-size: 30px;"><i class="bi bi-heart-fill"></i></span>
+  <% end %>
+  <% else %>
+  <%= link_to create_favorite_path(post), method: :post, remote: true do %>
+    <span style="color:gray;font-size: 30px;"><i class="bi bi-heart-fill"></i></span>
+  <% end %>
+<% end %>
