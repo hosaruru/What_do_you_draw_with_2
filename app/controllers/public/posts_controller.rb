@@ -12,7 +12,7 @@ class Public::PostsController < ApplicationController
     else
       @posts = Post.all.order(created_at: :desc).page(params[:page])
     end
-    @tag_lists = Tag.all
+      @tag_lists = Tag.all
   end
   
   def new

@@ -1,0 +1,2 @@
+$("#new_board_comment").html("<%= j(render 'public/board_comments/board_form', board: @board, board_comment: @board_comment) %>")
+$("#board_comments_area").html("<%= j(render 'public/board_comments/board_comments', board: @board , board_comment: @board_comment) %>")

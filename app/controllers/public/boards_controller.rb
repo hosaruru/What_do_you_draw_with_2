@@ -10,7 +10,7 @@ class Public::BoardsController < ApplicationController
     @board = Board.new(board_params)
     @board.image.attach(params[:board][:image])
     @board.user_id = current_user.id
-    if@board.save
+    if @board.save
       redirect_to board_path(@board.id)
     else
       flash.now[:alret] = "*は必須です。"

@@ -1,0 +1,7 @@
+<%= form_with(model:[@board, @board_comment], local: false) do |f| %>
+  <div id="comments_error">
+    <%= render 'public/post_comments/error_messages', model: f.object %>
+  </div>
+  <%= f.text_area :answer, rows: '5', placeholder: "コメントをここに" , style: "height: 80px;", class: 'search_container' %>
+  <%= f.submit "送信する" ,class: "col btn btn-dark-blue btn-rounded mb-4"%>
+ <% end %>

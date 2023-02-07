@@ -71,7 +71,7 @@
             <%=  %>    
           <% else %>
             <p id="post_<%= @post.id %>">
-				      <%= render 'post', post: @post %>
+				      <%= render 'public/favorites/favorite', post: @post %>
 				    </p>
           <% end %><br>
           <span class=""><%= link_to 'Twitter', "https://twitter.com/share?url=#{request.url}/&text=&hashtags=なにで描いたの", title: 'Twitter', target: '_blank' ,class: "bi bi-twitter ml-1",style: "font-size: 20px;"%></span><br>
@@ -81,35 +81,16 @@
   </div>
   </div>
   <div class="mx-2 mx-sm-auto shadow-lg rounded px-0 my-5 table"> 
-    <% @post.post_comments.each do |post_comment| %>
-      <div class="ml-3">
-  			<% if post_comment.user.image_local.present? %>
-  				<%= image_tag post_comment.user.image_local.variant(resize_to_fill: [48, 48]) %>
-  			<% else %>
-  				<%= image_tag post_comment.user.image  %>
-  			<% end %> 
-        <div class="balloon1-left">
-          <p><b><%=safe_join(post_comment.comment.split("\n"),tag(:br))%></b></p>
-          <p class="pt-2 small">
-          <small>
-            <%= post_comment.user.user_name %><br>
-            <%= post_comment.created_at.strftime('%Y/%m/%d %H:%M:%S') %>
-            <% if post_comment.user == current_user %><br>
-              <%= link_to '削除', post_post_comment_path(@post, post_comment), data: {confirm: '本当に削除しますか？'}, method: :delete ,class: "col btn btn-pink-moon btn-rounded mt-3"%><br>
-            <% end %>
-          </small>
-          </p>
-        </div>
-      </div>
-    <% end %>
+    <div id="comments_area"> 
+      <%= render 'public/post_comments/post_comments', post: @post, post_comment: @post_comment %>
+    </div>
     <div class="mt-5 ml-4 pt-3">
       <% if current_user.email == 'guest@example.com' %>		
         <%=  %>    
       <% else %>
-        <%= form_with model: [@post, @post_comment] do |f| %>
-          <%= f.text_area :comment, rows: '5', placeholder: "コメントをここに" , style: "height: 80px;", class: 'search_container' %>
-          <%= f.submit "送信する" ,class: "col btn btn-dark-blue btn-rounded mb-4"%>
-        <% end %>
+      <div id="new_comment">
+        <%= render 'public/post_comments/form', post: @post, post_comment: @post_comment %>
+      </div>
       <% end %>
     </div>
   </div>

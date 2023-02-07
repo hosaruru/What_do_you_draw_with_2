@@ -1,0 +1,21 @@
+<% @post.post_comments.each do |post_comment| %>
+  <div class="ml-3">
+		<% if post_comment.user.image_local.present? %>
+			<%= image_tag post_comment.user.image_local.variant(resize_to_fill: [48, 48]) %>
+		<% else %>
+			<%= image_tag post_comment.user.image  %>
+		<% end %> 
+    <div class="balloon1-left">
+      <p><b><%=safe_join(post_comment.comment.split("\n"),tag(:br))%></b></p>
+      <p class="pt-2 small">
+      <small>
+        <%= post_comment.user.user_name %><br>
+        <%= post_comment.created_at.strftime('%Y/%m/%d %H:%M:%S') %>
+        <% if post_comment.user == current_user %><br>
+          <%= link_to '削除', post_post_comment_path(@post, post_comment), method: :delete , remote: true, data: {confirm: '本当に削除しますか？'}, class: "col btn btn-pink-moon btn-rounded mt-3"%><br>
+        <% end %>
+      </small>
+      </p>
+    </div>
+  </div>
+<% end %>

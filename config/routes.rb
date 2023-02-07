@@ -33,8 +33,8 @@ devise_for :admin, skip: [:registrations, :passwords] ,controllers: {
       resources :post_comments, only: [:create, :destroy]
     end
     # resource :favorites, only: [:create, :destroy]
-    # patch 'posts/:id' => 'posts#update', as: 'update_post'
-    # post 'posts' => 'posts#create'
+    patch 'posts/:id' => 'posts#update', as: 'update_post'
+    post 'posts' => 'posts#create'
     
     resource :favorites, only: [:create, :destroy]
     post 'favorite/:id' => 'favorites#create', as: 'create_favorite'

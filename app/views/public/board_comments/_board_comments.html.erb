@@ -1,0 +1,21 @@
+<% @board.board_comments.each do |board_comment| %>
+  <div class="answer_box5 ml-3"><small>
+		<% if board_comment.user.image_local.present? %>
+			<%= image_tag board_comment.user.image_local.variant(resize_to_fill: [48, 48]) %>
+		<% else %>
+			<%= image_tag board_comment.user.image %>
+		<% end %>
+    <div class="balloon1-left">
+      <p><b><%=safe_join(board_comment.answer.split("\n"),tag(:br))%></b></p>
+      <p class="pt-2 small">
+      <small>
+        <%= board_comment.user.user_name %><br>
+        <%= board_comment.created_at.strftime('%Y/%m/%d %H:%M:%S') %>
+        <% if board_comment.user == current_user %><br>
+          <%= link_to '削除', board_destroy_board_comment_path(@board, board_comment), method: :delete , remote: true, data: {confirm: '本当に削除しますか？'}, class: "col btn btn-pink-moon btn-rounded mt-2"%><br>
+        <% end %>
+      </small>
+      </p>
+    </div>
+  </div>
+<% end %>
