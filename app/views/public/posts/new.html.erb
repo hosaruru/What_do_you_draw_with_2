@@ -69,6 +69,9 @@
             <%= f.text_area :tag_name, placeholder: "漫画 イラスト ", class: 'uk-input uk-form-small' %>
           <% end %>
           </p> 
+          <div class="form-group">
+            <%= f.select :status, Post.statuses.keys.map { |k| [t("enums.post.status.#{k}"),k]}, {}, {class: "custom-select w-25"} %>
+          </div>
           <p><%= f.submit "投稿！" ,class: "col btn btn-dark-blue btn-rounded" %></p>        
         </div>
       </div>

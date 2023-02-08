@@ -1,0 +1,53 @@
+<div class="wrap mx-sm-auto">
+<div class='mt-5 mb-5', id="title">
+	<p>
+		<span>下</span>
+		<span>書</span>
+		<span>き</span>
+		<span>一</span>
+		<span>覧</span>
+	</p>
+</div>
+<% if @favorite_posts.blank? %>
+	<p class ="top">下書きがありません。</p>
+  <% else %>
+<div class='container px-sm-0'>
+		<% @posts.each do |post| %>
+			<%= link_to post_path(post.id) do %>
+			<div class='row py-4 border_gray'>
+				<div class="col-md-7">
+					<%= post.twitter.to_s.html_safe %>
+				</div>
+				<div class="col-md-5 pl-5">
+					<h5><i class="bi bi-person-fill"></i></i> ユーザー</h5>
+					<p><%= link_to user_path(post.user.id) do %>
+						<% if post.user.image_local.present? %>
+							<%= image_tag post.user.image_local.variant(resize_to_fill: [48, 48]) %>
+						<% else %>
+							<%= image_tag post.user.image %>
+						<% end %>
+							<%= post.user.user_name %>
+					<% end %></p>
+					<h5><i class="bi bi-magic"></i> 使用ソフト</h5>
+					<p>・<%= post.software.name %></p>
+					<h5><i class="bi bi-pen"></i> 線画ペン</h5>
+					<p>・<%= post.brush %></p>
+					<% if post.pen_present? %>
+					  <h5 class="mt-4"><i class="bi bi-pencil-fill"></i> 塗りペン、他</h5>
+					<% end %>
+					<% post.pens.each do |use_pen| %>
+						<% if use_pen.use_pen.present? %>
+							<p>・<%= use_pen.use_pen %></p>
+						<% end %>
+					<% end %><br>									
+					<p><%= link_to "詳細", post_path(post.id), class: "col btn btn-dark-blue btn-rounded" %></p>							
+					<% post.tags.each do |tag| %>
+						<p class="tag"><i class="bi bi-tag-fill"></i><%= link_to tag.tag_name, posts_path(tag_id: tag.id) %></p>											
+					<% end %>
+				</div>	
+			</div>
+			<% end %>
+		<% end %>		
+	</div>
+	<% end %>	
+</div>

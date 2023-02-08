@@ -10,9 +10,13 @@ class Public::PostsController < ApplicationController
       @posts = @tag.posts.order(created_at: :desc).page(params[:page])
       @tag_name = "タグ：" + @tag.tag_name + " の一覧"
     else
-      @posts = Post.all.order(created_at: :desc).page(params[:page])
+      # @posts = Post.all.order(created_at: :desc).page(params[:page])
+      @posts = Post.published.page(params[:page]).reverse_order
+      @posts = @posts.where('location LIKE ?', "%#{params[:search]}%") if params[:search].present?
     end
       @tag_lists = Tag.all
+      
+
   end
   
   def new
@@ -72,6 +76,9 @@ class Public::PostsController < ApplicationController
     @posts = @results.page(params[:page])
   end
   
+def confirm
+  @posts = current_user.posts.draft.page(params[:page]).reverse_order
+end
   private
   
   def set_q
@@ -80,7 +87,7 @@ class Public::PostsController < ApplicationController
   
   def post_params
     # :_destroyで、子モデルの削除及び編集の動作が利用可能
-    params.require(:post).permit(:tag_name, :brush, :image, :comments, :image, :introduction, :twitter, :software_id, pens_attributes:[:use_pen, :_destroy])
+    params.require(:post).permit(:tag_name, :brush, :image, :comments, :image, :introduction, :twitter, :software_id, :status, pens_attributes:[:use_pen, :_destroy])
   end
   
   def ensure_user

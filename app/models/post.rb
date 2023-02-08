@@ -9,6 +9,7 @@ class Post < ApplicationRecord
       has_many :pens, dependent: :destroy
       has_many :notifications, dependent: :destroy
       validates :twitter,:brush, presence: true
+      enum status: { published: 0, draft: 1 }
       # allow_destroy: trueをつけることで、子モデルの削除が可能
       accepts_nested_attributes_for :pens, allow_destroy: true
     def favorited?(user)

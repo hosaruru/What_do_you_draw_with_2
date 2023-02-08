@@ -23,6 +23,7 @@ devise_for :admin, skip: [:registrations, :passwords] ,controllers: {
     resources :posts do
       collection do
         get 'search'
+        get 'confirm'
       end
     end
     
@@ -31,6 +32,7 @@ devise_for :admin, skip: [:registrations, :passwords] ,controllers: {
     resources :posts, only: [:new, :show, :edit, :index]do
       delete 'posts/:id' => 'posts#destroy', as: 'destroy_posts'
       resources :post_comments, only: [:create, :destroy]
+        
     end
     # resource :favorites, only: [:create, :destroy]
     patch 'posts/:id' => 'posts#update', as: 'update_post'
