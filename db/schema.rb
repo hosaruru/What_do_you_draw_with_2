@@ -132,7 +132,6 @@ ActiveRecord::Schema.define(version: 2023_02_07_131949) do
     t.text "twitter"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
-    t.string "is_draft"
     t.integer "status", default: 0, null: false
   end
 
