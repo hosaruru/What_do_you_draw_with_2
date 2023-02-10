@@ -2,5 +2,5 @@ ja:
   enums:
     post:
       status:
-        published: '投稿する'
-        draft: '下書きする'
+        published: '実際に投稿する'
+        draft: '下書きに保存　'

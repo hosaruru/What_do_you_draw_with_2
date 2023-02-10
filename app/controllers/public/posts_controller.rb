@@ -13,10 +13,14 @@ class Public::PostsController < ApplicationController
       # @posts = Post.all.order(created_at: :desc).page(params[:page])
       @posts = Post.published.page(params[:page]).reverse_order
       @posts = @posts.where('location LIKE ?', "%#{params[:search]}%") if params[:search].present?
+      @all_ranks = @posts.find(Favorite.group(:post_id).order('count(post_id) desc').limit(3).pluck(:post_id))
     end
       @tag_lists = Tag.all
-      
-
+  end 
+  
+  def rank
+    @posts = Post.published.page(params[:page]).reverse_order
+   @all_ranks = @posts.find(Favorite.group(:post_id).order('count(post_id) desc').limit(3).pluck(:post_id))
   end
   
   def new

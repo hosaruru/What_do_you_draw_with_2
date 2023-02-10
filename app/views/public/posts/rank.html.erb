@@ -1,35 +1,18 @@
-<div class="notice">
-  <%= flash[:notice] %>
-</div>
 <div class='mt-5', id="title">
 	<p>
-		<span>み</span>
-		<span>ん</span>
-		<span>な</span>
-		<span>の</span>
-		<span>投</span>
-		<span>稿</span>
+		<span>ブ</span>
+		<span>ク</span>
+		<span>マ</span>
+		<span>ラ</span>
+		<span>ン</span>
+		<span>キ</span>
+		<span>ン</span>
+		<span>グ</span>
 	</p>
 </div>
-<p class= "tag_title"><%= @tag_name %></p>
 <div class="wrap mx-sm-auto">
-	<div class="top">
-		<%= search_form_for @q, url: search_posts_path do |f| %>
-			<%= f.search_field :brush_cont , class: 'search_container mb-2', placeholder: "線画ペン検索" %>
-			<%= f.submit '検索' ,class: "btn btn-dark btn-sm"%>
-		<% end %>
-		<%= search_form_for @q, url: search_posts_path do |f| %>
-			<%= f.search_field :pens_use_pen_cont, class: 'search_container' , placeholder: "塗りペン検索" %>
-			<%= f.submit '検索' ,class: "btn btn-dark btn-sm"%>
-		<% end %>	
-		  <div class="row mt-3">
-    <div class="col btn_wrap">
-        <%= link_to "ブクマランキング" , rank_posts_path, class: "col btn btn-funky-moon btn-rounded" %>
-    </div>
-    </div>
-	</div>
 	<div class='container px-sm-0'>
-		<% @posts.each do |post| %>
+		<% @all_ranks.each do |post| %>
 			<%= link_to post_path(post.id) do %>
 			<div class='row py-4 border_gray'>
 				<div class="col-md-7">

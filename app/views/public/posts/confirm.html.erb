@@ -20,7 +20,7 @@
                            <%#= post.twitter.to_s.html_safe %>
                            </td>
                             <td>					
-                    				<p><%= link_to "詳細", post_path(post.id), class: "col btn btn-dark-blue btn-rounded" %></p>							
+                    				<p><%= link_to "編集", edit_post_path(post.id), class: "col btn btn-dark-blue btn-rounded" %></p>							
                     				<% post.tags.each do |tag| %>
                     					<p class="tag"><i class="bi bi-tag-fill"></i><%= link_to tag.tag_name, posts_path(tag_id: tag.id) %></p>											
                     				<% end %>

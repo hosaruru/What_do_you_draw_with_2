@@ -37,7 +37,7 @@ class Post < ApplicationRecord
        current_tags = self.tags.pluck(:tag_name) unless self.tags.nil?
        # これから登録するタグの中から、すでに登録済のタグのみをold_tagsに入れる
        old_tags = current_tags - tags
-       # これから登録するタグの中から、新規のタグのみをold_tagsに入れる
+       # これから登録するタグの中から、新規のタグのみをnew_tagsに入れる
        new_tags = tags - current_tags
     
      ## Destroy
