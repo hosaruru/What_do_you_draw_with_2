@@ -1,122 +1,102 @@
-<div class="alret">
-  <%= flash[:alret] %>
-</div>
-<% if flash[:notice] %>
-<div class="notice pb-1">
-  <span>投稿できました。Twitterで共有してみましょう！</span><br>
-  <%= link_to 'Twitter', "https://twitter.com/share?url=#{request.url}/&text=&hashtags=なにで描いたの", title: 'Twitter', target: '_blank' ,class: "bi bi-twitter ml-4 col btn btn-dark-blue btn-rounded" %>
-</div>
-<% end %>
-<div class="wrap mx-sm-auto">
-<div class='mt-5 mb-5', id="title">
-  <p>
-  <span>詳</span>
-  <span>細</span>
-  </p>
-</div>
-  <div class='container'>
-  	<div class='row'>
-			<%= link_to user_path(@post.id) do %>
-				<div class="col-md-7">
-					<%= @post.twitter.to_s.html_safe %>
-				</div>
-				<div class="col-md-5">
-				  <h5><i class="bi bi-person-fill"></i></i> ユーザー</h5>
-					<p>
-					<%= link_to user_path(@post.user.id) do %>
-						<% if @post.user.image_local.present? %>
-							<%= image_tag @post.user.image_local.variant(resize_to_fill: [48, 48]) %>
-						<% else %>
-							<%= image_tag @post.user.image  %>
-						<% end %> <%= @post.user.user_name %>
-					<% end %>
-					</p>
-					<h5><i class="bi bi-magic"></i> 使用ソフト</h5>
-					<p>・<%= @post.software.name %></p>
-          <h5 class="mt-4"><i class="bi bi-pen"></i> 線画ペン</h5>
-            <p>・<%= @post.brush %></p> 
-              <% if @post.pen_present? %>
-                <h5 class="mt-4"><i class="bi bi-pencil-fill"></i> 塗りペン、他</h5>
-              <% end %>
-          <% @post.pens.each do |use_pen| %>
-              <% if use_pen.use_pen.present? %>
-                <p>・<%= use_pen.use_pen %></p>
-              <% end %>
-          <% end %>
-          <% if @post.comments.present? %>
-            <h5 class="mt-4"><i class="bi bi-card-text"></i> 補足説明</h5>
-            <p><%=safe_join(@post.comments.split("\n"),tag(:br))%></p>
-          <% end %>
-          <% @post.tags.each do |tag| %>
-            <p class="tag"><i class="bi bi-tag-fill"></i><%= link_to tag.tag_name, posts_path(tag_id: tag.id) %></p>											
-          <% end %>
-          <% if @post.image.attached? %>
-          <small>※画像をクリックすると拡大できます</small>
-            <figure class="hover-img">
-              <%= link_to @post.image, "data-lightbox": @post.image do %>
-                <%= image_tag @post.image ,style: "max-width: 200px;", class:"img" %>
-              <% end %>
-              <figcaption>
-                <p>画像をクリックして拡大</p>
-              </figcaption>
-            </figure>
-          <% end %>
-          <% if  @post.user == current_user %>
-            <div class="row" style="margin-left: 1px;">
-            <p><%= link_to "編集", edit_post_path(@post.id),class: "col btn btn-dark-blue btn-rounded" %></p>
-            <p><%= link_to "削除", post_destroy_posts_path(@post.id), class: "col btn btn-pink-moon btn-rounded", method: :delete, "data-confirm" => "本当に削除しますか？" %></p>
-            </div>
-          <% end %>          
-          <% if current_user.email == 'guest@example.com' %>		
-            <%=  %>    
-          <% else %>
-            <% if @post.favorited?(current_user) %>
-              <%= link_to favorites_path(post_id: @post.id), method: :delete do %>
-                <span style="color:red; font-size: 30px;"><i class="bi bi-heart-fill"></i></span>
-              <% end %>
-            <% else %>
-              <%= link_to favorites_path(post_id: @post.id), method: :post do %>
-                <span style="color:gray;font-size: 30px;"><i class="bi bi-heart-fill"></i></span>
-              <% end %>
-            <% end %>	
-          <% end %><br>
-          <span class=""><%= link_to 'Twitter', "https://twitter.com/share?url=#{request.url}/&text=&hashtags=なにで描いたの", title: 'Twitter', target: '_blank' ,class: "bi bi-twitter ml-1",style: "font-size: 20px;"%></span><br>
-  				<small><%= @post.created_at.strftime('%Y/%m/%d %H:%M:%S') %></small>
-				</div>							
-			<% end %>
-  </div>
-  </div>
-  <div class="mx-2 mx-sm-auto shadow-lg rounded px-0 my-5 table"> 
-    <% @post.post_comments.each do |post_comment| %>
-      <div class="ml-3">
-  			<% if post_comment.user.image_local.present? %>
-  				<%= image_tag post_comment.user.image_local.variant(resize_to_fill: [48, 48]) %>
-  			<% else %>
-  				<%= image_tag post_comment.user.image  %>
-  			<% end %> 
-        <div class="balloon1-left">
-          <p><b><%=safe_join(post_comment.comment.split("\n"),tag(:br))%></b></p>
-          <p class="pt-2 small">
-          <small>
-            <%= post_comment.user.user_name %><br>
-            <%= post_comment.created_at.strftime('%Y/%m/%d %H:%M:%S') %>
-            <% if post_comment.user == current_user %><br>
-              <%= link_to '削除', post_post_comment_path(@post, post_comment), data: {confirm: '本当に削除しますか？'}, method: :delete ,class: "col btn btn-pink-moon btn-rounded mt-3"%><br>
-            <% end %>
-          </small>
-          </p>
-        </div>
-      </div>
-    <% end %>
-    <div class="mt-5 ml-4 pt-3">
-      <% if current_user.email == 'guest@example.com' %>		
-        <%=  %>    
-      <% else %>
-        <%= form_with model: [@post, @post_comment] do |f| %>
-          <%= f.text_area :comment, rows: '5', placeholder: "コメントをここに" , style: "height: 80px;", class: 'search_container' %>
-          <%= f.submit "送信する" ,class: "col btn btn-dark-blue btn-rounded mb-4"%>
-        <% end %>
-      <% end %>
-    </div>
-  </div>
-</div>
+class Public::PostsController < ApplicationController
+  before_action :authenticate_user!
+  before_action :set_q, only: [:index, :search]
+  before_action :ensure_user, only: [:edit, :update, :destroy]
+  
+  def index 
+    #タグがクリックされたとき
+    if params[:tag_id].present?
+      @tag = Tag.find(params[:tag_id])
+      @posts = @tag.posts.order(created_at: :desc).page(params[:page])
+      @tag_name = "タグ：" + @tag.tag_name + " の一覧"
+    else
+      # @posts = Post.all.order(created_at: :desc).page(params[:page])
+      @posts = Post.published.page(params[:page]).reverse_order
+      @posts = @posts.where('location LIKE ?', "%#{params[:search]}%") if params[:search].present?
+      @all_ranks = @posts.find(Favorite.group(:post_id).order('count(post_id) desc').limit(3).pluck(:post_id))
+    end
+      @tag_lists = Tag.all
+  end 
+  
+  def rank
+    @posts = Post.published.page(params[:page]).reverse_order
+   @all_ranks = @posts.find(Favorite.group(:post_id).order('count(post_id) desc').limit(3).pluck(:post_id))
+  end
+  
+  def new
+   @post = Post.new
+   @pens = @post.pens.build
+  end
+
+  def create
+    @post = Post.new(post_params)
+    tag_list = params[:post][:tag_name].split(/[[:blank:]]/)
+    @post.image.attach(params[:post][:image])
+    @post.user_id = current_user.id
+    if @post.save
+      @post.save_posts(tag_list)
+      redirect_to post_path(@post.id)
+      flash[:notice] = ""
+    else
+      flash.now[:alret] = "*は必須です。"
+      render:new
+    end
+  end
+
+  def show
+    @post = Post.find(params[:id])
+    @software = Software.all
+    @post_comment = PostComment.new
+    @tag_lists = Tag.all
+  end
+
+  def edit
+    @post = Post.find(params[:id])
+  end
+
+  def update
+    @post = Post.find(params[:id])
+    tag_list = params[:post][:tag_name].split(/[[:blank:]]/)
+    @post.user_id = current_user.id
+    @post.clean_pen
+    if @post.update(post_params)
+       @post.save_posts(tag_list)
+      redirect_to post_path(@post.id)
+    else
+      flash.now[:alret] = "*は必須です。"
+      render:edit
+    end
+  end
+  
+  def destroy
+    @post = Post.find(params[:id])
+    @post.clean_tag
+    @post.destroy
+    redirect_to root_path
+  end
+  
+  def search
+    @results = @q.result
+    @posts = @results.page(params[:page])
+  end
+  
+def confirm
+  @posts = current_user.posts.draft.page(params[:page]).reverse_order
+end
+  private
+  
+  def set_q
+    @q = Post.ransack(params[:q])
+  end
+  
+  def post_params
+    # :_destroyで、子モデルの削除及び編集の動作が利用可能
+    params.require(:post).permit(:tag_name, :brush, :image, :comments, :image, :introduction, :twitter, :software_id, :status, pens_attributes:[:use_pen, :_destroy])
+  end
+  
+  def ensure_user
+    @posts = current_user.posts
+    @post = @posts.find_by(id: params[:id])
+    redirect_to new_post_path unless @post
+  end
+end

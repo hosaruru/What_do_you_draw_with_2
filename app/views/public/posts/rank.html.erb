@@ -12,8 +12,16 @@
 </div>
 <div class="wrap mx-sm-auto">
 	<div class='container px-sm-0'>
-		<% @all_ranks.each do |post| %>
+		<% @all_ranks.each.with_index(1) do |post, i| %>
+		<% if i == 1 %>
+		<p class="rank"><%= image_tag 'kkrn_icon_ranking_1.png' %></p>
+		<% elsif i == 2 %>
+		<p class="rank"><%= image_tag 'kkrn_icon_ranking_2.png' %></p>
+		<% elsif i == 3 %>
+		<p class="rank"><%= image_tag 'kkrn_icon_ranking_3.png' %></p>
+		<% end %>
 			<%= link_to post_path(post.id) do %>
+
 			<div class='row py-4 border_gray'>
 				<div class="col-md-7">
 					<%= post.twitter.to_s.html_safe %>
@@ -47,7 +55,9 @@
 				</div>	
 			</div>
 			<% end %>
-		<% end %>		
+		<% end %>	
+		
+			
 	</div>
 	<ul class="pagination"><li class="page-item"><%= paginate @posts%></li></ul>
 </div>

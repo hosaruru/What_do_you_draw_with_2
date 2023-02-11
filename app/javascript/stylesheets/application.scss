@@ -129,7 +129,13 @@ h2{
   top: -3px;
   outline : none;
 }
-
+.rank{
+  text-align: center;
+  margin: 30px 0 0 0;
+  }
+.rank img{
+  max-width: 60px;
+}
 .fadeIn {
   animation-name: fadeInAnime;
   animation-duration:3s;

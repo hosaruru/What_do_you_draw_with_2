@@ -33,13 +33,18 @@ class Public::PostsController < ApplicationController
     tag_list = params[:post][:tag_name].split(/[[:blank:]]/)
     @post.image.attach(params[:post][:image])
     @post.user_id = current_user.id
-    if @post.save
-      @post.save_posts(tag_list)
-      redirect_to post_path(@post.id)
-      flash[:notice] = ""
-    else
-      flash.now[:alret] = "*は必須です。"
-      render:new
+    if @post.published?
+        if @post.save
+          @post.save_posts(tag_list)
+          redirect_to post_path(@post.id)
+          flash[:notice] = ""
+        else
+          flash.now[:alret] = "*は必須です。"
+          render:new
+        end
+    elsif @post.draft?
+      @post.save!(validate: false)
+      redirect_to confirm_posts_path
     end
   end
 
@@ -59,13 +64,22 @@ class Public::PostsController < ApplicationController
     tag_list = params[:post][:tag_name].split(/[[:blank:]]/)
     @post.user_id = current_user.id
     @post.clean_pen
+    @post.update(post_params)
     if @post.update(post_params)
-       @post.save_posts(tag_list)
-      redirect_to post_path(@post.id)
+      if @post.published?
+         @post.save_posts(tag_list)
+        redirect_to post_path(@post.id)
+      end
+      elsif @post.draft?
+        @post.save_posts(tag_list)
+        @post.save!(validate: false)
+        redirect_to confirm_posts_path
+      
     else
-      flash.now[:alret] = "*は必須です。"
-      render:edit
+        flash.now[:alret] = "*は必須です。"
+        render:edit
     end
+    
   end
   
   def destroy
