@@ -8,6 +8,7 @@
   		<span>集</span>
   	</p>
   </div>
+
   <%= form_with model: @post, url: update_post_path(@post.id), method: :patch do |f| %>
     <div class="row input_area">
       <div class="col-md-5">
@@ -68,9 +69,12 @@
           <%= form_with(model: [@tag,@post], local: true) do |f| %>
             <%= f.text_area :tag_name, placeholder: "漫画 イラスト ", class: 'uk-input uk-form-small' %>
           <% end %>
-          </p> 
+          </p>
           <div class="form-group mt-5">
+          <% if @draft == "draft" %>
             <%= f.select :status, Post.statuses.keys.map { |k| [t("enums.post.status.#{k}"),k]}, {}, {class: "custom-select"} %>
+          <% else %>
+          <% end %>
           </div>
           <p><%= f.submit "OK！" ,class: "col btn btn-dark-blue btn-rounded" %></p>          
         </div>

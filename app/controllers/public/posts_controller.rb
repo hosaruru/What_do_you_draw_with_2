@@ -13,13 +13,12 @@ class Public::PostsController < ApplicationController
       # @posts = Post.all.order(created_at: :desc).page(params[:page])
       @posts = Post.published.page(params[:page]).reverse_order
       @posts = @posts.where('location LIKE ?', "%#{params[:search]}%") if params[:search].present?
-      @all_ranks = @posts.find(Favorite.group(:post_id).order('count(post_id) desc').limit(3).pluck(:post_id))
     end
       @tag_lists = Tag.all
   end 
   
   def rank
-    @posts = Post.published.page(params[:page]).reverse_order
+    @posts = Post.published.page(params[:page])
    @all_ranks = @posts.find(Favorite.group(:post_id).order('count(post_id) desc').limit(3).pluck(:post_id))
   end
   
@@ -57,14 +56,17 @@ class Public::PostsController < ApplicationController
 
   def edit
     @post = Post.find(params[:id])
+    if @post.draft?
+      @draft = "draft"
+    end
   end
 
   def update
     @post = Post.find(params[:id])
     tag_list = params[:post][:tag_name].split(/[[:blank:]]/)
     @post.user_id = current_user.id
-    @post.clean_pen
     @post.update(post_params)
+    @post.clean_pen
     if @post.update(post_params)
       if @post.published?
          @post.save_posts(tag_list)
@@ -74,12 +76,10 @@ class Public::PostsController < ApplicationController
         @post.save_posts(tag_list)
         @post.save!(validate: false)
         redirect_to confirm_posts_path
-      
     else
         flash.now[:alret] = "*は必須です。"
         render:edit
     end
-    
   end
   
   def destroy
@@ -95,7 +95,7 @@ class Public::PostsController < ApplicationController
   end
   
 def confirm
-  @posts = current_user.posts.draft.page(params[:page]).reverse_order
+    @posts = current_user.posts.draft.page(params[:page]).reverse_order
 end
   private
   
