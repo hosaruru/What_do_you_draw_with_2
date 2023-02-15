@@ -7,8 +7,7 @@ class Public::BoardCommentsController < ApplicationController
     if @board_comment.save    
       # @board_comment.create_notification_board_comment!
       @board_comment = BoardComment.new
-      @board_comment.create_notification_board_comment! 
-      
+      @board_comment.create_notification_board_comment!
     else
       render :error
     end

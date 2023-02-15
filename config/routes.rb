@@ -1,5 +1,9 @@
 Rails.application.routes.draw do
   namespace :public do
+    get 'relationships/followings'
+    get 'relationships/followers'
+  end
+  namespace :public do
     get 'homes/about'
   end
   # ユーザー用
@@ -50,6 +54,9 @@ devise_for :admin, skip: [:registrations, :passwords] ,controllers: {
       member do
         get :favorites
       end
+      resource :relationships, only: [:create, :destroy]
+        get 'followings' => 'relationships#followings', as: 'followings'
+        get 'followers' => 'relationships#followers', as: 'followers'
     end
 
     resources :lists, only: [:index, :show]
