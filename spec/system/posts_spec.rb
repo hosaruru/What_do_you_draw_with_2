@@ -1,7 +1,7 @@
 require 'rails_helper'
 
 describe 'postのテスト' do
-  let!(:post) {create(:post,twitter:'test',brush:'test') }
+  let!(:post) {create(:post) }
   let!(:user) {create(:user)}
   describe 'トップ画面(root_path)のテスト' do
     before do 
@@ -54,12 +54,14 @@ describe 'postのテスト' do
       end
     end
     context '挙動の確認' do
+      let!(:software) {create(:software)}
+
       it '投稿に成功しサクセスメッセージが表示されるか' do
         visit new_post_path
         fill_in 'post[twitter]', with: Faker::Lorem.characters(number:20)
         fill_in 'post[brush]', with: Faker::Lorem.characters(number:5)
-        fill_in 'post.software[name]', with: Faker::Lorem.characters(number:2)
-        click_button '投稿！'
+        select software.name,from: 'post[software_id]'
+        click_button 'OK！'
         expect(page).to have_content '投稿できました。Twitterで共有してみましょう！'
       end
       it '投稿に失敗する' do

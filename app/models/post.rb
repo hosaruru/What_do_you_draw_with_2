@@ -1,7 +1,7 @@
 class Post < ApplicationRecord
     has_one_attached :image
       belongs_to :user
-      belongs_to :software
+      belongs_to :software  # ,optional:true
       has_many :favorites, dependent: :destroy
       has_many :post_comments, dependent: :destroy    
       has_many :tagmaps, dependent: :destroy

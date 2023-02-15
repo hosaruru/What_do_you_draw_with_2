@@ -21,7 +21,6 @@
 		<p class="rank"><%= image_tag 'kkrn_icon_ranking_3.png' %></p>
 		<% end %>
 			<%= link_to post_path(post.id) do %>
-
 			<div class='row py-4 border_gray'>
 				<div class="col-md-7">
 					<%= post.twitter.to_s.html_safe %>
@@ -55,9 +54,6 @@
 				</div>	
 			</div>
 			<% end %>
-		<% end %>	
-		
-			
+		<% end %>			
 	</div>
-	<ul class="pagination"><li class="page-item"><%= paginate @posts%></li></ul>
 </div>

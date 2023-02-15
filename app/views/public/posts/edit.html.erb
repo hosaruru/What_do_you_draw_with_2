@@ -71,7 +71,7 @@
           <% end %>
           </p>
           <div class="form-group mt-5">
-          <% if @draft == "draft" %>
+          <% if @post.draft?%>
             <%= f.select :status, Post.statuses.keys.map { |k| [t("enums.post.status.#{k}"),k]}, {}, {class: "custom-select"} %>
           <% else %>
           <% end %>

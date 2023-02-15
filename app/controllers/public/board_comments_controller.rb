@@ -6,7 +6,6 @@ class Public::BoardCommentsController < ApplicationController
     @board_comment.user_id = current_user.id
     if @board_comment.save    
       # @board_comment.create_notification_board_comment!
-      @board_comment = BoardComment.new
       @board_comment.create_notification_board_comment!
     else
       render :error
@@ -16,6 +15,7 @@ class Public::BoardCommentsController < ApplicationController
   def destroy
     @board =  Board.find(params[:board_id])
     BoardComment.find(params[:id]).destroy
+    Notification.where(board_comment_id: params[:id]).destroy_all
   end
   
   private

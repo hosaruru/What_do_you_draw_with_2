@@ -1,4 +1,4 @@
-<%= form_with(model:[@board, @board_comment], local: false) do |f| %>
+<%= form_with(model:[board, board_comment], local: false) do |f| %>
   <div id="comments_error">
     <%= render 'public/post_comments/error_messages', model: f.object %>
   </div>

@@ -33,15 +33,21 @@ class Public::PostsController < ApplicationController
     @post.image.attach(params[:post][:image])
     @post.user_id = current_user.id
     if @post.published?
+      p @post.valid?
+      p @post.errors
         if @post.save
+          @post.name = "published"
+          @post.save
           @post.save_posts(tag_list)
           redirect_to post_path(@post.id)
           flash[:notice] = ""
         else
+          @post.name = "draft"
           flash.now[:alret] = "*は必須です。"
           render:new
         end
     elsif @post.draft?
+      @post.name = "draft"
       @post.save!(validate: false)
       redirect_to confirm_posts_path
     end
@@ -56,9 +62,6 @@ class Public::PostsController < ApplicationController
 
   def edit
     @post = Post.find(params[:id])
-    if @post.draft?
-      @draft = "draft"
-    end
   end
 
   def update
@@ -69,15 +72,19 @@ class Public::PostsController < ApplicationController
     @post.clean_pen
     if @post.update(post_params)
       if @post.published?
+         @post.update(post_params)
          @post.save_posts(tag_list)
         redirect_to post_path(@post.id)
         flash[:notice] = ""
       end
-      elsif @post.draft?
+    elsif @post.draft?
+        @post.update(post_params)
         @post.save_posts(tag_list)
         @post.save!(validate: false)
+        @post.clean_pen
         redirect_to confirm_posts_path
     else
+        @post.status = @post.status_was
         flash.now[:alret] = "*は必須です。"
         render:edit
     end
