@@ -71,6 +71,7 @@ class Public::PostsController < ApplicationController
       if @post.published?
          @post.save_posts(tag_list)
         redirect_to post_path(@post.id)
+        flash[:notice] = ""
       end
       elsif @post.draft?
         @post.save_posts(tag_list)
