@@ -37,7 +37,6 @@ describe 'postのテスト' do
     end
   end
   
-  
   describe "投稿処理に関するテスト" do
     before do
     login_as(user)
