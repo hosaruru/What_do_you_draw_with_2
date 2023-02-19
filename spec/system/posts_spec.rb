@@ -57,6 +57,9 @@ describe 'postのテスト' do
 
       it '投稿に成功しサクセスメッセージが表示されるか' do
         visit new_post_path
+        expect(page).to have_field 'post[twitter]'
+        expect(page).to have_field 'post[software_id]'
+        expect(page).to have_field 'post[brush]'
         fill_in 'post[twitter]', with: Faker::Lorem.characters(number:20)
         fill_in 'post[brush]', with: Faker::Lorem.characters(number:5)
         select software.name,from: 'post[software_id]'
