@@ -10,18 +10,25 @@
 				<span>ジ</span>
 				</p>
 			</div>
-			<table class='table mypage'>      	      	
-				<tr>
-				<td><% if @user.image_local.present? %>
-				<%= image_tag @user.image_local.variant(resize_to_fill: [48, 48]) %>
-				<% else %>
-				<%= image_tag @user.image  %>
-				<% end %>
-				<br><%= @user.user_name %>	<span><%= link_to "", edit_user_path ,class: "bi bi-gear"%></span></td>
-				</tr>
+			<table class='table mypage'>
+				<tbody style="display: inline-block;">
+					<tr style="display: inline-block;">
+					<td><% if @user.image_local.present? %>
+					<%= image_tag @user.image_local.variant(resize_to_fill: [48, 48]) %>
+					<% else %>
+					<%= image_tag @user.image  %>
+					<% end %>
+					<br><%= @user.user_name %>	<span><%= link_to "", edit_user_path ,class: "bi bi-gear"%></span></td>
+					</tr>
+					<tr>
+					  <td>フォロー数: <%=  link_to "#{@user.followings.count}" , user_followings_path(@user.id)%></td>
+	          <td>フォロワー数: <%=  link_to "#{@user.followers.count}" , user_followers_path(@user.id)%></td>
+
+	         </tr>
+	       <tbody>
 			</table>	      
 		</div>
-		<%= render 'public/relationships/followings' %>
+		<%#= render 'public/relationships/followings' %>
 	<% else %>
 		<div class="mt-5 mb-5">
 			<div id="title">
@@ -36,14 +43,20 @@
 				</p>
 			</div>
 			<table class='table mypage'>      	      	
-				<tr>
-				<td><% if @user.image_local.present? %>
-				<%= image_tag @user.image_local.variant(resize_to_fill: [48, 48]) %>
-				<% else %>
-				<%= image_tag @user.image  %>
-				<% end %>
-				<br><%= @user.user_name %></td>
+				<tbody style="display: inline-block;">
+				<tr style="display: inline-block;">
+					<td><% if @user.image_local.present? %>
+					<%= image_tag @user.image_local.variant(resize_to_fill: [48, 48]) %>
+					<% else %>
+					<%= image_tag @user.image  %>
+					<% end %>
+					<br><%= @user.user_name %></td>
 				</tr>
+				<tr>
+				  <td>フォロー数: <%= @user.followings.count %></td>
+          <td>フォロワー数: <%= @user.followers.count %></td>
+         </tr>
+        </tbody>
 			</table>
 			
 			<% if current_user.following?(@user) %>

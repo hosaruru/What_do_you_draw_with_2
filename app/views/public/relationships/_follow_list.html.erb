@@ -1,7 +1,5 @@
-<% if @users.blank? %>
-<p>ユーザーはいません</p>
-<% else %>
-    <% @users.each do |user| %>
+<% if @users.exists? %>
+  <% @users.each do |user| %>
     <table>
       <thead>
         <tr>
@@ -12,12 +10,11 @@
       </thead>
       <tbody>
         <tr>
-          <td><%= user.name %></td>
-          <td>フォロー数: <%= user.followings.count %></td>
-          <td>フォロワー数: <%= user.followers.count %></td>
+          <td><%= user.user_name %></td>
         </tr>
       </tbody>
     </table>
   <% end %>
+<% else %>
+  <p>ユーザーはいません</p>
 <% end %>
-<%= @nyo %>
