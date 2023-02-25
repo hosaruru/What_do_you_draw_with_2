@@ -1,20 +1,37 @@
-<% if @users.exists? %>
-  <% @users.each do |user| %>
-    <table>
-      <thead>
+<div class="wrap mx-sm-auto">
+  <div class="top">
+  <% if @users.exists? %>
+    <table class="table table-hover">
+      <thead class="thead-light">
         <tr>
-          <th>name</th>
-          <th></th>
-          <th></th>
+        <th scope="col">
+          <% if @url.include?("followings") %>
+          <%= "フォロー中" %>
+          <% else %>
+          <%= "フォロワー" %>
+          <% end %>
+        </th>
         </tr>
       </thead>
-      <tbody>
-        <tr>
-          <td><%= user.user_name %></td>
-        </tr>
+      <tbody>       
+          <% @users.each do |user| %>
+          <tr>
+            <td scope="row">
+            <%= link_to user_path(user.id) do %>
+                <% if user.image_local.present? %>
+                  <%= image_tag user.image_local.variant(resize_to_fill: [48, 48]) %>
+                  <% else %>
+                  <%= image_tag user.image  %>
+                <% end %>
+                <%= user.user_name %>
+              <% end %>
+            </td>
+          </tr>
+          <% end %>
+        <% else %>
+          <p>ユーザーはいません</p>
+        <% end %>
       </tbody>
     </table>
-  <% end %>
-<% else %>
-  <p>ユーザーはいません</p>
-<% end %>
+  </div>
+</div>
