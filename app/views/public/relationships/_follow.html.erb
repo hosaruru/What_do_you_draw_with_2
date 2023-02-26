@@ -1,0 +1,9 @@
+<% if current_user.following?(@user) %>
+  <%= link_to user_relationships_path(@user.id), method: :delete, remote: true do %>
+  <span class= "col btn btn-funky-moon btn-rounded">フォロー外す</span>
+  <% end %>
+<% else %>
+  <%= link_to user_relationships_path(@user.id), method: :post, remote: true do %>
+    <span class= "col btn btn-funky-moon btn-rounded">フォローする</span>
+  <% end %>
+<% end %>

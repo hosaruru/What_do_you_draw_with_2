@@ -1,12 +1,13 @@
 class Public::RelationshipsController < ApplicationController
+  before_action :user_params
   def create
     current_user.follow(params[:user_id])
-    redirect_to request.referer
+
   end
   # フォロー外すとき
   def destroy
     current_user.unfollow(params[:user_id])
-    redirect_to request.referer  
+
   end
   # フォロー一覧
   def followings
@@ -19,5 +20,11 @@ class Public::RelationshipsController < ApplicationController
     user = User.find(params[:user_id])
     @users = user.followers
     @url = request.url
+  end
+  
+  private
+
+  def user_params
+    @user = User.find(params[:user_id])
   end
 end
