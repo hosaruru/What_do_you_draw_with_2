@@ -18,11 +18,11 @@
 <% if current_user.email == 'guest@example.com' %>		
   <%=  %>    
 <% else %>
-  <div class="row mt-3">
-    <div class="col btn_wrap">
-        <%= link_to "投稿する" , new_board_path, class: "col btn btn-funky-moon btn-rounded" %>
-    </div>
-    </div>
+<div class="row mt-3">
+  <div class="col btn_wrap">
+      <%= link_to "投稿する" , new_board_path, class: "col btn btn-funky-moon btn-rounded" %>
+  </div>
+</div>
 <% end %>
 <div class="container">
   <% @boards.each do |board| %>
