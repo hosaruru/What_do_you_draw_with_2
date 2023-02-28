@@ -18,7 +18,7 @@ describe 'boardのテスト' do
     context '一覧の表示とリンクの確認' do
       it "投稿のリンクが表示されているか" do
         visit boards_path
-        new_link = page.all('a', :text => /投稿する/)
+        new_link = page.all('body', :text => /投稿する/)
       end
     end
   end

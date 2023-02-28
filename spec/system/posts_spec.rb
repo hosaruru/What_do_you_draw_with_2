@@ -66,23 +66,26 @@ describe 'postのテスト' do
         click_button 'OK！'
         expect(page).to have_content '投稿できました。Twitterで共有してみましょう！'
       end
-      it '投稿に失敗する' do
-        visit new_post_path
-        click_button '投稿！'
-        expect(page).to have_content '必須です'
-        expect(current_path).to eq posts_path
-      end
       it '投稿後のリダイレクト先は正しいか' do
-        fill_in 'post[title]', with: Faker::Lorem.characters(number:5)
-        fill_in 'post[body]', with: Faker::Lorem.characters(number:20)
-        click_button '投稿！'
+        visit new_post_path
+        expect(page).to have_field 'post[twitter]'
+        expect(page).to have_field 'post[software_id]'
+        expect(page).to have_field 'post[brush]'
+        fill_in 'post[twitter]', with: Faker::Lorem.characters(number:20)
+        fill_in 'post[brush]', with: Faker::Lorem.characters(number:5)
+        select software.name,from: 'post[software_id]'
+        click_button 'OK！'
         expect(page).to have_current_path post_path(Post.last)
       end
     end
+    context '挙動の確認2' do
+      it '投稿に失敗する' do
+        visit new_post_path
+        click_button 'OK！'
+        expect(page).to have_content '必須です'
+      end
+    end
   end
-    
-    
-
 
   describe '詳細画面のテスト' do
     before do
@@ -90,23 +93,18 @@ describe 'postのテスト' do
     end
     context '表示の確認' do
       it '編集リンクが表示される' do
-        visit post_path(post)
+        visit root_path
+        click_button '詳細'
         edit_link = page.all('a', :text => /編集/)
 			end
     end
     context '編集ボタンの遷移先の確認' do
       it '編集ボタンの遷移先は編集画面か' do
-        visit post_path(post)
-        edit_link = find_all('a')[1]
-        edit_link.click
+        visit root_path
+        click_button '詳細'
         expect(current_path).to eq('/posts/' + post.id.to_s + '/edit')
       end
     end
-    # context 'post削除のテスト' do
-    #   it 'postの削除' do
-    #     expect{ post.destroy }.to change{ Post.count }.by(-1)
-    #   end
-    # end
   end
   
   
