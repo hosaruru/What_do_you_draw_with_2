@@ -78,13 +78,11 @@ describe 'postのテスト' do
         expect(page).to have_current_path post_path(Post.last)
       end
     end
-    context '挙動の確認2' do
       it '投稿に失敗する' do
         visit new_post_path
         click_button 'OK！'
         expect(page).to have_content '必須です'
       end
-    end
   end
 
   describe '詳細画面のテスト' do

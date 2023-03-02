@@ -1,7 +1,7 @@
 require 'rails_helper'
 
 describe 'boardのテスト' do
-  let!(:board) {create(:board,headline:'test',text:'test') }
+  let!(:board) {create(:board)}
   let!(:user) {create(:user)}
   describe '掲示板画面(boards_path)のテスト' do
     before do 
@@ -26,7 +26,6 @@ describe 'boardのテスト' do
   describe "投稿処理に関するテスト" do
     before do
     login_as(user)
-    visit new_board_path
   end
     context '表示の確認' do
       it "タイトル、本文の入力ボックスが表示されているか" do
@@ -39,23 +38,20 @@ describe 'boardのテスト' do
       end
     end
     context '挙動の確認' do
-      it '投稿に成功しサクセスメッセージが表示されるか' do
+      it '投稿後のリダイレクト先は正しいか' do
         visit new_board_path
-        fill_in 'board[headline]', with: Faker::Lorem.characters(number:20)
-        fill_in 'board[question]', with: Faker::Lorem.characters(number:5)
+        expect(page).to have_field 'board[headline]'
+        expect(page).to have_field 'board[question]'
+        fill_in 'board[headline]', with: Faker::Lorem.characters(number:5)
+        fill_in 'board[question]', with: Faker::Lorem.characters(number:20)
         click_button '投稿！'
+        expect(page).to have_current_path board_path(Board.last)
       end
       it '投稿に失敗する' do
         visit new_board_path
         click_button '投稿！'
         expect(page).to have_content '必須です'
         expect(current_path).to eq boards_path
-      end
-      it '投稿後のリダイレクト先は正しいか' do
-        fill_in 'board[headline]', with: Faker::Lorem.characters(number:5)
-        fill_in 'board[question]', with: Faker::Lorem.characters(number:20)
-        click_button '投稿！'
-        expect(page).to have_current_path board_path(Board.last)
       end
     end
   end
