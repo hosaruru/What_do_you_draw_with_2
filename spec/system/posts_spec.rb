@@ -49,12 +49,17 @@ describe 'postのテスト' do
         expect(page).to have_field 'post[brush]'
       end
       it "投稿のリンクが表示されているか" do
-        new_link = page.all('a', :text => /投稿！/)
+        visit new_post_path
+        expect(page).to have_button 'OK！'
       end
     end
     context '挙動の確認' do
       let!(:software) {create(:software)}
-
+      it '更新に失敗しエラーメッセージが表示されるか' do
+        visit new_post_path
+        click_button 'OK！'
+        expect(page).to have_content '*は必須です。'
+end
       it '投稿に成功しサクセスメッセージが表示されるか' do
         visit new_post_path
         expect(page).to have_field 'post[twitter]'
@@ -85,56 +90,62 @@ describe 'postのテスト' do
       end
   end
 
-  describe '詳細画面のテスト' do
+  describe '編集画面のテスト' do
     before do
     login_as(user)
     end
     context '表示の確認' do
-      it '編集リンクが表示される' do
-        visit root_path
-        click_button '詳細'
-        edit_link = page.all('a', :text => /編集/)
+      let!(:software) {create(:software)}
+      it '編集リンクが表示され、遷移先は編集画面か' do
+        visit new_post_path
+        fill_in 'post[twitter]', with: Faker::Lorem.characters(number:20)
+        fill_in 'post[brush]', with: Faker::Lorem.characters(number:5)
+        select software.name,from: 'post[software_id]'
+        click_button 'OK！'
+        click_link '編集'
+        expect(current_path).to eq('/posts/2/edit')
 			end
     end
-    context '編集ボタンの遷移先の確認' do
-      it '編集ボタンの遷移先は編集画面か' do
-        visit root_path
-        click_button '詳細'
-        expect(current_path).to eq('/posts/' + post.id.to_s + '/edit')
-      end
-    end
-  end
-  
-  
-  
-  describe '編集画面のテスト' do
-    before do
-      login_as(user)
-      visit edit_post_path(post)
-    end
+    
     context '表示の確認' do
-      it '要確認編集前の内容がフォームに表示(セット)されている' do
-        visit edit_post_path(post)
-        expect(page).to have_field 'post[twitter]', with: post.twitter
-        expect(page).to have_field 'post[brush]', with: post.brush
-      end
-      it '保存ボタンが表示される' do
-        expect(page).to have_button '保存'
+      let!(:software) {create(:software)}
+      it 'OK！ボタンが表示される' do
+        visit new_post_path
+        fill_in 'post[twitter]', with: Faker::Lorem.characters(number:20)
+        fill_in 'post[brush]', with: Faker::Lorem.characters(number:5)
+        select software.name,from: 'post[software_id]'
+        click_button 'OK！'
+        click_link '編集'
+        click_button 'OK！'
       end 
     end
     context '更新処理に関するテスト' do
+      let!(:software) {create(:software)}
       it '更新に失敗しエラーメッセージが表示されるか' do
-        fill_in 'post[twitter]', with: ""
-        fill_in 'post[brush]', with: ""
-        click_button '保存'
-        expect(page).to have_content '必須です'
-      end
-      it '更新後のリダイレクト先は正しいか' do
+        visit new_post_path
         fill_in 'post[twitter]', with: Faker::Lorem.characters(number:20)
         fill_in 'post[brush]', with: Faker::Lorem.characters(number:5)
-        click_button '保存'
-        expect(page).to have_current_path post_path(post)
+        select software.name,from: 'post[software_id]'
+        click_button 'OK！'
+        click_link '編集'
+        fill_in 'post[twitter]', with: ""
+        fill_in 'post[brush]', with: ""
+        click_button 'OK！'
+        expect(page).to have_content '必須です'
+      end
+      it '更新後のリダイレクト先は正しいか' 
+      let!(:software) {create(:software)}
+        visit new_post_path
+        fill_in 'post[twitter]', with: Faker::Lorem.characters(number:20)
+        fill_in 'post[brush]', with: Faker::Lorem.characters(number:5)
+        select software.name,from: 'post[software_id]'
+        click_button 'OK！'
+        click_link '編集'
+        fill_in 'post[twitter]', with: ""
+        fill_in 'post[brush]', with: ""
+        click_button 'OK！'
+        expect(page).to have_content '必須です'
       end
     end
-  end
+end
 end

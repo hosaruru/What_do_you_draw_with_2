@@ -62,11 +62,11 @@ describe 'boardのテスト' do
 
   describe '詳細画面のテスト' do
     before do
-      login_as(user)
-      visit board_path(board)
+      login_as(user)    
     end
     context '表示の確認' do
       it '編集リンクが表示される' do
+        visit board_path(board)
         edit_link = find_all('a')[0]
         expect(edit_link.native.inner_text).to match(/edit/i)
 			end
