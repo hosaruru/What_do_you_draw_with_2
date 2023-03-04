@@ -133,8 +133,8 @@ end
         click_button 'OK！'
         expect(page).to have_content '必須です'
       end
-      it '更新後のリダイレクト先は正しいか' 
       let!(:software) {create(:software)}
+      it '更新後のリダイレクト先は正しいか' do 
         visit new_post_path
         fill_in 'post[twitter]', with: Faker::Lorem.characters(number:20)
         fill_in 'post[brush]', with: Faker::Lorem.characters(number:5)
@@ -144,8 +144,8 @@ end
         fill_in 'post[twitter]', with: ""
         fill_in 'post[brush]', with: ""
         click_button 'OK！'
-        expect(page).to have_content '必須です'
+        expect(page).to have_current_path post_path(Post.last)
       end
     end
-end
+  end
 end

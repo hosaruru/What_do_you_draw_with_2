@@ -66,9 +66,12 @@ describe 'boardのテスト' do
     end
     context '表示の確認' do
       it '編集リンクが表示される' do
-        visit board_path(board)
-        edit_link = find_all('a')[0]
-        expect(edit_link.native.inner_text).to match(/edit/i)
+        visit new_board_path
+        fill_in 'board[headline]', with: Faker::Lorem.characters(number:5)
+        fill_in 'board[question]', with: Faker::Lorem.characters(number:20)
+        click_link '投稿'
+        click_link '編集'
+        expect(current_path).to eq('/boards/2/edit')
 			end
     end
     context '編集ボタンの遷移先の確認' do
