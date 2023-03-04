@@ -68,14 +68,20 @@ class Public::PostsController < ApplicationController
     @post = Post.find(params[:id])
     tag_list = params[:post][:tag_name].split(/[[:blank:]]/)
     @post.user_id = current_user.id
-    @post.update(post_params)
-    @post.clean_pen
+    @post.update(post_params)  
     if @post.update(post_params)
+       @post.clean_pen
       if @post.published?
          @post.update(post_params)
          @post.save_posts(tag_list)
         redirect_to post_path(@post.id)
         flash[:notice] = ""
+      elsif @post.draft?
+        @post.update(post_params)
+        @post.save_posts(tag_list)
+        @post.save!(validate: false)
+        @post.clean_pen
+        redirect_to confirm_posts_path
       end
     elsif @post.draft?
         @post.update(post_params)

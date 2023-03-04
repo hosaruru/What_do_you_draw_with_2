@@ -1,6 +1,6 @@
-require 'rails_helper'
+require 'rails_helper't
 
-RSpec.describe 'Boardモデルのテスト', type: :model do
+RSpec.describe 'Boardモデルのテスト', js: true, type: :model do
   describe 'バリデーションのテスト' do
     subject { board.valid? }
 

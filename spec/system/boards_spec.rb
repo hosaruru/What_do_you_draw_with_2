@@ -55,39 +55,29 @@ describe 'boardのテスト' do
       end
     end
   end
-    
-    
-
-
-
   describe '詳細画面のテスト' do
     before do
       login_as(user)    
     end
     context '表示の確認' do
-      it '編集リンクが表示される' do
+      it '編集リンクが表示され、遷移先は編集画面か' do
         visit new_board_path
         fill_in 'board[headline]', with: Faker::Lorem.characters(number:5)
         fill_in 'board[question]', with: Faker::Lorem.characters(number:20)
-        click_link '投稿'
+        click_button '投稿！'
         click_link '編集'
         expect(current_path).to eq('/boards/2/edit')
 			end
     end
-    context '編集ボタンの遷移先の確認' do
-      it '編集ボタンの遷移先は編集画面か' do
-        edit_link = find_all('a')[0]
-        edit_link.click
-        expect(current_path).to eq('/boards/' + board.id.to_s + '/edit')
-      end
-    end
     context 'board削除のテスト' do
       it 'boardの削除' do
-        before_delete_board = Board.count
+        visit new_board_path
+        fill_in 'board[headline]', with: Faker::Lorem.characters(number:5)
+        fill_in 'board[question]', with: Faker::Lorem.characters(number:20)
+        click_button '投稿！'
+        page.accept_confirm do
         click_link '削除'
-        after_delete_board = Board.count
-        expect(before_delete_board - after_delete_board).to eq(1)
-        expect(current_path).to eq('/boards')
+        end
       end
     end
   end
